@@ -1,0 +1,126 @@
+# Change log: client edition review and fixes (2026-09-30)
+
+Originals saved as `PROMPT_awwwards_client_v4.original.md` and `PRODUCTION_CHECKLIST_client.original.md` in this folder (the older `*.pre-nonblocking.md` copies are the state before template mode). Each entry: finding ID (see `opus-client-review.md`), file, what changed and why. Every edit was an exact-match replacement asserted to occur once (`tools/apply.py`).
+
+- **M6a** (prompt): Inputs: an unreadable, corrupt or unsupported file counts as not supplied, so no input can crash or stop the run.
+- **M6b** (prompt): images.csv gains an optional slot column and a decorative marker; logo formats named, so image mapping is deterministic.
+- **M18a** (prompt): fonts/: "or prefers its own" contradicted decision (a) (type stays the reference's); a different brand font is now listed, not used.
+- **M21a** (prompt): legal.md now names the email provider and retention period, which BACK-01, BACK-14 and the privacy draft need.
+- **M4** (prompt): Template filler algorithm made deterministic (word-for-word length mapping from WS/slots.json, fixed lexicon, role-phrase rule); social links get a placeholder.
+- **M5a** (prompt): Placeholder images are real raster files in the final markup (so content:sync only swaps files), with alt="".
+- **M6c** (prompt): Logo: wordmark uses the client brand name when known; fit rule for any logo whose aspect differs from the slot.
+- **M32** (prompt): Template defaults: no provider (503), default language, generic NICHE-RULES when there is no brief (CNT-05 needed a file derived from a missing brief).
+- **M2+M5b+M6d+M24** (prompt): New deterministic mapping rules (keyed copy, image assignment, surplus and missing items, alt text, SVG sanitising, languages, extra pages); site.json schema with source client/template/system; system copy defined and bounded; placeholder marking for fixed-name icons; exact CLIENT-COMPLETE definition (rights.md and legal.md included, as LEG-16 requires); path made app-relative.
+- **H3a** (prompt): Ground rule 1 no longer lets a terminal state stop the run; missing tools or files only make dependent gates NOT_RUN; every run ends with the handover and the final message.
+- **M3a** (prompt): Rule 4 forbade downloading the original's text and stylesheets, yet gates 6 and 13 and the filler need them in WS/evidence.
+- **M6e** (prompt): Rule 4 logo sentence points to the fit rule in Inputs.
+- **M3b** (prompt): Rule 4 evidence sentence matches the new download allowance.
+- **M2b** (prompt): Rule 5: system copy is a third allowed source; interface words are system copy (the old "that the client's copy also uses" forbade "Menu" in template mode).
+- **M26a** (prompt): Links on a production client site must not lead to 404: nav items without a built page link to a matching section or home, and are listed.
+- **M8a** (prompt): Rule 8 names owner-only rows and their status.
+- **H3b** (prompt): If the methodology repo cannot be fetched, follow the prompt alone instead of stopping.
+- **H3c** (prompt): Methodology exception: contract terminal states end the loop, not the run; an auth wall means a target swap.
+- **M3c+M4b** (prompt): slots.json records word lengths and hue (needed by filler.mjs and placeholders); the original's visible text is saved to WS/evidence for gate 13.
+- **H4** (prompt): The handover package is the app repository; the build record WS (which holds every capture of the original) is a separate local repository that is never handed over; CLIENT_INPUT is git-ignored; app-relative paths defined.
+- **H3d** (prompt): Preflight: a missing tool no longer yields "report the blocker"; validate-input lists template slots after recon, when slots are known.
+- **M25a** (prompt): A TARGET_URL that fails the checks no longer leaves the agent without a rule.
+- **M25b** (prompt): Never bypass CAPTCHAs or bot challenges; an unreachable Awwwards no longer blocks target choice (award recorded as UNVERIFIED).
+- **M17a** (prompt): Section progress defined; each scroll effect recorded as progress-based or per-pixel factor, so the motion gate compares like with like when client content changes heights.
+- **M4c** (prompt): Slot map records word lengths and hue family.
+- **H3e** (prompt): A 403/429 after recon no longer forces a target swap mid-build; cached evidence is used and live-read gates are NOT_RUN.
+- **H2a** (prompt): Rest layer again asserts layout geometry (display, alignment, offsets, max-width, width, height and x-rect of layout boxes), which v3 covered with rects and v4 had dropped; what depends on content leaves only via the measured content probe; pseudo-element content strings are copy.
+- **H2b** (prompt): Content layer bounded: x-line-* always content; other entries only if the content probe measured them as content-dependent; the comparator enforces this; content probe defined.
+- **H4b** (prompt): Assertion-change commits live in the WS repository now that the app is its own repository.
+- **M18b** (prompt): An open font the original uses is self-hosted from its open source under the same family name, so font-family stays a rest assertion.
+- **M19a+M1a** (prompt): Images are auto-oriented before metadata stripping (stripping alone turns phone photos sideways) and recorded in an image manifest that gate 13 can check; alt text follows the mapping rules.
+- **M13a+M12a** (prompt): Icons from the logo or template wordmark; noindex whenever SITE_ENV is not production, unset included, read at build time for static hosts.
+- **M7+M21b+H1a** (prompt): Contact endpoint made deployable on Netlify, Cloudflare Pages and Vercel (one Fetch handler plus adapters), sets its own headers (host header files do not reach functions), fixed check order, sends only to the configured recipient, form services called server-side (SEC-05), SMTP default with the Cloudflare caveat, provider variables optional so the site serves without credentials, per-process limits documented.
+- **H2c+M15+M31** (prompt): Copy-fit gate now separates fidelity (clone vs content probe, same content) from copy budget (probe vs original), defines clipping, overlap and the contrast statistic, and gives one rule for overflow in fixed-size boxes (FAIL for the client, never edit copy or design).
+- **M17b** (prompt): Motion gate compares progress-based effects by section progress and per-pixel factors by scroll distance from the section start.
+- **M8b+M12b** (prompt): Production gate runs as production and records owner-only rows as OWNER-CONFIRM.
+- **M8c** (prompt): Production gate records -O rows.
+- **H3f** (prompt): STUCK and CEILING end the loop, not the run; a non-compiling build is a defect to fix; HARD-BLOCKER removed.
+- **H2d** (prompt): Eyeball pass uses the content probe for the original side, so the side-by-side compares the same content.
+- **H4c** (prompt): Source snapshot excludes .git now that the app is a repository, or invariant 5 can never hold.
+- **L6** (prompt): Polish invariant 2 also covers the copy-fit gate.
+- **H4d** (prompt): Invariant 5 compares the same way as the snapshot.
+- **M16a** (prompt): Smoothness defects compared at the same section progress, since client content changes pixel offsets.
+- **M16b** (prompt): Inherited class compared at the same section progress.
+- **M14a** (prompt): README regains the substitution table and N/A reasons lost from the comparison edition, plus content status, OWNER-CONFIRM rows and which numbers used template content.
+- **M7b+M14b** (prompt): DEPLOY.md covers the endpoint adapters, SITE_ENV and rate limiting per host; the deploy artifacts lost from the comparison edition (host header files, root 404.html, redirects, CI, lighthouserc, npm run verify) are listed again.
+- **M8d+M22a+M12c** (prompt): LAUNCH_CHECKLIST: production only when CLIENT-COMPLETE and drafts reviewed, rate limiting and preview protection, legal review of the design reuse, run audit:live, and every -O row with a confirmation step.
+- **M5c** (prompt): A client-input template with slot keys and budgets makes content:sync mapping deterministic.
+- **M22b** (prompt): PROVENANCE tells the client plainly that the design is reproduced, not original, and that its reuse needs legal review.
+- **M5d+M11+H4e** (prompt): content:sync and audit:live live in the app (WS is not handed over); content:sync precedence, idempotence, re-checks and scratch-copy testing specified; audit:live flags, output path, safe probe set and a positive control in its smoke test.
+- **L4** (prompt): dHash size defined so the Hamming threshold means the same for every model.
+- **M8e** (prompt): Gate 10 accepts owner-only rows as OWNER-CONFIRM with a launch-checklist entry.
+- **M1b+M2c+M30** (prompt): Gate 13 made computable: image manifest instead of impossible SHA-256 equality for processed images, icon sets allowed, system copy recognised, shingle normalisation defined, client-copy matches reported not edited, numbers and names limited to visible text.
+- **M5e+M7c** (prompt): Gate 14 covers content:sync testing and variables read through adapters (Cloudflare passes env, not process.env).
+- **M8f** (checklist): Purpose line: owner-only rows are the one kind an agent cannot check.
+- **M8g** (checklist): New -O class suffix for rows only the owner can do or confirm.
+- **M8h** (checklist): New status OWNER-CONFIRM.
+- **L1** (checklist): Rule 1 parenthetical updated: noindex now applies only to staging builds.
+- **M2d+L20** (checklist): Rule 2: the list of allowed launch essentials is closed and complete (legal pages, language switcher, CNT-07 scrim), so it cannot be read as examples.
+- **M8i** (checklist): Rule 5 names owner-only rows.
+- **M12d** (checklist): SEO-02: unset SITE_ENV counts as staging; build-time for static hosts (meta tag and host header files are static there).
+- **M13b** (checklist): SEO-05 no longer fails in template mode.
+- **M13c** (checklist): SEO-06 icon source in template mode.
+- **M26b** (checklist): SEO-08: no internal link may reach a 404 on a production client site.
+- **L3** (checklist): security.txt required fields per RFC 9116 (verified).
+- **M10a+M23** (checklist): SEC-03: AWAITING-DEPLOY instead of N/A; includeSubDomains only once the owner confirms every subdomain is HTTPS (it breaks any that is not); no "exercise" wording; verify runnable from outside.
+- **M20** (checklist): SEC-06 grep no longer flags the variable names that the new server code and .env.example must contain.
+- **M29** (checklist): SEC-10: no open-source licence is chosen for the client's paid code by default; CLIENT_INPUT git-ignored.
+- **M7d+M21c** (checklist): BACK-01: one handler plus host adapters, recipient fixed, form services server-side (SEC-05), site serves without provider configuration.
+- **H1b** (checklist): BACK-08 required the process to exit when a variable is missing, which contradicts BACK-01's 503 and makes npm run start (and every gate) fail in a run without credentials.
+- **M7e** (checklist): BACK-10 SIGTERM applies to the Node server (serverless hosts manage their own shutdown).
+- **M7f** (checklist): BACK-11 on serverless hosts, where no /healthz process exists.
+- **M7g** (checklist): HOST-08: Netlify header files, like Cloudflare's, do not apply to function responses (verified), so the handler sets its own headers.
+- **M9** (checklist): HOST-02 gave a false PASS: OpenSSL 3 clients refuse TLS 1.1 at the default security level (migration guide), and LibreSSL prints "Protocol: TLSv1.3" even on a failed handshake (tested). A control host and a cipher check make it sound.
+- **M10b** (checklist): HOST-03 verify runnable from outside; certbot dry run is an owner step on self-managed servers.
+- **M10c** (checklist): HOST-04: a zone cannot be enumerated from outside, so dangling-record checks run over the records in DNS.md.
+- **M10d** (checklist): HOST-06: Netlify reports cache hits in Cache-Status (RFC 9211, verified).
+- **M10e** (checklist): HOST-09 needs a preview URL input; protection itself is an owner setting.
+- **M8j** (checklist): HOST-11 cannot be checked from outside: owner-only.
+- **M8k** (checklist): HOST-12 owner-only.
+- **M8l** (checklist): HOST-13 owner-only.
+- **M8m** (checklist): HOST-14 backups: owner-only, with the mirror always required and stored data covered.
+- **M8n** (checklist): HOST-17 is a timed drill only the owner can run.
+- **L8** (checklist): OPS-01: tying CI to deploys is a host setting the owner makes.
+- **L2** (checklist): LEG intro no longer assumes a rebuild with no C features.
+- **L14** (checklist): LEG-03 grep: a reference name that is a common word used in client copy is reported, not failed.
+- **L5b** (checklist): LEG-05 applies to marketing mail, not the contact form's notification to the owner.
+- **M6f** (checklist): I18N-01 is keyed to the client's languages, not the original's.
+- **L9** (checklist): CNT-01: unreadable files count as missing; malformed and synthetic-full fixtures.
+- **M1c** (checklist): CNT-03: provenance via the image manifest (processed images cannot match source hashes), icon sets allowed, placeholder alt defined.
+- **M24b** (checklist): CNT-04: exact CLIENT-COMPLETE definition, consistent with LEG-16.
+- **M2e+M32b** (checklist): CNT-05: system copy and its bounded numbers are exempt (the 404 status, the year and design counters were false positives); visible text only; generic rules when there is no brief.
+- **H2e+M15b** (checklist): CNT-06 aligned with the new copy-fit gate (probe comparison, overflow rule).
+- **M31b** (checklist): CNT-07 contrast statistic defined.
+- **M18c** (checklist): CNT-08 verify was impossible (the reference's fonts are never downloaded, so there is no hash to compare); name tables and licences are checkable.
+- **M19b** (checklist): CNT-09: auto-orient before stripping; runnable metadata check.
+- **M12e** (checklist): New CNT-11: a machine check at launch that production carries no placeholders, draft legal text or placeholder contact details, and uses the real host.
+- **M7h** (checklist): DEL-01 covers variables read through adapter env objects (Cloudflare), not only process.env.
+- **M11b** (checklist): DEL-02: positive control in the smoke test (a tool that fails everything no longer passes), bounded probe set, output files.
+- **M22c** (checklist): DEL-05 records that the design is reproduced, not original; the tag is on the app repository.
+- **M5f** (checklist): DEL-07: content:sync tested in a scratch copy with four inputs, idempotence and precedence checked, shipped site.json untouched.
+- **L15+M27** (checklist): Verification history no longer reads like live rules (the comparison edition's form, deployment and notice rules are named as replaced), and records this review.
+- **H3g** (prompt): Eyeball pass no longer depends on a green gate, so it still runs after STUCK or CEILING.
+- **H4f** (prompt): WS wording reconciled with HOST-14 (a private backup mirror is allowed; publication and handover are not).
+- **H3h** (prompt): Methodology exception also covers the contract's HARD-BLOCKER for a failing build or dev server.
+- **M5g** (prompt): content:sync reports failed checks without failing.
+- **M33a** (checklist): SEO-05 verify: the og:image URL is absolute on SITE_URL, which is not live before deploy (and is example.com in template mode), so the local check fetches the path on the local server.
+- **M33b** (checklist): SEO-10 verify: sitemap URLs are absolute on SITE_URL, so before deploy they are requested with the local origin.
+- **M10f** (checklist): MAIL-01: reading a received message's headers needs inbox access, an owner step.
+- **L12** (checklist): Rule 7 client-feature list includes LEG-12 and I18N-01, which depend on legal.md and brief.md.
+- **M30b** (checklist): CNT-02 shingle normalisation stated, matching gate 13.
+- **L16** (checklist): BACK-12: a third-party CAPTCHA would break SEC-05, so none by default.
+- **M6g** (checklist): CNT-10 aligned with the prompt's translation fallback.
+- **M34a** (prompt): The BACK rows that need a configured provider (BACK-01 "with provider config", BACK-10, BACK-13, BACK-15) are runnable without credentials through a local SMTP sink.
+- **M34b** (checklist): BACK-01 verify runnable without credentials.
+- **H2f** (prompt): The content probe records which site.json it injected, so a probe run on other content cannot be passed off.
+- **L17** (prompt): README tells the client where the gate outputs live.
+- **M4d** (prompt): Filler lexicon and cycling order pinned (a prototype showed per-slot versus global cycling gives different text), so two models produce the same filler.
+- **M6h** (prompt): Which gates run on which language is stated, so multilingual runs are bounded and comparable.
+- **L18** (checklist): Verification note: security.txt facts are now fetched (RFC 9116).
+- **L19** (checklist): CNT-06 points to where the content probe is defined.
+- **H2g** (prompt): Rule 6 and the content probe no longer read as contradictory: moving an entry to content is allowed only through the measured probe.

@@ -1,0 +1,28 @@
+SCROLLCRAFT — QUICK START
+By Nate Herk / AI Automation Society
+
+1. Extract this ZIP. Keep the scroll-craft folder intact.
+
+CODEX
+Copy the entire scroll-craft folder into your project’s .agents/skills/ folder.
+Ask Codex: “Use the Scrollcraft skill to build my website.”
+
+CLAUDE CODE
+Ask Claude Code to read scroll-craft/SKILL.md and use it to build your website.
+Alternatively, use Nate’s official plugin installation instructions in SOURCE-README.md.
+
+SETUP
+The skill requires Node.js 18+, a full ffmpeg build, and playwright-core with Chrome.
+Ask your coding agent to read the included instructions, check requirements, and run
+the skill’s doctor and workspace setup before building.
+
+Use your own photos and footage, or optionally connect KIE AI for generated assets.
+The skill is free. Your coding agent and generated assets may have separate costs.
+Keep API keys private; never place them in published website files.
+
+WATCH NATE’S WALKTHROUGH
+https://www.youtube.com/watch?v=QUI6Ug4cHnE
+
+LATEST VERSION / SOURCE
+https://github.com/nateherkai/scroll-craft
+Packaged source revision: 0b816225945e45380397d6a0487efa3c98916858

@@ -1,0 +1,14 @@
+.DS_Store
+node_modules/
+.env
+.env.*
+!.env.example
+# a real client's input never belongs in this repository (the example one in examples/ does)
+/CLIENT_INPUT/
+# build records created by a run, if someone runs inside this folder by mistake
+/clone-workspace/
+/*-site/
+*.log
+
+# local agent settings
+/.claude/

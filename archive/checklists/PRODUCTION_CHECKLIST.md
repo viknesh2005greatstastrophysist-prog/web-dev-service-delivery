@@ -1,0 +1,270 @@
+# Production-grade checklist for rebuilt award-style sites
+
+Purpose: a rebuild is production grade when it matches the original everywhere a visitor can see, and equals or beats it on speed, accessibility, robustness, discoverability and polish. Every row below is checkable by an unattended agent (Playwright, Lighthouse CLI, axe-core, curl, grep); a row whose Verify column says Review is filled by hand with saved evidence.
+
+**Classes.** `G` = must pass. `R` = recommended, do unless it costs fidelity. `C` = conditional: applies only if the feature exists, otherwise record `N/A` with the reason. A `-L` suffix (for example `G-L`) marks a row that can only be checked on a live deployed URL.
+
+**Statuses** for the audit table: `PASS`, `FAIL`, `N/A` (with reason), `FIDELITY-EXCEPTION` (see rule 2), `NOT_RUN`. No `PASS` without saved evidence.
+
+**Rules of application**
+1. **Beat-or-match.** Run the same audit (Lighthouse mobile and desktop, axe, header check, 404 probe, console log, transfer size and request count) on the original first, and save it as the baseline. On every numeric row the clone must be equal or better (5% tolerance for run-to-run noise), and it must also meet the absolute threshold in the row wherever the original meets it. Where the original misses a threshold, the clone must still be equal or better, and the row is logged. Numeric rows are: Lighthouse Performance score, LCP, CLS, TBT, transferred bytes, request count, JS bytes, the MOT-01 frame-time figures, the Accessibility and Best Practices scores, and the SEO score with the `is-crawlable` audit excluded (noindex, SEO-02, fails that audit by design). Compare LCP as LCP minus TTFB, so a clone served from localhost and a remote original are comparable.
+2. **Fidelity wins.** No production item may change anything a visitor can see or feel at the four viewports, in any recorded state, motion sequence, intro or interaction, whether or not an assertion covers it. That includes copy, footer content, visible notices, cursor, focus appearance at rest, intro replay behaviour, scroll feel, image loading during scroll, and every asserted value. Solve items invisibly first (semantics, ARIA, meta, headers, loading strategy, fallbacks, `@supports` fallbacks). If only a visible or felt change would fix an item (for example a low-contrast label the original has, or an intro that always replays), keep the original's behaviour, mark the row `FIDELITY-EXCEPTION`, and record the item, the original's behaviour, the cost of fixing it and what you did instead. The sole exception is the demo form's post-submit message required by BACK-01.
+3. **Measure like Lighthouse does.** Mobile profile = Slow 4G (RTT 150 ms, 1.6 Mbps down, 750 Kbps up) and 4x CPU slowdown. Use the median of 3 runs. Lab numbers are a proxy: INP is a field metric, so use the longest event duration in a scripted interaction run as the lab proxy. Pin one Lighthouse version and use it for both sites (Lighthouse 13 removed some older audits).
+4. Numbers marked (J) are judgment calls, not published standards. Everything else cites its basis.
+5. **Deploy-ready, never deployed.** The deliverable is a project, and the rebuild is not deployed to any public URL (LEG-16). Live-only rows (`-L`) are therefore recorded `N/A (not deployed)`, backed by the artifacts that make the row pass on deploy (host header file, `404.html`, redirect rules, CI workflow, and `docs/DEPLOY.md` with the exact verify command for each row). Never mark a live-only row `PASS` from localhost.
+6. **Backend rows.** A rebuild with no form has no server code: record `BACK-00` as static and every other `BACK` and `MAIL` row as `N/A`. A rebuild whose original has forms ships exactly one demo endpoint (BACK-01), which makes BACK-02, BACK-03, BACK-04 and BACK-07 apply; `MAIL` stays `N/A`. Any other server code makes every `BACK` row apply, and outbound email makes `MAIL` apply.
+7. **Every `N/A` needs an absence predicate**, a machine-checked fact saved as evidence, for example `document.querySelectorAll('canvas').length === 0`, `typeof window.gsap === 'undefined'` or `!document.querySelector('form')`. Rows that name a feature (SPD-09, TYP-10, TYP-15, RSP-07, A11Y-07, A11Y-10 to A11Y-13, EDGE-07, MOT-03 to MOT-05, MOT-07, MOT-08, MOT-11) apply only when the predicate for that feature is false. `-L` rows use the predicate `README states the rebuild is not deployed (LEG-16)`.
+
+---
+
+## SPD: speed and delivery
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| SPD-01 | Core Web Vitals at the good thresholds: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 (75th percentile, mobile and desktop separately; web.dev/vitals). Lab proxy: Lighthouse mobile LCP and CLS, plus the INP proxy from rule 3. | `npx lighthouse <url> --output=json --only-categories=performance` (default mobile throttling) ×3, take median | G |
+| SPD-02 | Beat-or-match the original on LCP, CLS, TBT, transferred bytes, request count and JS bytes (rule 1). | Same Lighthouse run on original and clone, compare JSON | G |
+| SPD-03 | The LCP element is in the initial HTML, has `fetchpriority="high"` (or a preload), and never `loading="lazy"`. Aim for LCP time split of about 40% TTFB, under 10% load delay, about 40% load duration, under 10% render delay (web.dev/optimize-lcp). | Lighthouse 13 `lcp-breakdown-insight` and `lcp-discovery-insight`; grep HTML | G |
+| SPD-04 | Every `<img>` and `<video>` has `width` and `height` (or CSS `aspect-ratio`); images below the fold use `loading="lazy"` and `decoding="async"`, unless that makes them pop in during a fast scripted scroll where the original's do not. | Playwright: for each img, attributes present; CLS attributable to images = 0 | G |
+| SPD-05 | Modern formats (AVIF or WebP) with `srcset` and `sizes`; no image's intrinsic width exceeds 2× its rendered width. | Playwright: `naturalWidth <= 2 * clientWidth` for every img | G |
+| SPD-06 | Hashed static files: `Cache-Control: max-age=31536000` (add `immutable`); HTML: `Cache-Control: no-cache` with `ETag` (web.dev/http-cache). | `curl -sI` on one hashed asset and on `/` | G |
+| SPD-07 | Text responses (HTML, CSS, JS, JSON, SVG) are Brotli or gzip compressed. | `curl -sI -H 'Accept-Encoding: br,gzip'` shows `content-encoding` | G |
+| SPD-08 | Heavy libraries (three.js, video players, GSAP plugins) load only where used; no duplicated library copies; initial JS bytes ≤ original's. Reference: the 2025 Web Almanac gives a median mobile page of 2,164 KB with 646 KB JS and 72 requests in its page-weight distribution (the same chapter cites 2.6 MB for the median mobile home page). | Bundle analyser or Playwright response sizes; coverage report | G |
+| SPD-09 | Any preloader or intro has a hard timeout of 4 s (J): if assets fail, content is usable by then. It can be skipped, and does not replay on return visits, only where the original already behaves that way; otherwise match the original (rule 2). | Playwright: block heavy assets, assert content interactive by 4 s; reload and assert intro skipped | G |
+| SPD-10 | Video: poster image, `muted playsinline`, `preload="metadata"` or none when off-screen; nothing downloads before it is needed; bytes ≤ original's. | Playwright network log before scroll | R |
+| SPD-11 | bfcache eligible: no `unload` listener, no `Cache-Control: no-store` on the document, no open connections at navigation (web.dev/bfcache). | Lighthouse bfcache audit; DevTools Application > Back/forward cache; `NotRestoredReasons` | R |
+| SPD-12 | Optional prefetch/prerender via Speculation Rules only as progressive enhancement (Chrome and Edge only, not Baseline); never on URLs with side effects. | grep `speculationrules`; verify page works when unsupported | R |
+
+## TYP: typography, backgrounds and rendering
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| TYP-01 | Fonts self-hosted as `woff2`, subsetted to used glyph ranges; every `@font-face` sets `font-display`. | grep CSS; response content-type `font/woff2` | G |
+| TYP-02 | Metric-matched fallback: a fallback `@font-face` with `size-adjust`, `ascent-override`, `descent-override` and `line-gap-override` (`size-adjust` is Baseline since 2024; the three override descriptors work in Chromium and Firefox only, not Safari, per MDN compatibility data) so font swap adds ≤ 0.01 CLS in Chromium; measure it there and record the WebKit value. | Playwright: delay font response 2 s, sum layout-shift entries around the swap | G |
+| TYP-03 | Preload only the 1 to 2 critical fonts (`rel="preload" as="font" type="font/woff2" crossorigin`). | grep HTML head | G |
+| TYP-04 | Every used weight and style is a real loaded face: no synthetic bold or italic. | Playwright: `document.fonts` all `loaded`; compare computed `font-weight` to available faces | G |
+| TYP-05 | `<html lang>` is a valid tag matching the content. | `document.documentElement.lang` non-empty, axe `html-has-lang`, `html-lang-valid` | G |
+| TYP-06 | Type scales with user settings: sizes in `rem` or `clamp()` with a `rem` term, never `vw` alone. | Set `document.documentElement.style.fontSize='32px'` (Playwright cannot set browser text zoom) and assert every computed text size defined in `rem` or `clamp()` doubles; `vw`-only sizes fail | G |
+| TYP-07 | Adopt modern text wrapping only where it keeps the original's line counts: `text-wrap: balance` on headings (limit 6 lines in Chromium, 10 in Firefox), `pretty` on long copy (Chromium and Safari 26 only, not Baseline; MDN). | Compare `x-line-count` before and after | R |
+| TYP-08 | Numerals that animate or align use `font-variant-numeric: tabular-nums` so digits do not jitter. | computed style on counters and prices | R |
+| TYP-09 | `-webkit-text-size-adjust: 100%` (or `text-size-adjust`) so iOS does not inflate text in landscape. | computed style on `html` | G |
+| TYP-10 | Form controls compute to `font-size` ≥ 16px on touch devices so iOS Safari does not zoom on focus (`@media (pointer: coarse)`). | Playwright touch context: computed font-size of input, select, textarea | G |
+| TYP-11 | Text contrast ≥ 4.5:1 (3:1 for large text) and non-text UI ≥ 3:1. Low contrast is the most common failure on the web, 79.1% of home pages (WebAIM Million 2025). Fidelity exceptions per rule 2. | axe `color-contrast` on every state and viewport | G |
+| TYP-12 | `<meta name="theme-color">` equals the page's top background (add light and dark variants when the site has both). `html` has an explicit `background-color` equal to the edge colour so overscroll and rubber-banding never flash white. If `html` computes transparent and `body` has an opaque background, the canvas already takes `body`'s colour (CSS background propagation), which counts as PASS; otherwise, if `html`'s background is asserted, it is a `FIDELITY-EXCEPTION`. | grep head; computed `html` background | G |
+| TYP-13 | Large background images have a dominant-colour `background-color` placeholder so nothing flashes white while loading. | Throttled screenshot at first paint | G |
+| TYP-14 | Large gradients show no visible banding (add subtle grain or dither) and never rely on `background-attachment: fixed` on touch devices (iOS ignores it). | Screenshot review at 2x; grep CSS | R |
+| TYP-15 | `backdrop-filter` has a `-webkit-` prefix and an `@supports not` fallback (solid or semi-opaque background). | grep CSS; emulate unsupported | G |
+| TYP-16 | `::selection`, `caret-color` and `accent-color` set to on-brand values that keep 4.5:1 contrast. | computed styles | R |
+| TYP-17 | Where the original locks scroll for modals or menus, `scrollbar-gutter: stable` (or equivalent) prevents a layout jump. | Playwright: page width before and after opening menu | R |
+| TYP-18 | `:focus-visible` ring is always visible, ≥ 3:1 against neighbours, never `outline: none` without replacement (WCAG 2.4.7 and 1.4.11; geometry per 2.4.13 at AAA). | Playwright tab walk, computed outline per stop | G |
+| TYP-19 | Hover effects are gated by `@media (hover: hover) and (pointer: fine)`; tap highlight and `touch-action` set deliberately. | grep CSS; touch emulation shows no stuck hover | G |
+| TYP-20 | Print stylesheet hides fixed chrome and animation and prints readable content without overflow. | `page.emulateMedia({media:'print'})` screenshot and `pdf()` | R |
+| TYP-21 | `@media (forced-colors: active)` keeps borders and focus visible. | Playwright `forcedColors: 'active'` screenshot | R |
+| TYP-22 | Keep the original's viewport units exactly (`vh`, `svh` or `dvh`) and record which it uses; do not swap them, because `svh` equals `vh` in headless emulation but differs on real phones. Fixed bars respect `env(safe-area-inset-*)` where the original does. | grep CSS; record the original's units in `WS/baseline-original` | R |
+
+## RSP: responsive and device robustness
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| RSP-01 | Viewport meta contains `width=device-width, initial-scale=1` (plus `viewport-fit=cover` only if the original has it) and never disables zoom (no `user-scalable=no`, `maximum-scale` below 5). | grep head | G |
+| RSP-02 | No horizontal scrollbar at 320, 375, 768, 1440, 1920, 2560 and 3440 px wide. | Playwright: `scrollWidth <= innerWidth` at each width | G |
+| RSP-03 | Reflow: at 320 CSS px wide (400% of 1280) no two-dimensional scrolling and no lost content (WCAG 1.4.10). | Playwright 320×640, screenshot and overflow check | G |
+| RSP-04 | Landscape phones (844×390) are usable; no orientation lock. | Playwright emulation | G |
+| RSP-05 | Pointer targets ≥ 24×24 CSS px, or spaced so a 24 px circle does not overlap another target (WCAG 2.2 AA 2.5.8). Expand hit areas invisibly with a pseudo-element or padding that leaves layout unchanged (rule 2). | Sample `document.elementFromPoint` on a 4 px grid over a 24×24 box centred on each target; pass if every sample resolves to the target or a descendant. axe `target-size` ignores pseudo-element hit areas, so findings resolved this way are recorded `PASS (hit-area)` with the grid evidence and excluded from A11Y-01's count | G |
+| RSP-06 | Runs in Chromium, WebKit and Firefox: smoke test and rest screenshots on all three; features without Baseline support sit behind `@supports` or feature detection. | Playwright projects for the three engines | R |
+| RSP-07 | Every hover-only interaction has a touch and keyboard equivalent. | Manual scripted check per interaction-map entry | G |
+
+## A11Y: accessibility
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| A11Y-01 | axe-core with tags `wcag2a`, `wcag2aa`, `wcag21aa`, `wcag22aa` reports 0 violations on every route in every state (menu open, modal open, reveals finished). Fidelity exceptions per rule 2. | `@axe-core/playwright` per state | G |
+| A11Y-02 | The six most common failures are zero: low contrast, missing alt, missing form labels, empty links, empty buttons, missing language (79.1%, 55.5%, 48.2%, 45.4%, 29.6%, 15.8% of home pages; WebAIM Million 2025). | axe rules `color-contrast`, `image-alt`, `label`, `link-name`, `button-name`, `html-has-lang` | G |
+| A11Y-03 | Exactly one `<main>`; `<header>`, `<nav>`, `<footer>` landmarks; a skip link is the first focusable element, visible on focus, and lands on `<main>`. | Playwright first Tab press; axe `landmark-*`, `bypass` | G |
+| A11Y-04 | One `<h1>`; heading levels never skip, including headings that are only visual. Add the semantics without changing computed styles. | Playwright heading outline | G |
+| A11Y-05 | Every interactive element is reachable and operable by keyboard in a logical order; no traps; modals trap focus, close on Esc and return focus to the trigger. | Playwright Tab walk plus per-modal test | G |
+| A11Y-06 | Focused elements are never hidden behind sticky headers (WCAG 2.4.11): set `scroll-padding-top` at least the header height, unless the original lands anchors elsewhere (rule 2). | Playwright: each tab stop's rect is not under a fixed element | G |
+| A11Y-07 | Anything that requires dragging (carousels, sliders, drag boards) also works with buttons or keys (WCAG 2.5.7). | Interaction-map audit | G |
+| A11Y-08 | Meaningful images have alt text; decorative ones use `alt=""` or CSS; canvas and WebGL stages have a text equivalent and `role` or `aria-label`. | axe; grep | G |
+| A11Y-09 | `prefers-reduced-motion: reduce` turns off parallax, reveal animation, autoplay video and smooth scrolling (`scroll-behavior: auto`), keeps feedback and essential transitions, and leaves all content reachable (web.dev). JS-driven motion needs a `matchMedia` listener. | Playwright `reducedMotion: 'reduce'`: no decorative transform animation; full content present | G |
+| A11Y-10 | Moving content that lasts over 5 s has a pause control or is stopped under reduced motion (WCAG 2.2.2); nothing flashes more than 3 times a second (2.3.1). Stopping only under reduced motion is a judgment call (J): full 2.2.2 conformance needs an on-page mechanism, which would be a `FIDELITY-EXCEPTION`. | Interaction-map audit; frame analysis of flashing regions | G |
+| A11Y-11 | Forms (if any): visible label or `aria-label`, `autocomplete` tokens, error text tied by `aria-describedby`, status in an `aria-live` region, focus moved to the first error. | Playwright submit invalid form | C |
+| A11Y-12 | SPA route changes update `document.title`, move focus to the new `<h1>` or `<main>`, and announce navigation. | Playwright: title and `document.activeElement` after each transition | G |
+| A11Y-13 | Match the original's cursor behaviour. Where it hides the native cursor, a visible custom cursor stays over links and inputs, and is off on touch and under reduced motion. An original that hides the cursor with no replacement is a `FIDELITY-EXCEPTION`. | Playwright pointer test; computed `cursor` | G |
+| A11Y-14 | Audio: nothing plays sound before user activation; a visible mute control exists only if the original has one (WCAG 1.4.2). | Init script: no `AudioContext` in state `running` and no unmuted media playing before the first user gesture | C |
+
+## SEO: metadata, sharing and icons
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| SEO-01 | Unique `<title>` and meta description (description about 70 to 160 characters, J). The title matches the original's title with the brand name only, never the domain; the unofficial-rebuild notice goes in the meta description. | grep head | G |
+| SEO-02 | Unofficial-rebuild policy: `<meta name="robots" content="noindex">` and `X-Robots-Tag: noindex`. Do NOT also block the site in `robots.txt`: a blocked page cannot have its noindex seen (Google Search Central). Canonical points to itself. | curl headers; `robots.txt` has no `Disallow: /` | G |
+| SEO-03 | Missing routes return a real HTTP 404, never 200 with an error page (soft 404; Google Search Central). Applies to routes and to assets. | `curl -s -o /dev/null -w '%{http_code}' <url>/no-such-page` = 404 | G |
+| SEO-04 | Primary copy and the `<h1>` are in the served HTML, without JS or scrolling. | `curl -s <url>` contains the h1 text and body copy | G |
+| SEO-05 | Open Graph and card tags: `og:title`, `og:description`, `og:image` (absolute URL, 1200×630), `og:image:alt`, `og:url`, `og:type`, `twitter:card=summary_large_image`. The image returns 200 with an image content-type. | curl the tags and the image | G |
+| SEO-06 | Icon set complete: `favicon.ico` (16, 32, 48), `favicon.svg` (with a dark-mode media query), `apple-touch-icon.png` 180×180, `icon-192.png`, `icon-512.png`, a maskable 512, and `site.webmanifest` (name, short_name, icons, theme_color, background_color, display). All return 200. | curl each URL; parse manifest | G |
+| SEO-07 | Consistent URLs: one canonical host, one trailing-slash policy, no redirect chains longer than one hop, `http` redirects to `https` with 301 on the deployed host. | `curl -sIL` chain | G-L |
+| SEO-08 | Internal navigation uses real `<a href>`; `target="_blank"` links carry `rel="noopener"`; `mailto:` and `tel:` links are correct. | Playwright link audit | G |
+| SEO-09 | `/.well-known/security.txt` (RFC 9116) with a contact if the project is public. | curl | R |
+
+## EDGE: errors, edge cases and microcopy
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| EDGE-01 | Recon the original's 404: request a random missing path, a missing asset, a bad query and a trailing-slash variant; save screenshots and status codes. If it has a custom 404, rebuild it in the same style. If it has a generic one, build a custom one anyway. | `WS/baseline-original` includes the 404 capture | G |
+| EDGE-02 | The 404 page: real 404 status (SEO-03); `noindex`; same nav, fonts, colours and background as the site; visible "404"; one plain sentence saying what happened; a clear way home; 3 or more links to main sections; no auto-redirect; works with JS off; `<title>` says "Page not found"; the `<h1>` is focusable. | curl and Playwright with JS disabled | G |
+| EDGE-03 | 404 microcopy: friendly, specific, no blame, no jargon, no dead end. Tone options: plain ("That page doesn't exist. It may have moved, or the link may be wrong. Head back home or pick a section below."), warm ("Well, that went nowhere. Let's get you back on track."), minimal ("404. Page not found."). Match the brand's voice. | Review | R |
+| EDGE-04 | Missing asset URLs return 404 with the right content-type, never `index.html`. | `curl -sI <url>/img/none.png` | G |
+| EDGE-05 | A failed heavy asset (video, font, script, WebGL) never blanks the page. Block each in Playwright and assert readable content remains. | Playwright `route.abort()` per asset class | G |
+| EDGE-06 | With JS disabled, all copy is visible: nothing is hidden by a CSS initial state that only JS reverses (use an `html.js` gate), and `<noscript>` explains what is missing. | Playwright `javaScriptEnabled:false` screenshot | G |
+| EDGE-07 | With WebGL unavailable, a static fallback renders, with no uncaught exception. | Chromium `--disable-gpu`, `--disable-webgl` | G |
+| EDGE-08 | Console is clean: 0 errors, 0 failed requests, 0 deprecation warnings on load and after scripted interactions; no 404 for favicon, manifest or source maps. | Playwright console and `requestfailed` listeners | G |
+| EDGE-09 | Forms (if any): personal data is never placed in a GET URL; no false success state; the submit button disables during submit; spam control (honeypot and rate limit) without a CAPTCHA if possible. | Playwright | C |
+| EDGE-10 | Back and forward restore scroll position and replay the preloader only if the original does; `history.scrollRestoration` handled deliberately. | Playwright navigate, back, forward | G |
+| EDGE-11 | Text extremes do not break layout: long words and URLs wrap (`overflow-wrap: anywhere` in flexible containers). | Inject long strings and screenshot | R |
+| EDGE-12 | Cookie banner only if non-essential cookies exist; if present it causes no layout shift, is keyboard dismissible and defaults to essential-only. | Playwright | C |
+| EDGE-13 | Slow 3G and offline: content readable on slow 3G; an optional offline page. | Playwright network emulation | R |
+
+## MOT: motion, scroll and interaction production quality
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| MOT-01 | Smooth under load: during a scripted full-page scroll at 1440×900 with 4x CPU throttle, p95 frame time ≤ 25 ms and no more than 5% of frames over 33 ms (J). Not worse than the original's measured values. | Playwright rAF timing during scroll; Performance trace | G |
+| MOT-02 | Animate `transform`, `opacity` and `clip-path`; `will-change` only on elements actively animating, removed afterwards. | grep CSS and JS; Performance layers | G |
+| MOT-03 | GSAP ScrollTrigger: `ScrollTrigger.refresh()` after fonts and images load; `gsap.matchMedia()` for breakpoints and reduced motion; `.kill()` and `.revert()` on unmount; `ScrollTrigger.config({ignoreMobileResize:true})` on touch. | `ScrollTrigger.getAll().length` returns to baseline after 5 route changes (or 5 unmount and remount cycles on a single-route scope) | G |
+| MOT-04 | If the original uses Lenis, use it with the original's measured settings and the standard wiring: `lenis.on('scroll', ScrollTrigger.update)`, `gsap.ticker.add(t => lenis.raf(t*1000))`, `gsap.ticker.lagSmoothing(0)`; `lenis.stop()` and `start()` around modals; `data-lenis-prevent` on inner scrollers; `anchors: true`; `lenis.destroy()` on unmount; stylesheet imported; touch stays native unless the original sets `syncTouch`. If the original does not use Lenis, do not add it. | Playwright keyboard and anchor scroll test; grep | G |
+| MOT-05 | WebGL and canvas: cap DPR at 2 (J); handle `webglcontextlost` and `webglcontextrestored`; dispose geometries, materials, textures, render targets and the renderer on unmount; pause when off-screen or the tab is hidden. | JS heap growth ≤ 10% over 5 route changes (or 5 unmount and remount cycles); override `document.hidden` and `visibilityState` to hidden, dispatch `visibilitychange`, wrap `requestAnimationFrame`, and assert the page's own rAF calls over 2 s are 0 (the browser keeps firing rAF itself) | G |
+| MOT-06 | Resize and orientation change re-layout without a reload: `ResizeObserver` or `visualViewport`; resizing 1440 to 390 raises no errors and leaves no stale sizes. | Playwright resize test | G |
+| MOT-07 | Page transitions: focus, title and scroll restoration handled (A11Y-12, EDGE-10); no double-run of enter animations. | Playwright | G |
+| MOT-08 | Cursor effects run only under `(hover: hover) and (pointer: fine)` and respect reduced motion. | Emulate touch; grep | G |
+| MOT-09 | Scrubbed video: dense keyframes, poster fallback, iOS decoder priming (see scroll-craft `encode.sh` and verify notes). | scroll-craft harness | R |
+| MOT-10 | Deterministic captures: expose a ready flag after intro and fonts so tests can wait instead of sleeping. | Playwright waits on the flag | R |
+| MOT-11 | The clone has the same frame-rate dependence as the original: if the original's lerps are per-frame, the clone's are too. Run both scroll traces at 60 fps and at 30 fps (`requestAnimationFrame` skipping every other frame); the clone's 30-versus-60 deviation stays within the motion-gate tolerances of the original's 30-versus-60 deviation. | Playwright rAF throttling on both sites | G |
+| MOT-12 | If autoplay is rejected (iOS Low Power Mode), the poster stays, no console error appears and layout does not change. | Override `HTMLMediaElement.prototype.play` to reject, then load the page | C |
+| MOT-13 | At most one WebGL context, and GPU memory is stable: `renderer.info.memory` is unchanged after 5 scroll passes. | Count `getContext` calls for `webgl` and `webgl2` in an init script; read `renderer.info.memory` (three.js; otherwise count live textures and buffers) | C |
+| MOT-14 | Wheel and touch listeners are `{passive: true}` unless they call `preventDefault` (Lighthouse 13 no longer audits this). | Wrap `addEventListener` in an init script, dispatch a synthetic wheel and touch event, and flag non-passive listeners after which `defaultPrevented` is false | G |
+
+## SEC: security, hosting and code hygiene
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| SEC-01 | `npm run start` serves the production build with compression, cache headers (SPD-06, SPD-07), the headers below, clean URLs and a real custom 404. The whole audit runs against it. | `curl -sI` script | G |
+| SEC-02 | Response headers (OWASP HTTP Headers cheat sheet): `X-Content-Type-Options: nosniff`; `Referrer-Policy: strict-origin-when-cross-origin`; `Permissions-Policy: geolocation=(), camera=(), microphone=()`; `Cross-Origin-Opener-Policy: same-origin`; `Cross-Origin-Resource-Policy: same-site`; `frame-ancestors 'none'` in CSP (or `X-Frame-Options: DENY`); no `Server` or `X-Powered-By`; `X-XSS-Protection` absent or `0`. | `curl -sI` assertions | G |
+| SEC-03 | On HTTPS deployments: `Strict-Transport-Security: max-age=63072000; includeSubDomains`. Add `preload` only when you are committed forever: removal takes months (hstspreload.org needs max-age ≥ 31536000, includeSubDomains, preload). For this exercise do not submit to preload. Not testable on plain-http localhost: mark `N/A` locally and document the header in the README. | README and server config | G-L |
+| SEC-04 | CSP: `default-src 'self'`; `script-src 'self'` (hashes for inline; `'wasm-unsafe-eval'` only if WebAssembly is used); `style-src` hashes or `'self'`; `worker-src blob:` and `media-src 'self' blob:` if needed; `img-src 'self' data:`; `font-src 'self'`; `connect-src 'self'`; `frame-ancestors 'none'`; `base-uri 'none'`; `object-src 'none'`. PASS requires the enforced `Content-Security-Policy` header from `npm run start`; use `Content-Security-Policy-Report-Only` only during development (MDN). Inline JSON-LD or speculation rules need a hash in `script-src`. | Playwright: 0 CSP violation events across the scripted run | G |
+| SEC-05 | Zero third-party requests by default: every request origin is your own. Fonts and libraries are self-hosted. | Playwright request-origin set equals `{own origin}` | G |
+| SEC-06 | No secrets in the repo or bundle; `.env` ignored; `.env.example` present. | grep `dist/` and repo for key patterns (`AKIA`, `sk-`, `api_key`, `secret`, `token=`) | G |
+| SEC-07 | `npm audit --omit=dev` shows 0 high or critical (or each is documented); lockfile committed; `engines` and `.nvmrc` set; production dependency licences reviewed. | `npm audit`; license checker | G |
+| SEC-08 | Production build serves no source maps publicly (or documents that it does) and has no stray `console.log`. | curl `.map`; grep `dist/` | G |
+| SEC-09 | No cookies set unless needed (`document.cookie` empty, no `Set-Cookie`); any cookie is `Secure; HttpOnly; SameSite`. | Playwright context cookies | G |
+| SEC-10 | Repo hygiene: `.gitignore` (node_modules, dist, .env), README with install, run, build, start, test and deploy notes, LICENSE, third-party notices, and a licence table for every font, image and library. | Check files exist | G |
+| SEC-11 | `npm run verify` runs build, typecheck, lint, the Playwright smoke suite, axe and the production audit offline, and exits non-zero on any failure. | Run it | R |
+| SEC-12 | Any third-party script or style (if you ever add one) carries Subresource Integrity. | grep | R |
+
+## BACK: backend and API (conditional on any server-side code)
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| BACK-00 | Record the architecture in `docs/DEPLOY.md`: static only, or static plus which server code (form endpoint, API, edge function). Static means every other `BACK` and `MAIL` row is `N/A`. | Read the file | G |
+| BACK-01 | Every form the original has keeps its original look and POSTs to one same-origin demo endpoint, `/api/demo-form`, served by `npm run start`. It validates the body, stores and sends nothing, and returns 202. The form then shows the original's own success component with the text "Demo rebuild: nothing was sent." No `mailto:` links and no third-party form service. A fake success without that text is a failure (EDGE-09). | Playwright submits each form; curl the endpoint with valid and invalid bodies | G |
+| BACK-02 | Method and content allowlists: unsupported methods return 405 with an `Allow` header; missing or unexpected `Content-Type` returns 415; bodies over the limit return 413 (OWASP REST). | `curl -X PUT`, wrong content-type, and an oversized body | C |
+| BACK-03 | Every field is validated server-side (type, length, range, format), independent of the client. Failures return 400 or 422 with a generic message, never stack traces or internals; unexpected errors fail closed (OWASP Top 10:2025 A10 Mishandling of Exceptional Conditions). | Fuzz each field with empty, huge, wrong-type and control-character values | C |
+| BACK-04 | Rate limiting per client and per route: excess requests return 429 with `Retry-After`; planned maintenance returns 503 with `Retry-After` (MDN; OWASP REST). | Send limit+1 requests in a burst and read status and header | C |
+| BACK-05 | CSRF: state-changing requests are POST/PUT/DELETE only, session cookies use `SameSite=Lax` or `Strict`, and the server checks `Origin` (or a token, or a custom header for fetch APIs). CAPTCHA alone is not CSRF protection (OWASP CSRF). | `curl -X POST -H 'Origin: https://evil.example'` returns 403 | C |
+| BACK-06 | CORS: explicit origin allowlist; never `Access-Control-Allow-Origin: *` together with credentials; send `Vary: Origin` when the value varies; set `Access-Control-Max-Age` (MDN). | `curl -H 'Origin: ...' -X OPTIONS` for allowed and disallowed origins | C |
+| BACK-07 | API responses carry `Cache-Control: no-store`, `X-Content-Type-Options: nosniff`, `Content-Security-Policy: frame-ancestors 'none'` and a correct `Content-Type` (OWASP REST). | `curl -sI` on each endpoint | C |
+| BACK-08 | Configuration comes from environment variables only; the process validates required variables at boot and exits with a clear message if any is missing; `.env.example` lists them; no secret reaches logs or responses. | Start with a variable removed; grep logs | C |
+| BACK-09 | Structured logs with a request ID, no passwords, tokens or personal data, and validation failures and rate-limit hits are logged (OWASP Top 10:2025 A09 Security Logging and Alerting Failures). | Trigger each case and read the log | C |
+| BACK-10 | Outbound calls (email API, webhooks) have timeouts (10 s, J) and bounded retries with backoff; on failure the user sees an honest error. The process handles `SIGTERM` by finishing in-flight requests and exiting within 10 s (J). | Kill the dependency mid-request; send `SIGTERM` under load | C |
+| BACK-11 | `/healthz` returns 200 with a small JSON body and no secrets or versions of internal libraries; used by the host and the uptime monitor. | `curl -s /healthz` | C |
+| BACK-12 | Spam control on public forms without harming accessibility: honeypot field, minimum-time check, rate limit. Any CAPTCHA is privacy-preserving and has an accessible alternative. | Submit as a bot and as a human | C |
+| BACK-13 | Header injection blocked: reject CR and LF in any value that lands in an email header (`Subject`, `Reply-To`, `From`); send from one fixed address on an authenticated domain. | Submit `a%0d%0aBcc: x@y.example` and inspect the outgoing message | C |
+| BACK-14 | Data minimisation: store only what the feature needs, document the retention period, and provide a deletion path; personal data never appears in URLs, logs or analytics. | Review schema and code; grep | C |
+| BACK-15 | Double submits are harmless: the button disables during submit and the server de-duplicates (idempotency key or token). | Submit twice quickly; count resulting emails or records | C |
+| BACK-16 | Supply chain (OWASP Top 10:2025 A03): `npm ci` from the committed lockfile, no unreviewed install scripts on new packages, `npm audit signatures` passes where available. | Run the commands | C |
+
+## MAIL: email deliverability (conditional on the site's domain sending or receiving mail)
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| MAIL-01 | The sending domain publishes a single SPF record (10 DNS lookups or fewer), DKIM signing, and DMARC (`p=none` is the Google and Yahoo minimum; `p=quarantine` or stricter is recommended, J; add `rua=` reports). Gmail bulk senders (5,000 or more messages a day to personal Gmail accounts) must have all three, one-click unsubscribe and a spam-complaint rate under 0.3%, enforced more strictly since Nov 2025. | `dig +short TXT <domain>`; `dig +short TXT _dmarc.<domain>`; send to a test inbox and read headers | C-L |
+| MAIL-02 | Marketing mail carries `List-Unsubscribe` and `List-Unsubscribe-Post: List-Unsubscribe=One-Click` (RFC 8058), a working unsubscribe honored within 10 business days at most (CAN-SPAM; aim for immediately), a physical postal address, an accurate From and Reply-To, and a subject that matches the content. CAN-SPAM penalties run up to $53,088 per email (FTC, January 2025 inflation adjustment). | Inspect raw headers of a test message | C |
+| MAIL-03 | Transactional and marketing mail use separate sending identities (subdomain or stream); the Reply-To address is monitored. | DNS and provider config | C |
+
+## HOST: hosting, DNS, TLS and deployment
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| HOST-01 | Every hostname (apex and `www`) serves a valid TLS certificate (full chain, matching SAN, more than 14 days left, J), `http` redirects to `https` with a single 301, and one canonical host is chosen. | `openssl s_client -connect host:443 -servername host`; `curl -sIL http://host` | G-L |
+| HOST-02 | TLS 1.2 is the minimum and 1.3 is enabled; TLS 1.0 and 1.1 are off (Mozilla's intermediate profile; version numbers from prior knowledge, see status note). | `openssl s_client -tls1_1` must fail; `-tls1_3` must succeed; or `testssl.sh` | G-L |
+| HOST-03 | Certificate renewal is automated with an ACME client that supports ACME Renewal Information (ARI) or renews at about two thirds of lifetime. Never a hardcoded 60-day cron: public certificate lifetime is 200 days since 2026-03-15, 100 days from 2027-03-15 and 47 days from 2029-03-15 (CA/Browser Forum SC-081v3), and Let's Encrypt is moving to 64 then 45 days. | Read cert `notBefore` and `notAfter`; `certbot renew --dry-run` or the host's equivalent | G-L |
+| HOST-04 | DNS: A (and AAAA if the host supports IPv6) records, `www` handled, a CAA record limiting who may issue certificates, TTL between 300 and 3600 s (J), and no dangling records that could allow subdomain takeover. | `dig +short A AAAA CAA host`; check every CNAME resolves | G-L |
+| HOST-05 | HTTP/2 or HTTP/3 is enabled. | `curl -sI --http2 https://host`; `curl --http3 -sI` where curl supports it | G-L |
+| HOST-06 | Static assets are served from a CDN or the host's edge network, and a repeat request for a hashed asset is a cache HIT. | Second `curl -sI` shows `age`, `x-cache`, `cf-cache-status` or `x-vercel-cache: HIT` | G-L |
+| HOST-07 | The host returns the custom `404.html` with a real 404 status for unknown paths (Netlify, Cloudflare Pages and Vercel all serve a root `404.html` this way). A blanket SPA rewrite such as `/* /index.html 200` is not allowed for unknown routes: it creates soft 404s (SEO-03). | `curl -s -o /dev/null -w '%{http_code}' https://host/no-such-page` = 404 | G-L |
+| HOST-08 | The header rules of SEC-02 and SEC-04 are committed in the host's own format and served by `npm run start`: Cloudflare Pages `_headers` (max 100 rules, 2,000 characters per line, and not applied to Functions responses), Netlify `_headers` or `netlify.toml`, or `vercel.json`. Provide the nginx equivalent in `docs/DEPLOY.md`. | Diff `curl -sI` against the config | G |
+| HOST-09 | Environments are separated: production, and preview or staging. Previews are `noindex` (`X-Robots-Tag`) and access-protected (basic auth or SSO), use separate environment variables, and never leak into search results. | `curl -sI` on a preview URL; try the URL without credentials | G-L |
+| HOST-10 | Deploys are reproducible: `npm ci && npm run build` from a clean checkout produces the artifact, the final state is tagged `v1.0.0`, and the rollback steps are documented. | Clean clone build; `git tag`; read `docs/DEPLOY.md` | G |
+| HOST-11 | External uptime monitoring checks `/` and `/healthz` at 5 minute intervals or better (J), alerts a real channel, and separately alerts on certificate expiry and domain expiry (30 days out, J). | Monitor configuration | G-L |
+| HOST-12 | Accounts and domains are locked down: 2FA on registrar, DNS, host and repository accounts; registrar lock and auto-renew on; DNSSEC where the registrar supports it. | `dig +dnssec`; owner-only items are listed as open in the README | R |
+| HOST-13 | Cost and abuse guardrails: bandwidth or egress alerts, and large media served through the CDN rather than the origin. | Provider settings | R |
+| HOST-14 | Backups: any stored data has automated backups and a tested restore (3 copies, 2 media types, 1 off-site, J). For a static site the repository is the source of truth and is mirrored. | Restore drill notes | C |
+| HOST-15 | Hosting is green: the Green Web Foundation check returns `green: true`. | `curl -s https://api.thegreenwebfoundation.org/api/v3/greencheck/<host>` | R-L |
+| HOST-16 | The header rules of HOST-08 are confirmed on the deployed URL. | Diff `curl -sI https://host` against the committed config | G-L |
+| HOST-17 | Rollback to the previous deploy takes 5 minutes or less (J) on the host. | Time the documented rollback | G-L |
+
+## OPS: pipeline, monitoring and maintenance
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| OPS-01 | CI runs on every push and pull request: install from the lockfile, build, typecheck, lint, tests, `npm audit`. A failure blocks deploy. | `npm run verify` passes locally and exits non-zero after a deliberately broken change; the workflow file lints with `actionlint` | G |
+| OPS-02 | Performance budgets are enforced in CI (Lighthouse CI assertions on LCP, CLS, TBT and transfer size, set from the clone-versus-original baseline). | `lighthouserc` file; `lhci autorun` run locally exits non-zero when a budget is lowered below the measured value | G |
+| OPS-03 | `docs/DEPLOY.md` is a runbook: build, deploy, verify, roll back, rotate secrets, renew certificates and domains, health checks, and who to contact. | Read the file | G |
+| OPS-04 | Real-user vitals, if collected, use the `web-vitals` library (`onLCP`, `onINP`, `onCLS`) sent with `navigator.sendBeacon` to a first-party endpoint, aggregated with no personal identifiers, and gated by consent where the jurisdiction requires it. Metrics can fire more than once (visibility change, bfcache restore), so dedupe by `id`. | Inspect the beacon payload | R |
+| OPS-05 | Client errors (`error` and `unhandledrejection`) are reported to a first-party endpoint, rate-limited, with personal data scrubbed. | Throw a test error and read the payload | R |
+| OPS-06 | Dependency updates are automated (Renovate or Dependabot, weekly) and security updates are merged within 7 days (J). | Bot config present | R |
+| OPS-07 | A supported-browser policy is documented (for example the last 2 evergreen versions of Chrome, Edge, Firefox and Safari, plus current iOS Safari, J) and RSP-06 tests it. | README section | R |
+
+## LEG: legal and privacy hygiene
+
+Basis: the Munich ruling (LG München I, AZ 3 O 17493/20, Jan 2022, €100 damages for loading Google Fonts from Google's servers without consent), and the regulations named in each row. A rebuild usually has none of the `C` features: record `N/A` with the reason. This is engineering hygiene, not legal advice: for anything that goes live with real users or commerce, get counsel.
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| LEG-01 | Fonts are self-hosted: no requests to `fonts.googleapis.com` or `fonts.gstatic.com`. | Playwright request log | G |
+| LEG-02 | No session replay, heatmaps, or third-party analytics or trackers on by default. Anything added is opt-in and privacy-preserving. | Request-origin check (SEC-05); grep for known vendors | G |
+| LEG-03 | Unofficial-rebuild notice in the README, the 404 page, an HTML comment at the top of `index.html`, and visually hidden text at the end of the footer. Built pages name the original by brand name only, never by domain. No visible change to any in-scope page (rule 2). The original's logo and marks are not passed off as yours. | grep; render in-scope pages and confirm no visible difference | G |
+| LEG-04 | If a signup exists and is directed at children, or you have actual knowledge of under-13 users, comply with COPPA (no data collection from under-13s without verifiable parental consent). Otherwise a neutral age screen is optional (J). | Interaction check | C |
+| LEG-05 | If email is sent: every message carries an unsubscribe link and a physical postal address. | Template check | C |
+| LEG-06 | If there is a paid subscription: price, billing frequency, renewal terms and how to cancel are visible next to the subscribe button, before payment. | Screenshot of the checkout | C |
+| LEG-07 | Superseded by LEG-15 (kept as a placeholder so row IDs stay stable). | none | R |
+| LEG-08 | If any personal data is collected: a privacy notice that matches what is collected. A cookie banner only if non-essential cookies exist (EDGE-12). | Review | C |
+| LEG-09 | Cookie consent, only if any non-essential cookie or SDK exists: the banner appears before any is set; Reject sits on the first layer and is as prominent as Accept; no pre-ticked boxes; withdrawing consent is as easy as giving it (EDPB guidance, ePrivacy). Essential-only sites need no banner (EDGE-12). | Playwright: fresh context has no non-essential cookies; click Reject and confirm none appear | C |
+| LEG-10 | Honor Global Privacy Control: if `Sec-GPC: 1` or `navigator.globalPrivacyControl` is true, treat it as an opt-out of sale and sharing (California CCPA/CPRA and similar states) with no extra steps, and confirm it visibly. | Playwright with header `Sec-GPC: 1`: no third-party or advertising requests | C |
+| LEG-11 | Privacy notice (or a one-line statement that nothing is collected): data collected, purpose, legal basis (EU), retention, processors, user rights (access, deletion) and a contact. Linked from the README and the 404 page; on in-scope pages, including from any form, only as visually hidden text (rule 2). | Links present; content matches the code | G |
+| LEG-12 | Accessibility statement (linked from the README and the 404 page, and as visually hidden text on in-scope pages; rule 2) and an accessible support channel if the European Accessibility Act applies (services to EU consumers, in force since 2025-06-28, microenterprises exempt for services). The statement names the provider and contact, the accessibility features, any parts not covered and why, and the support channel. | Link present; content matches A11Y results | C |
+| LEG-13 | Legal-entity details where local law requires them (for example an imprint in Germany or Austria), and terms and a refund policy if there are accounts or commerce (prior knowledge, see status note). | Footer check | C |
+| LEG-14 | Third-party licences are complied with: font licence texts ship with the font files (SIL OFL requires the notice); images under CC BY carry attribution and none are `NC` or `ND` unless the use allows it; libraries appear in `THIRD_PARTY_NOTICES` with their licences; no GPL or AGPL code unless the project complies. For each font record whether its licence declares a Reserved Font Name and how subsetting complies (TYP-01). GSAP is under its own free licence, not an OSI licence: cite it in the notices. | `npx license-checker --production --summary`; read the notices file | G |
+| LEG-15 | If users can upload content: a DMCA designated agent is registered at copyright.gov (fee $6 per designation or amendment, renewed every 3 years), the contact is public, and there is a takedown process. A missing or expired registration risks losing safe harbor. | Search the DMCA directory; footer link | C |
+| LEG-16 | The rebuild is not deployed to any public URL, and the README says so. Publishing beyond the comparison video needs the original's logos, wordmarks and copy removed or licensed, a domain that cannot be confused with the original's, and human sign-off, so it is out of scope for an unattended run. | grep README | G |
+
+
+## SUS and I18N: sustainability and internationalisation
+
+| ID | Requirement and pass criterion | Verify | Class |
+|---|---|---|---|
+| SUS-01 | Page weight and request count are at or below the original's, and where the original allows, at or below the 2025 mobile median (2,164 KB and 72 requests in the Web Almanac's page-weight distribution; the same chapter cites 2.6 MB for the median mobile home page). | Playwright transfer totals vs baseline | R |
+| SUS-02 | Off-screen video, canvas and animation are paused, and `Save-Data: on` (or `prefers-reduced-data`) gets lighter media and no autoplay video. | Playwright with header `Save-Data: on`; hidden-tab CPU check | R |
+| SUS-03 | Record an estimated carbon figure per page view (Sustainable Web Design model v4) in the README next to the original's. The W3C Web Sustainability Guidelines are a Group Note Draft (September 2026), not a Recommendation, so use them as guidance. | Calculator run with measured bytes | R |
+| I18N-01 | If the original has more than one language: `hreflang` alternates, `lang` on the `<html>` and on any inline switch of language, `dir` for RTL, a language switcher that keeps the current page, and no hardcoded strings in code. | grep head; Playwright per locale | C |
+
+---
+
+## Verification status of this checklist
+
+Fetched from primary sources on 2026-09-30: Core Web Vitals thresholds and LCP breakdown (web.dev), INP guidance (web.dev), WCAG 2.2 additions (W3C), 2025 page weight (HTTP Archive Web Almanac), bfcache blockers (web.dev), `prefers-reduced-motion` guidance (web.dev), soft 404 and status codes (Google Search Central), noindex versus robots.txt (Google Search Central), HTTP security header values (OWASP), `text-wrap` and `size-adjust` support (MDN), cache headers (web.dev), CSP (MDN), HSTS preload rules (hstspreload.org), Speculation Rules support (Chrome docs), GSAP ScrollTrigger and Lenis usage (their docs), Lighthouse throttling defaults, WebAIM Million 2025 percentages, Munich Google Fonts ruling (news and law-firm summaries). Favicon and Open Graph sizes come from current guides (secondary sources), not the specs. Rows marked (J), the microcopy examples, the 4 s preloader cap, the frame-time budget, the WebGL DPR cap and the `security.txt` row are engineering judgment or from prior knowledge, not fetched.
+
+**Second round (backend, hosting, legal, operations), 2026-09-30.** Fetched from primary pages: OWASP REST Security and CSRF Prevention cheat sheets, MDN `Retry-After` and CORS, Cloudflare Pages `_headers` limits, FTC CAN-SPAM guide (10 business days, $53,088 per email), the `web-vitals` library README. From search results that name the primary body but were read as summaries: OWASP Top 10:2025 category list, CA/Browser Forum SC-081v3 schedule (200 days from 2026-03-15, 100 from 2027-03-15, 47 from 2029-03-15), Let's Encrypt moving to 64 then 45 days, Google and Yahoo bulk sender rules, European Accessibility Act scope and statement content, EDPB cookie-banner rules, Global Privacy Control obligations, DMCA agent fee ($6) and 3-year renewal (the Copyright Office page fetched did not show the fee, so it rests on secondary law-firm sources), W3C Web Sustainability Guidelines status, the Green Web Foundation API, and static-host 404 behaviour. **Not verified, from prior knowledge:** Mozilla TLS profile versions (the Mozilla wiki page has moved and the replacement URL returned 404), HTTP/2 and HTTP/3 checks, CAA and TTL guidance, `npm audit signatures`, SIL OFL notice terms, German-style imprint duties, and every row marked (J).
+
+**Independent review, 2026-09-30.** An Opus reviewer tested this file and the companion prompt against the pinned upstream repo, the scroll-craft harness, Lighthouse 13.5.0 and axe-core 4.11.4. Corrections applied: fidelity rule widened to anything visible or felt; live-only rows never deployed; one demo form endpoint; absence predicates for `N/A`; Lighthouse 13 audit names; per-descriptor Safari support for font metric overrides; `text-wrap: pretty` is not Baseline; hit-area verification by point sampling; WebAIM empty-button figure 29.6%; CAN-SPAM adjustment year; W3C sustainability status.
+
+**Second review round, 2026-09-30.** Fixed: no state-changing requests to the original, the demo-form message as the sole visible exception, tab title matching the original, MOT-11 now mirrors the original's frame-rate dependence, viewport units kept as the original's, HOST and OPS rows split into local and live-only parts, and several verification methods made runnable.

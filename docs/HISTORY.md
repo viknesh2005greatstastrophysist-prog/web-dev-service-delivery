@@ -1,0 +1,41 @@
+# History
+
+How the prompt and checklist got to their current form. Append a line here for every change that matters.
+
+## Lineage
+
+| Edition | Date | What it was | Where it is | Status |
+|---|---|---|---|---|
+| Master prompts (general, precise, reviewed, accounting and tax) | 2026-09-28 to 09-30 | The first audit-and-tighten work: Awwwards pixel rebuilds plus a scroll-craft layer | `archive/earlier-master-prompts/` | Superseded |
+| Clone with polish | 2026-09-30 | The operator's own short prompt ("rebuild it pixel for pixel") plus the scroll-craft polish pass as an additive last step | `archive/prompts/PROMPT_awwwards_clone_with_polish.md` | Superseded |
+| v2 | 2026-09-30 | Whole-prompt rewrite for truthful gates, fidelity and motion, autonomy, the comparison video | `archive/prompts/PROMPT_awwwards_clone_v2.md` | Superseded |
+| v3 and `PRODUCTION_CHECKLIST.md` | 2026-09-30 | Comparison-video edition: 167-row checklist, Opus-reviewed to GREEN in 4 rounds | `archive/prompts/PROMPT_awwwards_clone_v3.md`, `archive/checklists/PRODUCTION_CHECKLIST.md`, reviews in `docs/reviews/v3-comparison-edition/` | Superseded |
+| v4 client edition | 2026-09-30 | Paid client deliverables: template mode, content sections, 188 rows; Opus-reviewed GREEN; made non-blocking after a HARD-BLOCKER complaint | `archive/prompts/PROMPT_awwwards_client_v4.md`, `archive/checklists/PRODUCTION_CHECKLIST_client.md`, reviews in `docs/reviews/v4-client-edition/` | Superseded; v6 is built on it |
+| v5 inspired edition | 2026-09-30 | "Close cousin" approach to reduce legal exposure: a distance gate against the reference; GPT-run lessons added | `archive/prompts/PROMPT_awwwards_inspired_v5.md`, `archive/checklists/PRODUCTION_CHECKLIST_inspired.md` | Abandoned when the operator chose clone-then-swap |
+| v6 clone-and-swap | 2026-10-01 | Reference build, content ladder, swap probe, brand shift, production loop; 196 rows; Opus-reviewed GREEN after 2 blockers | `prompt/`, `checklist/`; review in `docs/reviews/v6/01-*` | Current |
+| v6 gold-standard pass | 2026-10-01 | Whole checklist raised to gold: 253 rows, 18 sections, new UXF section; Opus-reviewed GREEN after 4 blockers | `docs/reviews/v6/02-*`, `docs/research/` | Current |
+| v6 run parts | 2026-10-01 | Optional `RUN_PART=1` and `RUN_PART=2`; Opus-reviewed GREEN after 2 blockers | `docs/reviews/v6/03-*` | Current |
+| v6 US legal edits | 2026-10-01 | Brand shift default, two builds, AI-authorship wording, LEG-18; Opus-reviewed GREEN after 1 blocker | `docs/reviews/v6/04-*`, `docs/LEGAL_NOTES.md` | Current |
+
+## What the GPT run taught (an earlier client edition, run with no client input)
+
+The run built a working site, disclosed five failed gates and one unrun gate, and scored 100 on Lighthouse mobile
+against 61 for the original. It also produced 260 geometry failures and visible defects that its checks missed:
+an overlay backdrop that collapsed to zero height, menu and footer text that was dark on dark, a footer clock
+replaced by an address, mobile contact buttons in the wrong layout, no mobile navigation with JavaScript off, and
+animation code that overwrote placeholder markers. It had built audit machinery before the pages looked right.
+
+Each defect became a rule or a gate in v6:
+- Ground rule 9, "look before you measure": screenshots of every state next to the original before any number.
+- Ground rule 10, rebuild the box tree: never paste sampled computed values onto a differently nested DOM.
+- The state walk: every menu and overlay at five viewports, contrast measured on rendered pixels, backdrop area,
+  and outside-click, Escape and close all dismissing.
+- Per-element coverage and geometry asserted from the first cycle.
+- Live widgets stay functional; animation code never writes slot markers (CNT-12, CNT-13).
+- Ten broken-fixture smoke tests for the audit tool, so a check that cannot fail is not a check.
+- `escalation.md` must list every remaining visible defect when a gate fails.
+
+## Change log
+
+- 2026-10-01: Repository created. The prompt's two absolute paths became `<KIT_DIR>` paths, and its methodology step
+  now uses the pinned submodule first. `scripts/check-kit.py` added. Everything else is as reviewed.
