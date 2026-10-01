@@ -1,0 +1,3 @@
+[submodule "vendor/clone-app-pat-pro-public"]
+	path = vendor/clone-app-pat-pro-public
+	url = https://github.com/per-simmons/clone-app-pat-pro-public.git
