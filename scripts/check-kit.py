@@ -13,6 +13,7 @@ right, only whether the two files still agree with each other.
 """
 import argparse
 import itertools
+import json
 import subprocess
 from release_gate import catalogue
 import pathlib
@@ -78,6 +79,33 @@ cited = set(re.findall(r"\b([A-Z][A-Z0-9]{1,4}-\d{2})\b", ck + pr))
 missing = [c for c in sorted(cited) if c not in idset and not c.startswith(prefixes)]
 check("every row ID cited in either file exists", not missing, str(missing))
 
+# The reviewed source set is fixed to the user's supplied clips; JSON is provenance,
+# not a transcript or release proof. Validate errors as failed checks, never crash.
+source_path = ROOT / "docs/reviews/instagram-addon-2026-10-03/lessons.json"
+try:
+    source_record = json.loads(source_path.read_text())
+    sources = source_record["sources"]
+    supplied = {"Dc-Ye_1zpcr", "DcKiRe3TvdB", "Dd36v-8s8O2", "Dd6qP9CRxax", "Dd35bp-q_Cv", "DduSPm2B3Lq", "DdsrRJpywBe", "Dd3ZGNeSvK5", "DdP1ySxAsxT"}
+    check("video sources: exactly nine supplied IDs and matching URLs",
+          len(sources) == 9 and {x["id"] for x in sources} == supplied and
+          all(x["url"] == f"https://www.instagram.com/p/{x['id']}/" for x in sources))
+    check("video sources: every mapped row exists",
+          all(x["rows"] and all(row in idset for row in x["rows"]) for x in sources))
+    check("video sources: sampled review scope and artifact identities",
+          source_record["schema_version"] == 1 and bool(source_record["review_scope"]) and
+          all(x["status"] == "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT" and
+              x["audio_transcribed"] is False and x["frames"] and
+              re.fullmatch(r"[a-f0-9]{64}", x["video_sha256"]) and
+              re.fullmatch(r"[a-f0-9]{64}", x["post_metadata_sha256"]) and
+              all(re.fullmatch(r"[a-f0-9]{64}", f["sha256"]) for f in x["frames"])
+              for x in sources))
+except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
+    check("video sources: readable provenance record", False, str(error))
+addon_path = ROOT / "checklist/VIDEO_LESSONS_ADDON.md"
+addon = addon_path.read_text() if addon_path.exists() else ""
+addon_refs = set(re.findall(r"\b([A-Z][A-Z0-9]{1,4}-\d{2})\b", addon))
+check("video add-on: cited rows exist", addon_refs <= idset, str(sorted(addon_refs-idset)))
+
 # sections: prompt list equals the checklist's headings
 ck_sections = []
 for h in re.findall(r"^## ([A-Za-z0-9 ]+?):", ck, re.M):
@@ -120,7 +148,7 @@ check("no machine-specific absolute paths", "/Users/" not in pr + ck and "C:\\" 
 for rel in ("skills/scroll-craft/SKILL.md", "skills/scroll-craft/scripts/shoot.mjs", "skills/scroll-craft/references/verify.md",
             "skills/scroll-craft/LICENSE", "checklist/PRODUCTION_CHECKLIST_clone_swap.md", "examples/CLIENT_INPUT/brief.md",
             "scripts/release_gate.py", "tests/test_release_gate.py", "docs/RELEASE_EVIDENCE.md",
-            "docs/ci/verify-kit.yml"):
+            "docs/ci/verify-kit.yml", "checklist/VIDEO_LESSONS_ADDON.md"):
     check(f"kit file exists: {rel}", (ROOT / rel).exists())
 sub = ROOT / "vendor" / "clone-app-pat-pro-public"
 check("methodology submodule is checked out (run: git submodule update --init)", (sub / "SKILL.md").exists(),
@@ -138,8 +166,12 @@ for forbidden in ("LCP minus TTFB", "else `build`", "For any other client the fi
 check("deploy build is always accessible", "build:deploy always enables A11Y_FIXES=on" in ck)
 
 # Validate actual Markdown file links in the active entry points, not example code paths.
-for rel in ("README.md", "docs/HOW_TO_RUN.md", "docs/RELEASE_EVIDENCE.md", "checklist/PRODUCTION_CHECKLIST_clone_swap.md"):
+for rel in ("README.md", "docs/HOW_TO_RUN.md", "docs/RELEASE_EVIDENCE.md", "checklist/PRODUCTION_CHECKLIST_clone_swap.md", "checklist/VIDEO_LESSONS_ADDON.md",
+            "docs/reviews/instagram-addon-2026-10-03/REVIEW.md"):
     document = ROOT / rel
+    if not document.exists():
+        check(f"active Markdown file exists: {rel}", False)
+        continue
     links = re.findall(r"(?<!!)\[[^\]]+\]\(([^)]+)\)", document.read_text())
     broken = [link for link in links if not re.match(r"[a-z]+:|#", link) and not (document.parent / link.split("#")[0]).exists()]
     check(f"active Markdown file links resolve: {rel}", not broken, str(broken))

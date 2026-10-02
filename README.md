@@ -11,7 +11,7 @@ Status (2026-10-02): production requirements audited, release-evidence validatio
 
 ```
 prompt/       The prompt you give the agent (one file, about 16,000 words)
-checklist/    The production-grade checklist the prompt audits against (262 rows, 18 sections)
+checklist/    The production-grade checklist the prompt audits against (270 rows, 18 sections)
 skills/       scroll-craft, the scroll and motion polish skill the prompt uses (MIT, Nate Herk)
 vendor/       The upstream cloning methodology as a git submodule, pinned to the commit the prompt names
 examples/     A starter CLIENT_INPUT folder to copy for each new client
@@ -84,6 +84,8 @@ recommended answer is written permission from its creators or advice from a US I
   a fidelity exception records the shortfall and does not waive the production requirement.
 - Things only a person can do remain: deploying, DNS and accounts, legal review, a screen-reader pass, and the
   permission question on the reference design.
+
+The [video lessons add-on](checklist/VIDEO_LESSONS_ADDON.md) maps nine Instagram sources into eight new requirements and existing checks. See the [dated review](docs/reviews/instagram-addon-2026-10-03/REVIEW.md) for accepted lessons, rejected claims and viewing limits.
 
 ## Editing the kit
 

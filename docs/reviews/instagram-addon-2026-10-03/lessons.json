@@ -1,0 +1,521 @@
+{
+  "schema_version": 1,
+  "review_scope": "Sampled visual frames and public post descriptions; no continuous playback or spoken-audio transcription.",
+  "sources": [
+    {
+      "id": "Dc-Ye_1zpcr",
+      "url": "https://www.instagram.com/p/Dc-Ye_1zpcr/",
+      "creator_metadata": "mudasir",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "duration_seconds": null,
+      "video_sha256": "858c7069819897ee04812356a2f7c10396f172ef49ca51898b084ba3b521a815",
+      "post_metadata_sha256": "5275315a62bf85383dd6df2baf2e9b53badfd82b2f1a732f7c57a2cec6a30684",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "lesson": "Audience-matched launch distribution",
+      "rows": [
+        "SEO-16"
+      ],
+      "moments": [
+        "00:00 repository and 00:05-00:25 channel examples"
+      ],
+      "caution": "No guaranteed conversion or automatic bulk submission.",
+      "frames": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "b3d599c2499976beff342c184f5fbed223a4f64f051b2ed34fca766247edcf65"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "dd287dd5c42acb7af6fbeed312598e112f4d500f8aa901aae89b43c6b2e0d449"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "0a18648b21f3b421b15086b3a602a99e7861e845f18822b24b1d58407e2dca14"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "a43fda16f0307b9bc62e232ee5c888245a27c26c5450d02b0f5f0969197ce546"
+        },
+        {
+          "file": "watch/frames/frame_0005.jpg",
+          "sha256": "8b99a60ff2b3b80e5cfeba03fc2c290d34795bde8533aa35a69b267574c569c6"
+        },
+        {
+          "file": "watch/frames/frame_0006.jpg",
+          "sha256": "8f94c101fd0025c23464059aa55b897e928fec682043128a4e032060a53551c8"
+        }
+      ]
+    },
+    {
+      "id": "DcKiRe3TvdB",
+      "url": "https://www.instagram.com/p/DcKiRe3TvdB/",
+      "creator_metadata": "Alex Yates",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "duration_seconds": null,
+      "video_sha256": "c1afc58d815e823f769e7983b9494a3bd4111fdd9af7247280f6bec33689169f",
+      "post_metadata_sha256": "39a54962963b2ed1ee9a32f4aae04bdf7691404a22f1c1d556c35fe64a7d7222",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "lesson": "Twenty practical UI fixes",
+      "rows": [
+        "RSP-02",
+        "SEO-08",
+        "RSP-06",
+        "SEO-06",
+        "SEO-01",
+        "EDGE-02",
+        "SPD-05",
+        "UXF-01",
+        "UXF-05",
+        "CNT-04",
+        "UXF-04"
+      ],
+      "moments": [
+        "00:00-00:25 tips; 00:26.5 final mobile tip"
+      ],
+      "caution": "Copyright dates require accurate owner-approved dates/ranges.",
+      "frames": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "ad984a79892d0ca69def68277d3a0623ce6d22a89fa404194eb629f06372e176"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "a43169aa232c1f66a944b538e77b4416db316762a063d32f9161d1dd35f846ae"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "986338d1dc087bec7f7af44f00e9cf22a9fdf1b1c2620e4978240f699cee4c26"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "c61501f2e025c7e379e705fb728cabb8c7d1ea069467738b35310413560bf065"
+        },
+        {
+          "file": "watch/frames/frame_0005.jpg",
+          "sha256": "ef2ec14b0731642b691f7a8359ba00fe74266992b9c72387770e7ff7008b3ff1"
+        },
+        {
+          "file": "watch/frames/frame_0006.jpg",
+          "sha256": "494669b561f9914df8771e4c9f44d60d83ac8cafae270ebdbe62c3f3eb8492ea"
+        },
+        {
+          "file": "tail/frames/cue_0000.jpg",
+          "sha256": "d40a3ef9c72ad6fbe151265145777a968871f008ea1f601ab01d960b3b34cb2e"
+        }
+      ]
+    },
+    {
+      "id": "Dd36v-8s8O2",
+      "url": "https://www.instagram.com/p/Dd36v-8s8O2/",
+      "creator_metadata": "Udayan | SEO and AI Visibility",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "duration_seconds": null,
+      "video_sha256": "be07f2d1d16a173b503f6a8f65d1ce1bb91e35f3f8360903229d135e07ac88b2",
+      "post_metadata_sha256": "d0f17f42cf98d86bb42ee03e61da36e6cc8ee823f1cf274ba5a75c194e245d75",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "lesson": "Satirical accumulating SEO request",
+      "rows": [
+        "SEO-02",
+        "SEO-03",
+        "SEO-04",
+        "SEO-10",
+        "SEO-11",
+        "CNT-05"
+      ],
+      "moments": [
+        "00:00-00:35 accumulating requirements"
+      ],
+      "caution": "Reject blanket noindex removal, AI ban, FAQ-rich-result promise, arbitrary Forbes link and undefined two-second target.",
+      "frames": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "65560e7ab03357cf8f4c8eb85d9e718ab7336ee1f8077729a49b2eb53a8a3448"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "8bfcc23b2e96f08c43f4caf31d7eec4a9546acdab7e5ba6443809edd4ae23be5"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "cebfc2e7f13aab1e38a2d1dfba775f6b2f9a09898b9251d87b8ae44e222f851f"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "8f0f3d37e1d7e90177ca5a9cc91aab3659ec80aba424e344987385f070506c2f"
+        },
+        {
+          "file": "watch/frames/frame_0005.jpg",
+          "sha256": "0b8735bae14516c1c9ff8584e1196c6dd444aee7bf34628f51512e03fab9a745"
+        },
+        {
+          "file": "watch/frames/frame_0006.jpg",
+          "sha256": "f1fcff6def1ac3cedcc4f06449c69852e520582aa241d632fc6df101e42e9f99"
+        },
+        {
+          "file": "watch/frames/frame_0007.jpg",
+          "sha256": "21fff1293dd8f64b337ad646453aad975587afeaf133e91ed6b66453399422f5"
+        },
+        {
+          "file": "watch/frames/frame_0008.jpg",
+          "sha256": "316df4e631846da73ed6a676df918b231bc413c88716c792538395725e7b43cf"
+        }
+      ]
+    },
+    {
+      "id": "Dd6qP9CRxax",
+      "url": "https://www.instagram.com/p/Dd6qP9CRxax/",
+      "creator_metadata": "Udayan | SEO and AI Visibility",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "duration_seconds": null,
+      "video_sha256": "89f325ca2d525a1afaf5ee79c305eab093be1f7205ba0845be18d9334e30b6d9",
+      "post_metadata_sha256": "0859fe4b734e9056048ad4c6a60707c1d1abef3de64f82bf94565f54e9202518",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "lesson": "Ten launch steps in the post description",
+      "rows": [
+        "SEO-13",
+        "SEO-16",
+        "OPS-10",
+        "SEO-01",
+        "RSP-02",
+        "SPD-20"
+      ],
+      "moments": [
+        "00:05 sitemap; 00:10 analytics; 00:15 search; 00:20 reviews"
+      ],
+      "caution": "No ranking or ChatGPT visibility guarantee; profiles and analytics are conditional.",
+      "frames": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "f1303916f9b73132991fa5c62bbbd2d7c7ee0f96994fff82caa2aaebc4ec215d"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "ceaa4af0092624f8a3a0eba17e92b8f79e6992642cbf6f1b5e76e3bf6c27d84f"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "47548cbddc66734085e4683b736264dd8596e3bbc4c2ad7c98abb15cda6c7be0"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "169c1f16478030b69e319743d8c33b6eaa8a571690f7bfb94b704ccdbd216bab"
+        },
+        {
+          "file": "watch/frames/frame_0005.jpg",
+          "sha256": "20e0a784b997a38689c024ead129ab766f2d9a0612b2b28767d8fc461e74e000"
+        }
+      ]
+    },
+    {
+      "id": "Dd35bp-q_Cv",
+      "url": "https://www.instagram.com/p/Dd35bp-q_Cv/",
+      "creator_metadata": "Codvyn | Tech and AI",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "duration_seconds": null,
+      "video_sha256": "2dac7c5dd7fd7d9d661c388fbb8e3892387ad483ea38119465170147ff7f8701",
+      "post_metadata_sha256": "30be92629e91126461199b6e96f44a10a4f59baad773ed04904c1184a35529a6",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "lesson": "UI/3D resource examples",
+      "rows": [
+        "SEC-07",
+        "LEG-14",
+        "MOT-05",
+        "SPD-08"
+      ],
+      "moments": [
+        "00:15-00:35 threeui.com; 00:40-00:45 tasteskill.dev; 00:50 GSAP; 00:55-01:00 21st.dev"
+      ],
+      "caution": "Observed resources are candidates, not vetted recommendations; spoken Hindi not transcribed.",
+      "frames": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "9f89d4e7ae8fa15ceb60e1646c05d0d5d807780e5afd030bc1f83396e84f4f3f"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "d7e69ac42c65126cc0f81c6991c24cbcf3dd3fed3697df68422aef4020703751"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "82f0e3fd844966af8389f44c029068e623c102e20530a859d7bb144a5cc05f05"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "2c4a20eb8e1c84b0d4ad2cb15bdefa4821b27f3f2321c8282d854b065099edff"
+        },
+        {
+          "file": "watch/frames/frame_0005.jpg",
+          "sha256": "0ec8823cff2c052f9e81766ee4e2d8fe656aea52ad80c684af9886a6f226bab4"
+        },
+        {
+          "file": "watch/frames/frame_0006.jpg",
+          "sha256": "6f15822d7bd43ce4752f0a41d1a34c2b5e051584b96f3b201c6bd1d9f7ec0b29"
+        },
+        {
+          "file": "watch/frames/frame_0008.jpg",
+          "sha256": "0dacae5de718ace450885ad76a6b3b7d8a1f7f5b3428f0464df06dae338ec4d8"
+        },
+        {
+          "file": "watch/frames/frame_0009.jpg",
+          "sha256": "03a6f7844e952553f559078b6e052426a0cba69f995652e93327dfd83fce5abc"
+        },
+        {
+          "file": "watch/frames/frame_0010.jpg",
+          "sha256": "b7f011d3c117725598cf4a8476932dfc11c20c7dd478693067ab76c32c3a00f1"
+        },
+        {
+          "file": "watch/frames/frame_0011.jpg",
+          "sha256": "658d87ae28d2e61306b0d9048816492ad120103e1c5669f9d29a537ec754d0f1"
+        },
+        {
+          "file": "watch/frames/frame_0012.jpg",
+          "sha256": "ba049e9227d42f23ba9d9ae1392e3169867803fdbdebfabc7d5d9d4c962be6b6"
+        },
+        {
+          "file": "watch/frames/frame_0013.jpg",
+          "sha256": "1a78f0324f543f5fb314d0382596809e7718e14ef61e20c32ea9507ed20ffac7"
+        }
+      ]
+    },
+    {
+      "id": "DduSPm2B3Lq",
+      "url": "https://www.instagram.com/p/DduSPm2B3Lq/",
+      "creator_metadata": null,
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "duration_seconds": null,
+      "video_sha256": "3f156a2bf27b6b2f310868960df847de797e07051d1da495538bd123d7a434be",
+      "post_metadata_sha256": "fa27dcfb042f3fd06380e25ae565da5b4ca8c1f36e23274e881656030880d1b3",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "lesson": "Brief, iterative delivery and security review",
+      "rows": [
+        "DEL-16",
+        "BACK-18",
+        "BACK-17",
+        "SEC-07",
+        "LEG-11",
+        "CNT-05",
+        "SEO-16"
+      ],
+      "moments": [
+        "00:00-00:20 planning; 00:25 focused security prompts; 00:30-00:45 hosting/distribution"
+      ],
+      "caution": "Creator experience/model claims are unverified; legal requirements depend on actual scope.",
+      "frames": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "d852d1ec0c4797fc4de2635994907db33f7fe0a4cc832581560d15af3b112d34"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "2b9ac1a0c50df43d23a815c36baf520dd06f3d79399e5ab8dfeedbbf9bcb8149"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "f4a5d2e70e248291272b0721d19b7ab3a2ed2ca2451895810b74ffa24a2ed0ca"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "79374228dac2c164122669422738073f8900cbb88a678352219c9e3fd8936eeb"
+        },
+        {
+          "file": "watch/frames/frame_0005.jpg",
+          "sha256": "a2c775d3d211ff1181ff59904dbd1fe38de6faafbe900b5f4826f7e6ad584eda"
+        },
+        {
+          "file": "watch/frames/frame_0006.jpg",
+          "sha256": "95d4b4ebcfbc6e15844663fb1a049098337511ee174cc59ed7a57eee60c913b5"
+        },
+        {
+          "file": "watch/frames/frame_0007.jpg",
+          "sha256": "79ac5ae455a2e0a445eb165457f175cf8e3310e9c21dfdee43b01f62befc1773"
+        },
+        {
+          "file": "watch/frames/frame_0008.jpg",
+          "sha256": "f75ffc98331823a18e10efd8170392e15329f44645dd9b22a3199fb1a04bc661"
+        },
+        {
+          "file": "watch/frames/frame_0009.jpg",
+          "sha256": "961ff9d2dce8ab32f7c2e266f01c22bb09e6701673ad873165444405e58c0aa0"
+        },
+        {
+          "file": "watch/frames/frame_0010.jpg",
+          "sha256": "03805d4a16d53f492adef4f0f6c040e8a43e5245636abd047946219d9f64e5ee"
+        },
+        {
+          "file": "watch/frames/frame_0011.jpg",
+          "sha256": "a4d45cf2490bb85c3aa5f68efac7994ecd002a10e2d6348c5565522f414bf9ec"
+        },
+        {
+          "file": "security/frames/cue_0000.jpg",
+          "sha256": "c5a6b8cc6fcddd9271f0237fe4c93365cda135e6c9b6df20e447b5196d468fed"
+        }
+      ]
+    },
+    {
+      "id": "DdsrRJpywBe",
+      "url": "https://www.instagram.com/p/DdsrRJpywBe/",
+      "creator_metadata": "JOEY",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "duration_seconds": null,
+      "video_sha256": "2954836ed2ba4c85da589908fde2c299b2d23ea906b0c5a8bbf6e84be6d16469",
+      "post_metadata_sha256": "48ffdff8376b20dcd5f9412d3ae8384c84b33e73f4e7886af4ea9335d16e51d7",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "lesson": "Motion reference resources",
+      "rows": [
+        "SEC-07",
+        "MOT-04",
+        "MOT-05",
+        "EDGE-05"
+      ],
+      "moments": [
+        "00:05 lenis.dev; 00:10 basement.studio; 00:15 shadergradient.co"
+      ],
+      "caution": "No permission to copy assets or requirement to add a scrolling/3D dependency.",
+      "frames": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "3d5a1516d0f21af87dd573b928f5b6e9cdc2927aa1abf7ae5c3d4d6de3ba50bb"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "ecec3294455ed4fc57fcbc8184252d3234ca7938d0912bdedeb39b26d5b74a1b"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "101afe96da49aa3695973eb9db9480f9b472c562c8efe3e2d13b5f1062d1ab16"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "594071f8a8de901d6d56e820fdab235a0cd7eacb6f3088ba12ab16a9cec3ebf8"
+        }
+      ]
+    },
+    {
+      "id": "Dd3ZGNeSvK5",
+      "url": "https://www.instagram.com/p/Dd3ZGNeSvK5/",
+      "creator_metadata": "Oliver Merrick",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "duration_seconds": null,
+      "video_sha256": "ec198ee1503eb1bde4f17644fec3e719f5ea0318eb4ddac7ec18765994cd8868",
+      "post_metadata_sha256": "920022aa02bfcfa772131f16b77bfafc8946f84c5ba7573ca10009b6a3066cdf",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "lesson": "Structured SERP research and advisory scoring",
+      "rows": [
+        "SEO-15",
+        "CNT-05"
+      ],
+      "moments": [
+        "00:00-00:10 visible research dashboard; full post description"
+      ],
+      "caution": "Reject fixed three-beatable-results rule, unverified costs and calibrated-probability assumptions.",
+      "frames": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "88eeaf1082ed5b99421fc01344dab079cf8a1e1bfcea75f6df8e5586c3760d6c"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "1ca8292700a8ed359e98305b7f27b055e9e3efb490e8c51455fbba9fb6a85cb5"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "1633e9b456df3d28d9ee069ffcef622fc706090510c14237d39ecafeae275c85"
+        },
+        {
+          "file": "watch/frames/frame_0005.jpg",
+          "sha256": "ddf8da674cf2e841268c564ce02f8859c4b861b1148cf5b9207cee2058b051e2"
+        },
+        {
+          "file": "watch/frames/frame_0006.jpg",
+          "sha256": "f6ddcd20d72189b4b152624cf34483b5bc8d4ed2345906d50b5e568a20a3e5af"
+        },
+        {
+          "file": "watch/frames/frame_0007.jpg",
+          "sha256": "98f8707cd56dfd795e96b9cb3087f2523952b3e27eecbbb58981d2c0881ecee7"
+        },
+        {
+          "file": "watch/frames/frame_0008.jpg",
+          "sha256": "b13ec6c712b5374fb34e65ef70175d867be091d09add8f506154004df6d48f6a"
+        },
+        {
+          "file": "watch/frames/frame_0011.jpg",
+          "sha256": "90a4be34f795fb3fa7c6d56ec954f46d9f9b8015b9042537c7cb4f7fbb552253"
+        }
+      ]
+    },
+    {
+      "id": "DdP1ySxAsxT",
+      "url": "https://www.instagram.com/p/DdP1ySxAsxT/",
+      "creator_metadata": "Josh Hoeg | Vibe Coding & AI",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "duration_seconds": null,
+      "video_sha256": "9ada7163a42aeb058a1d63cccd961edd50cf06f58adac8b21cad4a2fab84e7ab",
+      "post_metadata_sha256": "ecf9e61e734eaa64906ae05a33389a0e4325fa687cbb1de415ecdd53e3920563",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "lesson": "Performance optimization menu",
+      "rows": [
+        "SPD-03",
+        "SPD-04",
+        "SPD-05",
+        "SPD-07",
+        "SPD-08",
+        "BACK-19",
+        "BACK-20",
+        "BACK-21",
+        "UXF-02"
+      ],
+      "moments": [
+        "00:00-00:30 cumulative checklist"
+      ],
+      "caution": "Measure before adding infrastructure; never lazy-load LCP or indiscriminately cache private APIs.",
+      "frames": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "ce83350d11da4bdfeebfd449c32633490aa75b2264ad586b8574af03d7b1b95b"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "d7299a29d98d4280998e690e1c1d57a2c7a42bea6d2e8b07a98c72926bb68a4a"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "8e2db15ca1517506ee30c5260e11e6b387c90a18726f581b4c821897bce997c3"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "08ad545fcef9f9fddfc276e6785a1c2086d8e0d2ebb88f6ccbb825f634d6e0b6"
+        },
+        {
+          "file": "watch/frames/frame_0005.jpg",
+          "sha256": "edde6bb3b60ea79566fffcbe4b86a878cd47715814d5c58669ea156c42d65441"
+        },
+        {
+          "file": "watch/frames/frame_0006.jpg",
+          "sha256": "27e72496b2b483df3f4b82c513e8012b7d3e311f43318330e6522d5dcd7eea78"
+        },
+        {
+          "file": "watch/frames/frame_0007.jpg",
+          "sha256": "c5b0c52c25d8b697e77f3e11cd51b68c81b95a1360143491a2a78a5f32316321"
+        }
+      ]
+    }
+  ]
+}

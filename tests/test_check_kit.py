@@ -1,6 +1,7 @@
 """Mutation tests prove the structural checker rejects document regressions."""
 from pathlib import Path
 import shutil
+import json
 import subprocess
 import sys
 import tempfile
@@ -50,13 +51,40 @@ class KitConsistencyTests(unittest.TestCase):
 
     def test_stale_document_count_fails(self):
         path = self.root/'README.md'
-        path.write_text(path.read_text().replace('(262 rows, 18 sections)', '(254 rows, 18 sections)'))
+        path.write_text(path.read_text().replace('(270 rows, 18 sections)', '(254 rows, 18 sections)'))
         self.assertRejected('README row count matches catalogue')
 
     def test_broken_entry_point_link_fails(self):
         path = self.root/'README.md'
         path.write_text(path.read_text()+'\n[Missing](docs/does-not-exist.md)\n')
         self.assertRejected('active Markdown file links resolve')
+
+    def mutate_sources(self, mutate):
+        path = self.root/'docs/reviews/instagram-addon-2026-10-03/lessons.json'
+        record = json.loads(path.read_text())
+        mutate(record)
+        path.write_text(json.dumps(record))
+
+    def test_missing_addon_is_rejected_without_traceback(self):
+        (self.root/'checklist/VIDEO_LESSONS_ADDON.md').unlink()
+        self.assertRejected('kit file exists: checklist/VIDEO_LESSONS_ADDON.md')
+
+    def test_missing_supplied_clip_is_rejected(self):
+        self.mutate_sources(lambda r: r['sources'].pop())
+        self.assertRejected('exactly nine supplied IDs')
+
+    def test_dangling_video_row_is_rejected(self):
+        self.mutate_sources(lambda r: r['sources'][0]['rows'].append('BACK-99'))
+        self.assertRejected('every mapped row exists')
+
+    def test_source_url_mismatch_is_rejected(self):
+        self.mutate_sources(lambda r: r['sources'][0].update(url='https://www.instagram.com/p/wrong/'))
+        self.assertRejected('matching URLs')
+
+    def test_malformed_provenance_is_rejected_without_traceback(self):
+        path = self.root/'docs/reviews/instagram-addon-2026-10-03/lessons.json'
+        path.write_text('{')
+        self.assertRejected('readable provenance record')
 
 
 if __name__ == '__main__':

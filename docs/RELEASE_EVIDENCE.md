@@ -2,7 +2,7 @@
 
 The validator checks record completeness, artifact identity claims and file integrity. It does not run website audits, authenticate a human, interpret screenshots, prove legal compliance or discover omitted routes. A dishonest test can still produce a well-formed record. A reviewer must inspect the underlying evidence and compare the actual deployed artifact with the recorded identity.
 
-Use the corrected checklist as the requirement source. All 262 row IDs remain present for every project; conditional rows can be N/A only with an observed absence predicate and evidence. Do not turn optional features into mandatory services just to satisfy the catalogue.
+Use the corrected checklist as the requirement source. All 270 row IDs remain present for every project; conditional rows can be N/A only with an observed absence predicate and evidence. Do not turn optional features into mandatory services just to satisfy the catalogue.
 
 ## Decisions
 
