@@ -5,22 +5,23 @@ winner that suits the client, rebuilds its design system, layout, structure and 
 it can measure, swaps in the client's own content, audits the result against a production-grade
 checklist, and hands over a package that a human deploys.
 
-Status (2026-10-01): written and reviewed, not yet run end to end. See "Status and honest limits" below.
+Status (2026-10-02): production requirements audited, release-evidence validation and adversarial tests added; a complete client delivery is still not verified end to end. See "Status and honest limits" below.
 
 ## What is in this repository
 
 ```
-prompt/       The prompt you give the agent (one file, about 16,500 words)
-checklist/    The production-grade checklist the prompt audits against (254 rows, 18 sections)
+prompt/       The prompt you give the agent (one file, about 16,000 words)
+checklist/    The production-grade checklist the prompt audits against (262 rows, 18 sections)
 skills/       scroll-craft, the scroll and motion polish skill the prompt uses (MIT, Nate Herk)
 vendor/       The upstream cloning methodology as a git submodule, pinned to the commit the prompt names
 examples/     A starter CLIENT_INPUT folder to copy for each new client
-scripts/      check-kit.py: confirms the prompt and the checklist still agree after an edit
+scripts/      Document consistency and dependency-free release-evidence validation
+tests/        Passing and adversarial fixtures for the release control
 docs/         How to run it, decisions, legal notes, history, and every review and research note
 archive/      Earlier editions of the prompt and checklist (superseded, kept for reference)
 ```
 
-Start with `docs/HOW_TO_RUN.md`.
+Start with [HOW_TO_RUN](docs/HOW_TO_RUN.md). Read the [release evidence contract](docs/RELEASE_EVIDENCE.md) and [2026-10-02 audit](docs/reviews/production-audit-2026-10-02/AUDIT.md) before making a readiness claim.
 
 ## What a run does, end to end
 
@@ -41,7 +42,7 @@ Start with `docs/HOW_TO_RUN.md`.
 8. **Polish** the scroll feel with the scroll-craft skill, additively.
 9. **Hand over** a git repository with docs, host configs for Netlify, Cloudflare Pages, Vercel and nginx, a CI
    workflow, draft legal pages, a `content:sync` script and an `audit:live` command a human runs after deploying.
-10. **Report** 15 gates, each PASS, FAIL, NOT_RUN or INHERITED, with the failures first.
+10. **Report** 15 fidelity/workflow gates and a separate production evidence decision. Handover is not launch approval; required production defects cannot pass as inherited.
 
 ## What "clone" means here
 
@@ -57,15 +58,15 @@ What differs by design:
 - commercial fonts, replaced by the closest open-licensed face unless the client owns a licence;
 - the brand shift (palette and typefaces), on by default;
 - launch essentials the original lacks (legal links, consent banner, form messages, a credits page);
-- invisible production fixes, and for a US-facing client the accessibility fixes in the deployed build.
+- invisible production fixes, and accessibility fixes in every deployed build.
 
-What the agent cannot fully measure: shader output (compared by frame strips), real phones, Firefox and WebKit.
+Limits: shader output needs frame review; real devices and assistive technology need human evidence. Playwright can test Chromium, Firefox and WebKit when installed; WebKit emulation is not physical iOS Safari.
 
 ## Legal position in one paragraph
 
-Replacing the original's text, photos, logo and brand removes the strongest claims. It does not make a
-layout-faithful clone safe from a claim. US copyright in a web page's layout and look and feel is thin, trade
-dress needs non-functionality and distinctiveness, and the likelier problem is a DMCA takedown sent to the host.
+Replacing content does not establish permission to reproduce a reference design. Copyright, trade dress,
+licences and hosting terms need assessment for the actual project; the kit cannot estimate the likelihood
+of a claim or a takedown.
 Read `docs/LEGAL_NOTES.md`. The prompt makes the reference design's rights an explicit launch step, and the
 recommended answer is written permission from its creators or advice from a US IP attorney. This is not legal advice.
 
@@ -77,18 +78,18 @@ recommended answer is written permission from its creators or advice from a US I
 - v6 has not been run end to end. An earlier edition run by another flagship model produced a working site but
   260 geometry failures and several visible defects (invisible menu text, a collapsed backdrop). Each was turned
   into a rule or a gate, but only a real run will show what else is missing.
-- The job is large (a 16,500-word prompt, a 21,000-word checklist). If a model runs out of context or hits usage
+- The job is large (a 16,000-word prompt, a 21,000-word checklist). If a model runs out of context or hits usage
   limits, use `RUN_PART=1` then `RUN_PART=2` (see `docs/HOW_TO_RUN.md`).
-- Gold-standard speed targets can be unreachable for a motion-heavy reference. The run reports that as a
-  fidelity exception or a FAIL; it does not hide it.
+- Strict speed budgets can be unreachable for a motion-heavy reference. Required misses block readiness;
+  a fidelity exception records the shortfall and does not waive the production requirement.
 - Things only a person can do remain: deploying, DNS and accounts, legal review, a screen-reader pass, and the
   permission question on the reference design.
 
 ## Editing the kit
 
 1. Change the prompt and the checklist together; they cite each other by row ID and section number.
-2. Keep existing row IDs stable. New rows take the next free number in their section.
-3. Run `python3 scripts/check-kit.py`. It must print ALL CHECKS PASSED.
+2. Keep existing row IDs stable. New rows take the next free number in their section; update `checklist/row-ids.txt`, the documented count and tests together. Never remove a row to hide a failure.
+3. Run `python3 scripts/check-kit.py` and `python3 -m unittest discover -s tests -v`. Both must pass. The [CI template](docs/ci/README.md) runs these on pushes and pull requests once activated; activation currently needs GitHub workflow permission. Neither proves a client site is ready.
 4. No em dashes or en dashes in the prompt or the checklist (the check enforces it).
 5. Get an independent review for any change to a gate, a build rule or the legal wording. Earlier reviews caught
    real blockers that the author missed every time. `docs/reviews/` shows how they were run.

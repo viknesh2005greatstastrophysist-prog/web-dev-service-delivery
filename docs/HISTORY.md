@@ -39,3 +39,5 @@ Each defect became a rule or a gate in v6:
 
 - 2026-10-01: Repository created. The prompt's two absolute paths became `<KIT_DIR>` paths, and its methodology step
   now uses the pinned submodule first. `scripts/check-kit.py` added. Everything else is as reviewed.
+
+- 2026-10-02: Production audit corrected performance comparisons, accessibility precedence, applicability, mail/DNS recovery and release claims. Preserved all 254 existing IDs and added eight checks. Added a dependency-free evidence validator, adversarial tests, stable ID inventory and an inactive CI template (workflow authorization pending); synchronized prompt/runbook/decisions. See `docs/reviews/production-audit-2026-10-02/AUDIT.md`. No website deployment is certified by this audit.

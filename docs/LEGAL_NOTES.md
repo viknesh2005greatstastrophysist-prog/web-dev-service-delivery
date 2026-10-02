@@ -4,13 +4,9 @@ This is research for the operator, not legal advice, and the author is not a law
 for a client base in the United States. Nothing in the kit makes a layout-faithful clone safe from a claim.
 Anyone can file a suit; the question is exposure. Use this to prepare questions for a US IP attorney.
 
-## Bottom line
+## Scope of these notes
 
-Replacing the original's text, photos, logo and brand name removes the strongest claims, and the kit checks that
-none of it ships. It does not remove the exposure that comes from reproducing the original's layout, structure and
-motion, which is what the kit is built to do. The exposure is lower than "copying a website" sounds, because US
-copyright in layout is thin, but a deliberate near-identical copy is exactly the case where thin protection can
-still apply. The likelier practical problem is a takedown notice to your client's host, not a lawsuit.
+Replacing content does not establish permission to reproduce a reference design. This historical research identifies issues for project-specific counsel review; it does not quantify claim strength, litigation likelihood or takedown probability. Active checklist rules and its 2026-10-02 audit supersede conflicting delivery instructions below.
 
 ## What the swap removes
 
@@ -63,8 +59,8 @@ written response plan before launch.
 
 - **ADA.** The Department of Justice says the ADA applies to business websites and points to WCAG and the
   Section 508 Standards as helpful guidance, with no single mandated technical standard for private businesses.
-  Shipping known contrast and target-size failures is therefore a larger risk than design copying for many clients,
-  so the kit deploys the accessibility-fixes build for US-facing clients. How often such claims are filed was not
+  The kit requires accessibility fixes in every deployed build as delivery policy, without ranking
+  accessibility claims against design-rights claims or treating WCAG checks as a legal guarantee. How often such claims are filed was not
   checked.
 - **FTC testimonials rule (effective 2024-10-21).** Fake or false consumer reviews and testimonials, including
   AI-generated ones, are prohibited, and it reaches agencies. The kit never drafts, stocks or paraphrases a testimonial.
@@ -73,7 +69,7 @@ written response plan before launch.
   coordination, arrangement and creative modification can be protected. This does not raise infringement exposure,
   but a claim that the client owns the copyright in the delivered code is shaky. SEC-10 and DEL-05 are worded for it.
 - **Already covered by checklist rows:** CAN-SPAM, Global Privacy Control and California rules, COPPA, DMCA agent
-  registration if users upload content, cookie consent, third-party font and licence compliance.
+  safe-harbor applicability and agent registration where relevant, cookie consent, third-party font and licence compliance.
 
 ## Verified and not verified
 
@@ -105,7 +101,7 @@ written response plan before launch.
 
 ## What would reduce the risk further
 
-1. Written permission from the reference's creators. It is the only thing that removes the layout question. Or choose
+1. Written permission from the reference's creators. Confirm that permission covers the intended use, the relevant rights and the granting party's authority. Or choose
    references from studios that allow reuse, or from properly licensed templates.
 2. Avoid highly distinctive or famous references, and those built around custom illustrations or shader art.
 3. Book an hour with a US IP attorney on this exact workflow: client contract language, warranties and indemnity

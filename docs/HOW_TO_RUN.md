@@ -5,7 +5,7 @@
 On the machine where the agent works:
 
 - An AI coding agent with a shell and file access that can run for a long time: Claude Code or Codex.
-- Node.js 18 or newer (the scroll-craft minimum; use an LTS release), npm and git.
+- A currently supported Node.js LTS line compatible with the pinned tooling, npm and git; Python 3.9+ for kit validation.
 - Google Chrome installed. The agent installs Playwright and Lighthouse itself during its preflight.
 - A full ffmpeg build (the scroll-craft contact sheet and video checks need it).
 - `curl`, `openssl` and `dig`. The preflight also checks `actionlint` and a licence checker.
@@ -89,7 +89,7 @@ RUN_PART=2
 ```
 
 Part 2 reads the handoff, re-verifies it, and finishes the job. Do not edit the work between the parts.
-If you do, the edits are saved aside and the recorded state is restored.
+If you do, preserve those edits and continue in an isolated checkout of the recorded state. Never silently reset the operator's work.
 
 ## 6. What you get
 
@@ -105,7 +105,7 @@ Inside the folder you started in, named after the client's brand (`<name>`):
 
 The agent's final message gives the target and award, the content status (`CLIENT-COMPLETE` or `CONTENT-PENDING`),
 the gate table (PASS, FAIL, NOT_RUN or INHERITED), the fidelity exceptions, known gaps, the run command and the
-first three things a human must do to launch. If any gate is not PASS, it says so first.
+first three things a human must do to launch. If any required gate is not PASS, it says so first. The [release evidence contract](RELEASE_EVIDENCE.md) defines the separate handover, launch and gold decisions; a finished run alone does not authorize launch.
 
 ## 7. What a human does after the run
 
@@ -114,12 +114,14 @@ From `<name>/app/docs/LAUNCH_CHECKLIST.md`, which lists each step with a way to 
 1. Settle the rights question on the reference design (written permission from its creators, or advice from a
    US IP attorney), and have counsel review the draft legal pages. Read `docs/LEGAL_NOTES.md` first.
 2. Have the client approve every drafted and stock slot and the brand shift. Complete the LICENSE grantor placeholder.
-3. Create hosting and email-provider accounts, set the environment variables, and set `SITE_ENV=production` only once
-   the content status is `CLIENT-COMPLETE`.
-4. Add the DNS records from `docs/DNS.md` and follow the cutover plan.
-5. Run `npm run audit:live -- https://the-client-site` and fix what fails.
-6. Do the owner-only steps: a real screen-reader pass, monitoring and backups, Search Console, the takedown
-   response plan, and the 7-day and 30-day reviews.
+3. Complete pre-launch owner checks on the final artifact: physical devices and screen readers, account ownership/security,
+   monitoring and isolated restore evidence, the takedown response plan, and explicit cutover approval with rollback triggers.
+4. Configure hosting and applicable provider accounts and environment variables. Set `SITE_ENV=production` only once
+   the content status is `CLIENT-COMPLETE`. Confirm the immutable accessible artifact and handover evidence before cutover.
+5. Follow the approved DNS/cutover plan, preserving existing business email records. Deploy the verified artifact, then run
+   `npm run audit:live -- https://the-client-site`, confirm actual final-domain contact delivery where applicable, and fix or roll back failures.
+6. Complete remaining live owner checks, record Search Console status and validate the launch evidence before declaring the launch verified.
+   Assign named follow-up dates. The recommended 7-day and 30-day reviews remain pending until they actually occur.
 
 ## 8. When the client sends more content later
 
@@ -133,4 +135,8 @@ copy or fetches stock; it only applies what the client supplied and re-runs the 
 - The methodology submodule is empty: run the `git submodule update --init` command above, or let the agent clone it.
 - A gate shows FAIL: read `WS/escalation.md` (what is left) and the visual review file `WS/gates/visual-review.md`.
 - Gold speed targets missed on a motion-heavy site: expected sometimes. They appear as fidelity exceptions or FAIL
-  rows with the measured value. Do not loosen the checklist to make a run look better.
+  rows with the measured value. Required misses block readiness; recording an exception does not waive them.
+
+## Validate the release evidence
+
+Use [RELEASE_EVIDENCE.md](RELEASE_EVIDENCE.md) to create the per-release record from actual tests. Run handover validation before delivery, then launch validation after approved deployment and final-domain checks. All host builds use `build:deploy` with accessibility fixes enabled. Preserve the same tested artifact throughout. A machine-valid record still needs human inspection.

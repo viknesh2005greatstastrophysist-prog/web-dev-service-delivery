@@ -14,13 +14,13 @@ reflected in the prompt and the checklist; change them together if you reverse o
 | Testimonials, client names, statistics and awards are never drafted or stocked | Only the client's own, or a marked placeholder; an empty testimonial slot stays a placeholder |
 | The agent never deploys | A human deploys and runs `npm run audit:live`; owner-only rows are confirmed in the launch checklist |
 | Brand shift on by default | `design_shift` defaults to `palette+type`; a palette is derived if `brand.md` has none, holding WCAG relative luminance |
-| Customers are in the United States | The deployed build for a US-facing client is `npm run build:a11y` (accessibility fixes on); `npm run build` stays the fidelity build |
-| Gold standard across the whole checklist | Gold targets are the pass criteria for speed, interaction and experience rows; a miss needs a fidelity exception |
+| Customers are in the United States | All deployed builds use `npm run build:deploy` and accessibility fixes on; `npm run build` remains a private fidelity comparison |
+| Gold standard across the whole checklist | Gold targets are the pass criteria for speed, interaction and experience rows; a required miss blocks readiness; fidelity exceptions disclose differences without waiving required checks |
 | A reference that misses a published floor is a FAIL | Not an exception, even if the reference misses it too |
-| CPU throttling is calibrated | Lighthouse's 4x CPU slowdown is adjusted by the machine's benchmark index (checklist rule 3) |
+| CPU throttling is calibrated | Effective versioned profiles and any supported calibration are recorded; simulated and applied throttling are not stacked (checklist rule 3) |
 | A11Y-21 and the touch-only hit areas stay | They change what some visitors see or feel; accepted |
 | Observatory A+ is a must-pass live row | HOST-20; each scan is published |
-| JAWS is required when the audience is North American | A11Y-18 (JAWS 55.5% vs NVDA 24.0% there, WebAIM survey 10) |
+| JAWS is required when the audience is North American | A11Y-18 house test matrix; required unavailable combinations remain unverified, and tool coverage is not a conformance guarantee |
 | Lighthouse CI blocks deploys at the gold targets | OPS-02, median of 3 runs |
 | Two-part run is available | `RUN_PART=1` then `RUN_PART=2`; the default is one run |
 | Derived type may keep a commercial original's open substitute | Least fidelity cost |
@@ -31,7 +31,7 @@ reflected in the prompt and the checklist; change them together if you reverse o
 
 | Item | Owner | Notes |
 |---|---|---|
-| First end-to-end run of v6 | Operator | Nothing here has been run yet. Send the report back to tune the prompt |
+| First end-to-end run of v6 | Operator | The evidence validator has fixture tests; a full client delivery through the prompt is still unverified |
 | Permission or legal advice on the reference design | Operator | Recommended before any client launch; see `LEGAL_NOTES.md` |
 | A licence for this kit | Operator | None chosen; internal use until then |
 | Where the repository is hosted and who can see it | Operator | It contains analysis of third-party sites; prefer private |
@@ -40,3 +40,7 @@ reflected in the prompt and the checklist; change them together if you reverse o
 | Splitting the run if a model times out | Operator | Use the two-part run |
 | Whether to buy a JAWS licence | Operator | Needed for North American audiences (A11Y-18) |
 | Whether to delete the original's captured text and images from `WS` after client acceptance | Operator | Lowers exposure; keep hashes and measurements |
+
+## Production audit decisions, 2026-10-02
+
+Required production checks take precedence over fidelity in the deployed build. An incomplete handover may finish, but cannot pass launch. Owner-confirmation status can become PASS only from dated human evidence. Missing inputs do not prove a feature or duty absent. Field performance is separate from lab performance. The evidence validator checks records, not whether a claimed test is truthful.

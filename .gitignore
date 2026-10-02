@@ -12,3 +12,7 @@ node_modules/
 
 # local agent settings
 /.claude/
+
+# Python verification artifacts
+__pycache__/
+*.pyc
