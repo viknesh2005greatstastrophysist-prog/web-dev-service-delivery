@@ -1,0 +1,43 @@
+test_broken_entry_point_link_fails (test_check_kit.KitConsistencyTests) ... ok
+test_dangling_video_row_is_rejected (test_check_kit.KitConsistencyTests) ... ok
+test_malformed_provenance_is_rejected_without_traceback (test_check_kit.KitConsistencyTests) ... ok
+test_malformed_row_fails_without_traceback (test_check_kit.KitConsistencyTests) ... ok
+test_missing_addon_is_rejected_without_traceback (test_check_kit.KitConsistencyTests) ... ok
+test_missing_carousel_slide_identity_is_rejected (test_check_kit.KitConsistencyTests) ... ok
+test_missing_finish_section_fails_without_traceback (test_check_kit.KitConsistencyTests) ... ok
+test_missing_second_batch_carousel_is_rejected (test_check_kit.KitConsistencyTests) ... ok
+test_missing_supplied_clip_is_rejected (test_check_kit.KitConsistencyTests) ... ok
+test_silent_row_removal_fails_inventory (test_check_kit.KitConsistencyTests) ... ok
+test_source_url_mismatch_is_rejected (test_check_kit.KitConsistencyTests) ... ok
+test_stale_document_count_fails (test_check_kit.KitConsistencyTests) ... ok
+test_valid_kit (test_check_kit.KitConsistencyTests) ... ok
+test_checklist_empty_or_duplicate_rejected (test_release_gate.ReleaseGateTests) ... ok
+test_cli_init_no_overwrite_and_unverified_record_exits_nonzero (test_release_gate.ReleaseGateTests) ... ok
+test_cli_rejects_invalid_json (test_release_gate.ReleaseGateTests) ... ok
+test_complete_synthetic_record_passes_every_phase (test_release_gate.ReleaseGateTests) ... ok
+test_duplicate_json_keys_rejected (test_release_gate.ReleaseGateTests) ... ok
+test_empty_scope_coverage_and_evidence_rejected (test_release_gate.ReleaseGateTests) ... ok
+test_evidence_before_build_future_or_missing_timezone (test_release_gate.ReleaseGateTests) ... ok
+test_evidence_path_escape_and_symlink (test_release_gate.ReleaseGateTests) ... ok
+test_fidelity_build_and_content_pending_block_launch (test_release_gate.ReleaseGateTests) ... ok
+test_full_catalogue_and_existing_ids_remain (test_release_gate.ReleaseGateTests) ... ok
+test_handover_pending_does_not_pass_launch (test_release_gate.ReleaseGateTests) ... ok
+test_local_and_wrong_url_cannot_pass_live (test_release_gate.ReleaseGateTests) ... ok
+test_malformed_record_types_fail_closed (test_release_gate.ReleaseGateTests) ... ok
+test_missing_duplicate_unknown_rows (test_release_gate.ReleaseGateTests) ... ok
+test_missing_tampered_empty_evidence (test_release_gate.ReleaseGateTests) ... ok
+test_na_requires_conditional_row_predicate_and_evidence (test_release_gate.ReleaseGateTests) ... ok
+test_owner_cannot_be_automated (test_release_gate.ReleaseGateTests) ... ok
+test_pending_status_cannot_hide_local_check (test_release_gate.ReleaseGateTests) ... ok
+test_production_host_canonicalization_and_dns (test_release_gate.ReleaseGateTests) ... ok
+test_recommended_miss_and_field_unavailable_prevent_gold_only (test_release_gate.ReleaseGateTests) ... ok
+test_recommended_omission_requires_action_owner_and_date (test_release_gate.ReleaseGateTests) ... ok
+test_required_failure_exception_and_unrun_block (test_release_gate.ReleaseGateTests) ... ok
+test_unknown_and_inherited_are_not_passes (test_release_gate.ReleaseGateTests) ... ok
+test_wrong_build_revision_and_artifact (test_release_gate.ReleaseGateTests) ... ok
+test_wrong_checklist_fingerprint (test_release_gate.ReleaseGateTests) ... ok
+
+----------------------------------------------------------------------
+Ran 38 tests in 1.823s
+
+OK

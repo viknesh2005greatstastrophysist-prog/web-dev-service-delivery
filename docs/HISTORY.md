@@ -39,3 +39,9 @@ Each defect became a rule or a gate in v6:
 
 - 2026-10-01: Repository created. The prompt's two absolute paths became `<KIT_DIR>` paths, and its methodology step
   now uses the pinned submodule first. `scripts/check-kit.py` added. Everything else is as reviewed.
+
+- 2026-10-02: Production audit corrected performance comparisons, accessibility precedence, applicability, mail/DNS recovery and release claims. Preserved all 254 existing IDs and added eight checks. Added a dependency-free evidence validator, adversarial tests, stable ID inventory and an inactive CI template (workflow authorization pending); synchronized prompt/runbook/decisions. See `docs/reviews/production-audit-2026-10-02/AUDIT.md`. No website deployment is certified by this audit.
+
+- 2026-10-03: Reviewed sampled frames and public post descriptions from nine supplied Instagram clips. Added the video lessons companion and eight source-linked rows (270 total), strengthened safe caching, GPU fallbacks, structured data and reference intake, and extended provenance checks. This changes the kit; it does not certify or deploy a client website. See `docs/reviews/instagram-addon-2026-10-03/REVIEW.md`.
+
+- 2026-10-03 (second media batch): Integrated six further videos and one nine-slide carousel. Added five conditional/recommended checks for crawler policy, webhook verification, production payment evidence, transactional mail and URL migration (275 total); strengthened cost bounds, sending identities and audience-fit copy. See `docs/reviews/instagram-batch2-2026-10-03/REVIEW.md`.
