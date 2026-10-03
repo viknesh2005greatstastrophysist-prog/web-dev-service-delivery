@@ -62,7 +62,7 @@ class ReleaseGateTests(unittest.TestCase):
 
     def test_full_catalogue_and_existing_ids_remain(self):
         rows = gate.catalogue(CHECKLIST)
-        self.assertEqual(270, len(rows))
+        self.assertEqual(275, len(rows))
         self.assertEqual(18, len({k.split('-')[0] for k in rows}))
 
     def test_missing_duplicate_unknown_rows(self):

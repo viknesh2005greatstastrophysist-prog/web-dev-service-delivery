@@ -12,7 +12,7 @@ Use this alongside the [production checklist](PRODUCTION_CHECKLIST_clone_swap.md
 6. If data features exist, test identity/permissions (BACK-18), representative query workloads (BACK-19), cache isolation/invalidation (BACK-20) and direct SQL connection behavior (BACK-21). Record an observed absence for each nonapplicable feature. Static websites do not acquire infrastructure merely to make a checklist look busy.
 7. Where analytics is approved, test meaningful, privacy-safe events on the final deployed artifact (OPS-10). Separate a click, accepted request, confirmed delivery and actual commercial outcome. Consent rejection and withdrawal are test states.
 
-The eight new rows are DEL-16, SEO-15, SEO-16, BACK-18, BACK-19, BACK-20, BACK-21 and OPS-10. Existing row IDs are preserved. The release record contains all 270 IDs; applicability and the existing handover/launch/gold rules determine the decision.
+The eight new rows are DEL-16, SEO-15, SEO-16, BACK-18, BACK-19, BACK-20, BACK-21 and OPS-10. Existing row IDs are preserved. The release record now contains all 275 IDs; applicability and the existing handover/launch/gold rules determine the decision.
 
 ## Twenty quick fixes, mapped to existing checks
 
@@ -56,3 +56,7 @@ The performance clip supplies a menu, not a mandate. Existing SPD checks cover m
 - A Business Profile requires actual eligibility and authorized management. An online-only agency cannot invent an office to qualify. See [Google's eligibility rules](https://support.google.com/business/answer/13763036).
 - Three apparently weak search results, a Forbes backlink, a nominal API cost, a particular model and an undefined two-second target do not prove demand, ranking, quality or readiness.
 - The clips' experience claims, performance outcomes and conversion promises were not independently verified. Their useful ideas become testable requirements; their claimed results do not become our results.
+
+## Second batch
+
+Seven further sources (six videos and one carousel) are mapped in the [second-batch companion](VIDEO_LESSONS_BATCH2.md). The first-batch evidence and eight original additions above remain historical; the current catalogue includes five further rows.

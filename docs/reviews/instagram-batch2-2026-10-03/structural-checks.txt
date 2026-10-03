@@ -1,0 +1,59 @@
+PASS  checklist: strict row grammar and nonempty catalogue
+PASS  checklist: IDs exactly match stable inventory
+PASS  README row count matches catalogue
+PASS  checklist: no duplicate row IDs
+PASS  checklist: every row has 4 cells
+PASS  checklist: every row ends in a valid class (G, R or C, optional -L or -O)
+PASS  checklist: IDs sorted within each section
+PASS  every row ID cited in either file exists
+PASS  video sources: exactly nine supplied IDs and matching URLs
+PASS  video sources: every mapped row exists
+PASS  video sources: sampled review scope and artifact identities
+PASS  video add-on: cited rows exist
+PASS  second batch: all seven source IDs and URLs
+PASS  second batch: all mapped rows exist
+PASS  second batch: media kinds and reviewed artifact identities
+PASS  second add-on: cited rows exist
+PASS  prompt section list equals the checklist's headings
+PASS  prompt section count word matches the list
+PASS  prompt has numbered sections 1 to 8
+PASS  every § reference points at a section 1 to 8
+PASS  Finish lists gates 1 to 15 in order
+PASS  Finish says 'all fifteen'
+PASS  prompt has ground rules 1 to 10
+PASS  checklist has rules of application 1 to 10
+PASS  checklist 'rule N' references exist
+PASS  no em or en dashes in the prompt or the checklist
+PASS  no machine-specific absolute paths
+PASS  kit file exists: skills/scroll-craft/SKILL.md
+PASS  kit file exists: skills/scroll-craft/scripts/shoot.mjs
+PASS  kit file exists: skills/scroll-craft/references/verify.md
+PASS  kit file exists: skills/scroll-craft/LICENSE
+PASS  kit file exists: checklist/PRODUCTION_CHECKLIST_clone_swap.md
+PASS  kit file exists: examples/CLIENT_INPUT/brief.md
+PASS  kit file exists: scripts/release_gate.py
+PASS  kit file exists: tests/test_release_gate.py
+PASS  kit file exists: docs/RELEASE_EVIDENCE.md
+PASS  kit file exists: docs/ci/verify-kit.yml
+PASS  kit file exists: checklist/VIDEO_LESSONS_ADDON.md
+PASS  kit file exists: checklist/VIDEO_LESSONS_BATCH2.md
+PASS  methodology submodule is checked out (run: git submodule update --init)
+PASS  methodology checkout matches reviewed pin
+PASS  prompt names the reviewed methodology pin
+PASS  prompt uses executable release record
+PASS  prompt omits superseded policy: LCP minus TTFB
+PASS  prompt omits superseded policy: else `build`
+PASS  prompt omits superseded policy: For any other client the fidelity build ships
+PASS  prompt omits superseded policy: ready for a human to deploy
+PASS  deploy build is always accessible
+PASS  active Markdown file links resolve: README.md
+PASS  active Markdown file links resolve: docs/HOW_TO_RUN.md
+PASS  active Markdown file links resolve: docs/RELEASE_EVIDENCE.md
+PASS  active Markdown file links resolve: checklist/PRODUCTION_CHECKLIST_clone_swap.md
+PASS  active Markdown file links resolve: checklist/VIDEO_LESSONS_ADDON.md
+PASS  active Markdown file links resolve: docs/reviews/instagram-addon-2026-10-03/REVIEW.md
+PASS  active Markdown file links resolve: checklist/VIDEO_LESSONS_BATCH2.md
+PASS  active Markdown file links resolve: docs/reviews/instagram-batch2-2026-10-03/REVIEW.md
+
+rows: 275   prompt words: 16241   checklist words: 22376
+ALL CHECKS PASSED

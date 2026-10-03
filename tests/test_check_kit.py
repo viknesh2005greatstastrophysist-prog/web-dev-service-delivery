@@ -51,7 +51,7 @@ class KitConsistencyTests(unittest.TestCase):
 
     def test_stale_document_count_fails(self):
         path = self.root/'README.md'
-        path.write_text(path.read_text().replace('(270 rows, 18 sections)', '(254 rows, 18 sections)'))
+        path.write_text(path.read_text().replace('(275 rows, 18 sections)', '(254 rows, 18 sections)'))
         self.assertRejected('README row count matches catalogue')
 
     def test_broken_entry_point_link_fails(self):
@@ -85,6 +85,21 @@ class KitConsistencyTests(unittest.TestCase):
         path = self.root/'docs/reviews/instagram-addon-2026-10-03/lessons.json'
         path.write_text('{')
         self.assertRejected('readable provenance record')
+
+
+    def test_missing_second_batch_carousel_is_rejected(self):
+        path = self.root/'docs/reviews/instagram-batch2-2026-10-03/lessons.json'
+        record = json.loads(path.read_text())
+        record['sources'] = [x for x in record['sources'] if x['media_kind'] != 'carousel']
+        path.write_text(json.dumps(record))
+        self.assertRejected('all seven source IDs')
+
+    def test_missing_carousel_slide_identity_is_rejected(self):
+        path = self.root/'docs/reviews/instagram-batch2-2026-10-03/lessons.json'
+        record = json.loads(path.read_text())
+        next(x for x in record['sources'] if x['media_kind'] == 'carousel')['artifacts'].pop()
+        path.write_text(json.dumps(record))
+        self.assertRejected('media kinds and reviewed artifact identities')
 
 
 if __name__ == '__main__':

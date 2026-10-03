@@ -106,6 +106,33 @@ addon = addon_path.read_text() if addon_path.exists() else ""
 addon_refs = set(re.findall(r"\b([A-Z][A-Z0-9]{1,4}-\d{2})\b", addon))
 check("video add-on: cited rows exist", addon_refs <= idset, str(sorted(addon_refs-idset)))
 
+# The second batch includes a carousel. Require all supplied sources while
+# keeping media kinds and their identity/coverage limits explicit.
+try:
+    batch = json.loads((ROOT / "docs/reviews/instagram-batch2-2026-10-03/lessons.json").read_text())
+    entries = batch["sources"]
+    expected = {"Db6mbRuyiik", "DbD6WQzDIk4", "Dd53_9IsfZ-", "DdS5oHtPvcA", "DcJ4skky39X", "DbdQQN3smX8", "Da1AU0nhCbI"}
+    check("second batch: all seven source IDs and URLs",
+          len(entries) == 7 and {x["id"] for x in entries} == expected and
+          all(x["url"] == f"https://www.instagram.com/p/{x['id']}/" for x in entries))
+    check("second batch: all mapped rows exist", all(x["rows"] and set(x["rows"]) <= idset for x in entries))
+    check("second batch: media kinds and reviewed artifact identities",
+          batch["schema_version"] == 1 and bool(batch["review_scope"]) and
+          all(x["media_kind"] == ("carousel" if x["id"] == "DbD6WQzDIk4" else "video") and
+              x["status"] == ("REVIEWED_CAROUSEL_AND_POST_TEXT" if x["media_kind"] == "carousel" else "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT") and
+              x["audio_transcribed"] is False and x["artifacts"] and
+              (x["media_kind"] != "carousel" or len(x["artifacts"]) == 9) and
+              re.fullmatch(r"[a-f0-9]{64}", x["media_sha256"]) and
+              re.fullmatch(r"[a-f0-9]{64}", x["post_metadata_sha256"]) and
+              all(re.fullmatch(r"[a-f0-9]{64}", f["sha256"]) for f in x["artifacts"])
+              for x in entries))
+except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
+    check("second batch: readable source record", False, str(error))
+second_addon_path = ROOT / "checklist/VIDEO_LESSONS_BATCH2.md"
+second_addon = second_addon_path.read_text() if second_addon_path.exists() else ""
+second_refs = set(re.findall(r"\b([A-Z][A-Z0-9]{1,4}-\d{2})\b", second_addon))
+check("second add-on: cited rows exist", second_refs <= idset, str(sorted(second_refs-idset)))
+
 # sections: prompt list equals the checklist's headings
 ck_sections = []
 for h in re.findall(r"^## ([A-Za-z0-9 ]+?):", ck, re.M):
@@ -148,7 +175,7 @@ check("no machine-specific absolute paths", "/Users/" not in pr + ck and "C:\\" 
 for rel in ("skills/scroll-craft/SKILL.md", "skills/scroll-craft/scripts/shoot.mjs", "skills/scroll-craft/references/verify.md",
             "skills/scroll-craft/LICENSE", "checklist/PRODUCTION_CHECKLIST_clone_swap.md", "examples/CLIENT_INPUT/brief.md",
             "scripts/release_gate.py", "tests/test_release_gate.py", "docs/RELEASE_EVIDENCE.md",
-            "docs/ci/verify-kit.yml", "checklist/VIDEO_LESSONS_ADDON.md"):
+            "docs/ci/verify-kit.yml", "checklist/VIDEO_LESSONS_ADDON.md", "checklist/VIDEO_LESSONS_BATCH2.md"):
     check(f"kit file exists: {rel}", (ROOT / rel).exists())
 sub = ROOT / "vendor" / "clone-app-pat-pro-public"
 check("methodology submodule is checked out (run: git submodule update --init)", (sub / "SKILL.md").exists(),
@@ -167,7 +194,8 @@ check("deploy build is always accessible", "build:deploy always enables A11Y_FIX
 
 # Validate actual Markdown file links in the active entry points, not example code paths.
 for rel in ("README.md", "docs/HOW_TO_RUN.md", "docs/RELEASE_EVIDENCE.md", "checklist/PRODUCTION_CHECKLIST_clone_swap.md", "checklist/VIDEO_LESSONS_ADDON.md",
-            "docs/reviews/instagram-addon-2026-10-03/REVIEW.md"):
+            "docs/reviews/instagram-addon-2026-10-03/REVIEW.md", "checklist/VIDEO_LESSONS_BATCH2.md",
+            "docs/reviews/instagram-batch2-2026-10-03/REVIEW.md"):
     document = ROOT / rel
     if not document.exists():
         check(f"active Markdown file exists: {rel}", False)

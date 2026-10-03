@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "review_scope": "Six videos: sampled frames plus public post text, no spoken-audio transcription. One carousel: all nine public image slides plus post text.",
+  "sources": [
+    {
+      "id": "Db6mbRuyiik",
+      "url": "https://www.instagram.com/p/Db6mbRuyiik/",
+      "creator_metadata": "Blake Davis",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "media_kind": "video",
+      "media_sha256": "033332645acfcb5cc77d269d9d55007e09a3fe8e55779b077d6d628c9c672fda",
+      "post_metadata_sha256": "60c2d9c8648534f38b921bdb547d63e124b6b6a63e8ed06c59c69b8549012922",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "duration_seconds": 26.3,
+      "moments": [
+        "00:00",
+        "00:05",
+        "00:10",
+        "00:15",
+        "00:20",
+        "00:25"
+      ],
+      "lesson": "Twenty launch/content essentials",
+      "rows": [
+        "SEO-01",
+        "SEO-04",
+        "UXF-03",
+        "SEO-15",
+        "CNT-05",
+        "SEO-08",
+        "LEG-11",
+        "LEG-13",
+        "OPS-10",
+        "SEO-13",
+        "SEO-10"
+      ],
+      "caution": "Use approved facts; no invented reviews, unnecessary location pages or mandatory analytics.",
+      "artifacts": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "bc617d6e1497664e0485a659b2a365aec2353115cf5543e5b26b50e2c385af45"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "3328de9352739b10d3b75e089cde0b566435f8f75ab2f2abec432bf5e781cebc"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "c9a1d87313cd2e6e49233d78b84e85915bc6ff4c74ab4338208c5864490aab2d"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "cd5400d0ea45e53c66188ab2a5c84005e0c93e06d8361864228d4b26a3065db3"
+        },
+        {
+          "file": "watch/frames/frame_0005.jpg",
+          "sha256": "9524d21673c0d12090b99c929897020475a8d8dec2dbc279dfb6f6308a175849"
+        },
+        {
+          "file": "watch/frames/frame_0006.jpg",
+          "sha256": "46f7a0b142b99e8543bb264aeda054656adff51d8eac9eda6f3b14de647c6f20"
+        }
+      ]
+    },
+    {
+      "id": "DbD6WQzDIk4",
+      "url": "https://www.instagram.com/p/DbD6WQzDIk4/",
+      "creator_metadata": "Nico Burkart",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_CAROUSEL_AND_POST_TEXT",
+      "media_kind": "carousel",
+      "media_sha256": "8359325e72955f8e7839629ee3d42894fd5eebba31ba49ab4e1671677b8766b3",
+      "post_metadata_sha256": "575cc2f1965a7ccd483f1efca695d97831385a1b278ce5bdc747ff7fd3cf4258",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "duration_seconds": null,
+      "moments": [],
+      "lesson": "Thirty-seven checks across seven layers",
+      "rows": [
+        "BACK-18",
+        "BACK-04",
+        "SEC-06",
+        "MAIL-01",
+        "MAIL-03",
+        "MAIL-06",
+        "MAIL-07",
+        "SEO-05",
+        "SEO-10",
+        "SPD-20",
+        "OPS-10",
+        "LEG-10",
+        "LEG-11",
+        "BACK-22",
+        "BACK-23",
+        "RSP-06",
+        "UXF-01",
+        "EDGE-02"
+      ],
+      "caution": "Carousel, not video. Preserve stricter kit priorities; HTTPS, privacy consent and broken journeys are not first-week deferrals.",
+      "artifacts": [
+        {
+          "file": "slides/1-DbD55lCsEHb.jpg",
+          "sha256": "f8654ad5e784852c8a1e84ae1ccb51afdf420880514b5ff76b2b1e1ec2453cdb"
+        },
+        {
+          "file": "slides/2-DbD55ljMClx.jpg",
+          "sha256": "169b5381572ebd50bc0a7ad994f23847afa1548e8c3d71cd1d574cac6cde82d7"
+        },
+        {
+          "file": "slides/3-DbD55maMSf-.jpg",
+          "sha256": "da28e0c844091023d00598d2a88817f50ff37a2189d8b8fffba7cb408c8b82f2"
+        },
+        {
+          "file": "slides/4-DbD55mhMwDF.jpg",
+          "sha256": "b7a04582878aad0de4be145a801d6de59a0039ef8f8c28fc5a76c7ec56b3c5ff"
+        },
+        {
+          "file": "slides/5-DbD55mzsVvw.jpg",
+          "sha256": "29cceb3b8c45ed3af1476c0d252a19c67ec7811ca05922e9a3c62eb31b9563bd"
+        },
+        {
+          "file": "slides/6-DbD55ngMHez.jpg",
+          "sha256": "19f59afb55d582d55dac81f548ba25928188325e276b526594ae39cffd2cf4ea"
+        },
+        {
+          "file": "slides/7-DbD55nXsqYf.jpg",
+          "sha256": "3fb7f9ec280794a93ab3dac197fc965cda9cee70c17289f306705ea8f53c6bf4"
+        },
+        {
+          "file": "slides/8-DbD55oDs8Wv.jpg",
+          "sha256": "1f73b2aa3234a316f75f792cc037aa16e71ba14c00c4160f4b828be52fa1b59d"
+        },
+        {
+          "file": "slides/9-DbD55oIMM6c.jpg",
+          "sha256": "5ed4946ff355ccbaa494cb23858ae8c9a1f08d16b60be57fdb40a467d191d331"
+        }
+      ]
+    },
+    {
+      "id": "Dd53_9IsfZ-",
+      "url": "https://www.instagram.com/p/Dd53_9IsfZ-/",
+      "creator_metadata": "Advik Jain | SEO and AI Visibility",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "media_kind": "video",
+      "media_sha256": "7f6af8512029f611b51bf06b4d356c39d59480ce3191709d5b855e1569c7131c",
+      "post_metadata_sha256": "8e998ef40eab4fdd81a716a8931bac3ee92bb9ef37895c96a933fefa95bcef2e",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "duration_seconds": 29.8,
+      "moments": [
+        "00:00",
+        "00:05",
+        "00:10",
+        "00:15",
+        "00:20",
+        "00:25"
+      ],
+      "lesson": "Fifteen post-launch discovery checks",
+      "rows": [
+        "SEO-02",
+        "SEO-13",
+        "SEO-10",
+        "SEO-17",
+        "HOST-23",
+        "SEO-01",
+        "SEO-06",
+        "SEC-03",
+        "RSP-06",
+        "SPD-20"
+      ],
+      "caution": "Remove noindex only on approved production; AI search/training controls are separate; no guaranteed ranking.",
+      "artifacts": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "e98547d2eb6828ec19e17f947954fa0ff6e0c6e6ac5ee1db823c12cd87ecb3f8"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "55d270f8a70662805b605f8257c524211373bc136914ecf6615232c4e80ce523"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "72f5b846afefb2f8490d2a826d1e809f1696a436a41d0e669f2ded4c308344a2"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "b01ae2ac40c3477cf033bda9529d7470d7e0c562ba15109f9ed369135b21250c"
+        },
+        {
+          "file": "watch/frames/frame_0005.jpg",
+          "sha256": "d85eda62f3345a1cdb9954ef8a487d2946e90f140b243005d437f73bf7727eec"
+        },
+        {
+          "file": "watch/frames/frame_0006.jpg",
+          "sha256": "2c3784547dfabde4a633fc1371f28c3158061eb571a21d110a551d522fc85d70"
+        }
+      ]
+    },
+    {
+      "id": "DdS5oHtPvcA",
+      "url": "https://www.instagram.com/p/DdS5oHtPvcA/",
+      "creator_metadata": "Alex Yates",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "media_kind": "video",
+      "media_sha256": "b63f6bf3f25b59a538d29754717ba659c70763aeca19564175550ae0bc466455",
+      "post_metadata_sha256": "0368d0b8a16b468df318b5f7b150ebca32fc2b43de8086768263cfe30748529d",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "duration_seconds": 29.5,
+      "moments": [
+        "00:00",
+        "00:05",
+        "00:10",
+        "00:15",
+        "00:20",
+        "00:25"
+      ],
+      "lesson": "Twenty technical website giveaways",
+      "rows": [
+        "SEO-01",
+        "SEO-04",
+        "SEO-05",
+        "SEO-07",
+        "SEO-10",
+        "SEO-11",
+        "SEO-17",
+        "SEO-06",
+        "A11Y-02",
+        "SEC-08",
+        "OPS-05",
+        "SPD-17"
+      ],
+      "caution": "Framework/provider choice is not evidence of poor quality; llms.txt is optional and blocking training may be deliberate.",
+      "artifacts": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "eeca8177b274aca1b92405dad28d467a76c22294ce047add506b84d0e44f2503"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "4dc77c9276c3acb625c523e47829aadc75f218c40f6ad1be179b3ea3a377508c"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "e94150b7711f70f12b152d202c576b04faabf0e0e8cc23fdba02f632f9c421c0"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "4a5f147497653274b286330ec7071d7c2eba1ec9fc793834dfe223f13faa8912"
+        },
+        {
+          "file": "watch/frames/frame_0005.jpg",
+          "sha256": "45efbb10ea8d6423ff3f7cd77e2778efdfbc8050671da92b6e47a504fcd52042"
+        },
+        {
+          "file": "watch/frames/frame_0006.jpg",
+          "sha256": "4b52b0272ea8737bc021c8dad8ead6ab1be7571291d8e4a48e362aee0b1df1a5"
+        },
+        {
+          "file": "tail/frames/cue_0000.jpg",
+          "sha256": "0c0d7cdab5447897eaae18a80875e789b93f48329e701e6f47a9ccef9cfe7275"
+        }
+      ]
+    },
+    {
+      "id": "DcJ4skky39X",
+      "url": "https://www.instagram.com/p/DcJ4skky39X/",
+      "creator_metadata": "Blake Davis",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "media_kind": "video",
+      "media_sha256": "a2262229985d50dba4ae77e24d0baa91d524351a388024408a8f29ec46624db4",
+      "post_metadata_sha256": "f0b9571360a4d38af33f902c6c669c117e033de5620f4164bad12c7ab9a96754",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "duration_seconds": 15.9,
+      "moments": [
+        "00:00",
+        "00:05",
+        "00:10",
+        "00:15"
+      ],
+      "lesson": "Ten post-launch SEO actions",
+      "rows": [
+        "SEO-13",
+        "SEO-10",
+        "OPS-10",
+        "SEO-16",
+        "SEO-01",
+        "SEO-15",
+        "SEO-08",
+        "SPD-05"
+      ],
+      "caution": "A ranking promise is unsupported; keywords/cities must be truthful and useful, not stuffing; no automatic backlink outreach.",
+      "artifacts": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "d1e4fb6da711ba44ac761cb2b63d4c6fda3861cc81aa8e2eeee1c2e010276897"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "1ce247f689f2dc41c8b044f369b20e4f74e9364fc0ccbe7f7f98c83de38a4adb"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "08e65ba2d03bc6a4b93086440c9d92f1e84169eed7402ce15f57eed8fd375dd2"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "ab0de2476816f6d79e02417ac8799bcb979c2bcee9f057fe7c5e6e4dcd60894c"
+        }
+      ]
+    },
+    {
+      "id": "DbdQQN3smX8",
+      "url": "https://www.instagram.com/p/DbdQQN3smX8/",
+      "creator_metadata": "Nico Burkart",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "media_kind": "video",
+      "media_sha256": "f35206c40137c62fff8e4a6d5d064f669c0274bd18f062db79b50f5e3a6efc95",
+      "post_metadata_sha256": "fb41191076a0673cf9af3d6fdccb9b7b78aa5d280760179695b51a2a7fc12c82",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "duration_seconds": 53.5,
+      "moments": [
+        "00:00",
+        "00:05",
+        "00:15",
+        "00:20",
+        "00:30",
+        "00:35",
+        "00:45",
+        "00:50"
+      ],
+      "lesson": "App, mail and public-domain setup",
+      "rows": [
+        "HOST-19",
+        "HOST-22",
+        "MAIL-01",
+        "MAIL-03",
+        "SEO-10",
+        "BACK-05",
+        "SEC-09"
+      ],
+      "caution": "Architecture and sender separation are conditional decisions, not three compulsory domains or guaranteed reputation protection.",
+      "artifacts": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "5ddf9f7ddf2452c911a5598837219baa216c571754fa416ad805ad48f3ad2c2f"
+        },
+        {
+          "file": "watch/frames/frame_0002.jpg",
+          "sha256": "8482ab1f48c166fd526418d5ee2fd3af90e3e4569427101da2e1c0714f886169"
+        },
+        {
+          "file": "watch/frames/frame_0004.jpg",
+          "sha256": "043af45161d2a2c5bc5220cb97db5fe72bb343f6b6002895a4dd4d8ffbffca6b"
+        },
+        {
+          "file": "watch/frames/frame_0005.jpg",
+          "sha256": "fdef2e071441e471b468fce960d74aace2bf75b6aa5e17719afdc2bf8e80ccd7"
+        },
+        {
+          "file": "watch/frames/frame_0007.jpg",
+          "sha256": "800f9c11f045179ec23e91e5a7f7a23d23cb280033d81074fa7cd1eced172dc0"
+        },
+        {
+          "file": "watch/frames/frame_0008.jpg",
+          "sha256": "af8d39613fb75fadd46076523d244c2a352546e1aea063d5056204d377d44cff"
+        },
+        {
+          "file": "watch/frames/frame_0010.jpg",
+          "sha256": "003c5ab5c1319e16d074ffd655a646604aea606350d052966c1420a59019330a"
+        },
+        {
+          "file": "watch/frames/frame_0011.jpg",
+          "sha256": "751572021286a06904f853995219ccd6ffeb3cac4ea48467d6a4106d8e20c81d"
+        }
+      ]
+    },
+    {
+      "id": "Da1AU0nhCbI",
+      "url": "https://www.instagram.com/p/Da1AU0nhCbI/",
+      "creator_metadata": "Mark Satterfield",
+      "reviewed_at": "2026-10-03",
+      "status": "REVIEWED_SAMPLED_VISUAL_AND_POST_TEXT",
+      "media_kind": "video",
+      "media_sha256": "0b3905a8e9dd2dfdb2de46e9fd837884273ea56ed03dff2ed060649dcceb01f8",
+      "post_metadata_sha256": "b32db850ef99526e611a6ed188d23281ac934cade3ad0834967845cedb4eb2eb",
+      "audio_transcribed": false,
+      "native_captions_available": false,
+      "duration_seconds": 84.8,
+      "moments": [
+        "00:00",
+        "00:10",
+        "00:25",
+        "00:35",
+        "00:45",
+        "00:55",
+        "01:10",
+        "01:20"
+      ],
+      "lesson": "Audience-fit copy and self-qualification",
+      "rows": [
+        "UXF-09",
+        "CNT-05",
+        "DEL-14"
+      ],
+      "caution": "Preserve service clarity. Use approved client needs and working preferences without invented affluence, prestige or conversion results.",
+      "artifacts": [
+        {
+          "file": "watch/frames/frame_0001.jpg",
+          "sha256": "1b7144745bd0602e8186a61d6a376f37939e61445b27f430e27d1e07bc0cd6ef"
+        },
+        {
+          "file": "watch/frames/frame_0003.jpg",
+          "sha256": "45fe9db65dbbe3079a370b0e0ba1394ccab568b7a547cf317bb5f620f69134f7"
+        },
+        {
+          "file": "watch/frames/frame_0006.jpg",
+          "sha256": "9c490ede5103f72f3a2e82f4853e8d8759ac804bfa166d5d3e4fa21d61dbe836"
+        },
+        {
+          "file": "watch/frames/frame_0008.jpg",
+          "sha256": "82a7106e94abf21672252c5161ea3f82011cb1d92b2e21b9ea96c2134d7ae161"
+        },
+        {
+          "file": "watch/frames/frame_0010.jpg",
+          "sha256": "672a9f297e6492d9a2cc880b73faa0b89752a021bcf4896baa431bfcb049e3e1"
+        },
+        {
+          "file": "watch/frames/frame_0012.jpg",
+          "sha256": "3e085f486ed9d2e22a89b4d6ce2c229d5dacfe3e13f172d3e428650ab5b8bff0"
+        },
+        {
+          "file": "watch/frames/frame_0015.jpg",
+          "sha256": "6bbec10efe1e6a19a4c22611298e94cab6c37bbc7fdd3ab323037725d7cf2104"
+        },
+        {
+          "file": "watch/frames/frame_0017.jpg",
+          "sha256": "2d46c54e8d0d057f8f76e1843deae37bd8f70f5912c56574a819beb667bceffc"
+        }
+      ]
+    }
+  ]
+}
