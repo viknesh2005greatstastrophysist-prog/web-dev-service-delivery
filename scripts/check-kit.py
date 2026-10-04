@@ -15,7 +15,7 @@ import argparse
 import itertools
 import json
 import subprocess
-from release_gate import catalogue
+from release_gate import catalogue, specifications, TIERS
 import pathlib
 import re
 import sys
@@ -60,10 +60,20 @@ def cells(line):
     return re.sub(r"`[^`]*`", "X", line).count("|")
 
 
-bad_cells = [l[:16] for l in rows if cells(l) != 5]
-check("checklist: every row has 4 cells", not bad_cells, str(bad_cells[:5]))
-bad_class = [l[:16] for l in rows if not re.search(r"\| (G|R|C)(-L|-O)? \|$", l)]
+bad_cells = [l[:16] for l in rows if cells(l) != 6]
+check("checklist: every row has 5 cells", not bad_cells, str(bad_cells[:5]))
+bad_class = [l[:16] for l in rows if not re.search(r"\| (G|R|C)(-L|-O)? \| (Diamond|Gold|Silver|Bronze) \|$", l)]
 check("checklist: every row ends in a valid class (G, R or C, optional -L or -O)", not bad_class, str(bad_class[:5]))
+try:
+    tier_rows = json.loads((ROOT / 'checklist/tiers.json').read_text())['rows']
+    specs = specifications(CHECKLIST)
+    check('tiers: complete ordered inventory, valid metadata and matching priorities',
+          [r['id'] for r in tier_rows] == ids and
+          all(r['tier'] in {tier.lower() for tier in TIERS} and specs[r['id']][1] == r['tier'].title()
+              and r['rationale'].strip() and r['group'].strip()
+              and r['timing'] in {'prelaunch', 'cutover', 'postlaunch', 'recurring'} for r in tier_rows))
+except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
+    check('tiers: complete ordered inventory, valid metadata and matching priorities', False, str(error))
 
 unsorted = []
 for sec, grp in itertools.groupby(ids, key=lambda i: i.split("-")[0]):
@@ -193,7 +203,9 @@ for forbidden in ("LCP minus TTFB", "else `build`", "For any other client the fi
 check("deploy build is always accessible", "build:deploy always enables A11Y_FIXES=on" in ck)
 
 # Validate actual Markdown file links in the active entry points, not example code paths.
-for rel in ("README.md", "docs/HOW_TO_RUN.md", "docs/RELEASE_EVIDENCE.md", "checklist/PRODUCTION_CHECKLIST_clone_swap.md", "checklist/VIDEO_LESSONS_ADDON.md",
+for rel in ("checklist/TIERS.md", "docs/reviews/checklist-tiers-2026-10-05/REVIEW.md",
+            "docs/reviews/checklist-tiers-2026-10-05/INDEPENDENT_REVIEW.md",
+            "README.md", "docs/HOW_TO_RUN.md", "docs/RELEASE_EVIDENCE.md", "checklist/PRODUCTION_CHECKLIST_clone_swap.md", "checklist/VIDEO_LESSONS_ADDON.md",
             "docs/reviews/instagram-addon-2026-10-03/REVIEW.md", "checklist/VIDEO_LESSONS_BATCH2.md",
             "docs/reviews/instagram-batch2-2026-10-03/REVIEW.md"):
     document = ROOT / rel

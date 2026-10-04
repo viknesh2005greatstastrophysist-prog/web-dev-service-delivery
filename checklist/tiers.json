@@ -1,0 +1,1930 @@
+{
+  "schema_version": 1,
+  "rows": [
+    {
+      "id": "SPD-01",
+      "tier": "gold",
+      "rationale": "Comparable lab speed and layout stability are quality targets.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-02",
+      "tier": "gold",
+      "rationale": "Deployed parity informs quality; it is not a safety gate.",
+      "timing": "cutover",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-03",
+      "tier": "gold",
+      "rationale": "Early LCP discovery improves loading quality.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-04",
+      "tier": "gold",
+      "rationale": "Dimensions and lazy loading reduce layout shifts.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-05",
+      "tier": "gold",
+      "rationale": "Responsive image sizing balances visual quality and bytes.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-06",
+      "tier": "diamond",
+      "rationale": "Private and mutable responses must not leak through shared caches.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-07",
+      "tier": "gold",
+      "rationale": "Compression improves delivery without changing content safety.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-08",
+      "tier": "gold",
+      "rationale": "Avoiding excess JavaScript protects loading and interaction quality.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-09",
+      "tier": "gold",
+      "rationale": "A stalled intro must not block usable content.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-10",
+      "tier": "silver",
+      "rationale": "Video transfer tuning is an optional media enhancement.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-11",
+      "tier": "gold",
+      "rationale": "Back-forward restoration improves repeat-visit continuity.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-12",
+      "tier": "silver",
+      "rationale": "Speculative loading is optional and must avoid side effects.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-13",
+      "tier": "gold",
+      "rationale": "These strict lab scores are agency budgets, not certification.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-14",
+      "tier": "gold",
+      "rationale": "Origin latency limits are internal performance targets.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-15",
+      "tier": "gold",
+      "rationale": "Edge latency depends on the auditor's network and host.",
+      "timing": "cutover",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-16",
+      "tier": "silver",
+      "rationale": "The HTML byte cap is a discretionary transfer target.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-17",
+      "tier": "gold",
+      "rationale": "Critical-path byte ceilings are strict agency performance budgets.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-18",
+      "tier": "gold",
+      "rationale": "Render-blocking limits improve perceived loading quality.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-19",
+      "tier": "silver",
+      "rationale": "Precompressed assets optimize a delivery implementation.",
+      "timing": "prelaunch",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-20",
+      "tier": "gold",
+      "rationale": "Live comparison verifies deployed performance quality.",
+      "timing": "cutover",
+      "group": "performance"
+    },
+    {
+      "id": "SPD-21",
+      "tier": "gold",
+      "rationale": "Field vitals require real post-launch traffic and sampling.",
+      "timing": "postlaunch",
+      "group": "performance"
+    },
+    {
+      "id": "TYP-01",
+      "tier": "gold",
+      "rationale": "Font formats and subsetting improve compatibility and loading.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-02",
+      "tier": "gold",
+      "rationale": "Metric fallbacks reduce layout movement during font loading.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-03",
+      "tier": "gold",
+      "rationale": "Selective font preloads improve first rendering.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-04",
+      "tier": "gold",
+      "rationale": "Real font faces preserve the intended text appearance.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-05",
+      "tier": "diamond",
+      "rationale": "A valid document language is needed for assistive technology.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-06",
+      "tier": "diamond",
+      "rationale": "Text must remain usable at 200 percent enlargement.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-07",
+      "tier": "silver",
+      "rationale": "Text wrapping polish is optional and reference-dependent.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-08",
+      "tier": "silver",
+      "rationale": "Tabular numerals are a visual alignment enhancement.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-09",
+      "tier": "gold",
+      "rationale": "Preventing unwanted mobile text inflation improves legibility.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-10",
+      "tier": "gold",
+      "rationale": "Input sizing avoids mobile zoom in form journeys.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-11",
+      "tier": "diamond",
+      "rationale": "WCAG text and interface contrast protects readable content.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-12",
+      "tier": "gold",
+      "rationale": "Matching the canvas color prevents visual flashes.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-13",
+      "tier": "gold",
+      "rationale": "Image placeholders reduce loading flashes.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-14",
+      "tier": "silver",
+      "rationale": "Gradient grain and fixed-background rules are visual polish.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-15",
+      "tier": "gold",
+      "rationale": "A fallback keeps used backdrop effects from failing abruptly.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-16",
+      "tier": "silver",
+      "rationale": "Branded selection and control colors are optional polish.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-17",
+      "tier": "gold",
+      "rationale": "Stable scrollbars prevent modal layout jumps.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-18",
+      "tier": "diamond",
+      "rationale": "Visible focus indicators preserve keyboard operation.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-19",
+      "tier": "gold",
+      "rationale": "Pointer-specific hover handling improves touch and keyboard quality.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-20",
+      "tier": "silver",
+      "rationale": "Print styling is a useful but non-core output enhancement.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-21",
+      "tier": "gold",
+      "rationale": "Forced-color support improves experience for a system preference.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-22",
+      "tier": "bronze",
+      "rationale": "Matching reference viewport units is a fidelity experiment.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-23",
+      "tier": "silver",
+      "rationale": "Line-length and font-size targets exceed baseline conformance.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "TYP-24",
+      "tier": "gold",
+      "rationale": "Font-count and byte caps are agency performance budgets.",
+      "timing": "prelaunch",
+      "group": "typography"
+    },
+    {
+      "id": "RSP-01",
+      "tier": "diamond",
+      "rationale": "Zoom must remain available and layout must target the device width.",
+      "timing": "prelaunch",
+      "group": "responsive"
+    },
+    {
+      "id": "RSP-02",
+      "tier": "gold",
+      "rationale": "The broad width matrix checks responsive quality beyond reflow.",
+      "timing": "prelaunch",
+      "group": "responsive"
+    },
+    {
+      "id": "RSP-03",
+      "tier": "diamond",
+      "rationale": "WCAG reflow requires core content without two-dimensional scrolling.",
+      "timing": "prelaunch",
+      "group": "responsive"
+    },
+    {
+      "id": "RSP-04",
+      "tier": "diamond",
+      "rationale": "Orientation changes must not remove access to content or function.",
+      "timing": "prelaunch",
+      "group": "responsive"
+    },
+    {
+      "id": "RSP-05",
+      "tier": "diamond",
+      "rationale": "WCAG AA target sizing prevents inaccessible controls.",
+      "timing": "prelaunch",
+      "group": "responsive"
+    },
+    {
+      "id": "RSP-06",
+      "tier": "gold",
+      "rationale": "Cross-engine journey checks reduce compatibility defects.",
+      "timing": "prelaunch",
+      "group": "responsive"
+    },
+    {
+      "id": "RSP-07",
+      "tier": "diamond",
+      "rationale": "Every action needs a keyboard and touch path.",
+      "timing": "prelaunch",
+      "group": "responsive"
+    },
+    {
+      "id": "RSP-08",
+      "tier": "gold",
+      "rationale": "The large screenshot matrix is expanded device-quality coverage.",
+      "timing": "prelaunch",
+      "group": "responsive"
+    },
+    {
+      "id": "RSP-09",
+      "tier": "diamond",
+      "rationale": "A focused form field must remain visible during entry.",
+      "timing": "prelaunch",
+      "group": "responsive"
+    },
+    {
+      "id": "RSP-10",
+      "tier": "gold",
+      "rationale": "Physical device checks add evidence beyond browser emulation.",
+      "timing": "prelaunch",
+      "group": "responsive"
+    },
+    {
+      "id": "A11Y-01",
+      "tier": "diamond",
+      "rationale": "Automated WCAG A and AA findings must be resolved.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-02",
+      "tier": "bronze",
+      "rationale": "This named subset duplicates the broader axe coverage in A11Y-01.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-03",
+      "tier": "diamond",
+      "rationale": "Landmarks and skip navigation make the site operable.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-04",
+      "tier": "diamond",
+      "rationale": "A coherent heading outline makes content navigable.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-05",
+      "tier": "diamond",
+      "rationale": "Keyboard-operable menus and dialogs protect complete journeys.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-06",
+      "tier": "diamond",
+      "rationale": "Focused controls must not disappear behind sticky content.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-07",
+      "tier": "diamond",
+      "rationale": "Dragging interactions need a single-pointer alternative.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-08",
+      "tier": "diamond",
+      "rationale": "Meaningful visual and canvas content needs an accessible equivalent.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-09",
+      "tier": "diamond",
+      "rationale": "Reduced-motion settings must not hide content or controls.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-10",
+      "tier": "diamond",
+      "rationale": "Required pause controls and flash limits prevent motion harm.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-11",
+      "tier": "diamond",
+      "rationale": "Visible labels and recoverable errors are required for usable forms.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-12",
+      "tier": "diamond",
+      "rationale": "Route changes must communicate navigation and focus to users.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-13",
+      "tier": "diamond",
+      "rationale": "A hidden native cursor needs an accessible visible replacement.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-14",
+      "tier": "diamond",
+      "rationale": "Audio must not surprise users before activation.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-15",
+      "tier": "diamond",
+      "rationale": "Current location must be identifiable in navigation.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-16",
+      "tier": "diamond",
+      "rationale": "WCAG text-spacing overrides must not erase content or labels.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-17",
+      "tier": "diamond",
+      "rationale": "Hover content must remain dismissible and reachable.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-18",
+      "tier": "diamond",
+      "rationale": "Real desktop and mobile assistive-technology review verifies essential access beyond automated checks.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-19",
+      "tier": "diamond",
+      "rationale": "Consistent help and no re-entry support complete form processes.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-20",
+      "tier": "diamond",
+      "rationale": "Meaningful media needs applicable captions and alternatives.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-21",
+      "tier": "silver",
+      "rationale": "Extra contrast-preference rendering is an enhancement beyond the default accessible build.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "A11Y-22",
+      "tier": "diamond",
+      "rationale": "A complete A/AA review covers manual criteria and processes.",
+      "timing": "prelaunch",
+      "group": "accessibility"
+    },
+    {
+      "id": "SEO-01",
+      "tier": "gold",
+      "rationale": "Unique useful metadata improves route identity; exact lengths are house guidance.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-02",
+      "tier": "diamond",
+      "rationale": "Unapproved or incomplete content must not be indexed as production.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-03",
+      "tier": "diamond",
+      "rationale": "A missing route must truthfully return an HTTP 404.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-04",
+      "tier": "diamond",
+      "rationale": "Primary information must remain available without client-side JavaScript.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-05",
+      "tier": "silver",
+      "rationale": "Social preview tags and exact image targets are sharing polish.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-06",
+      "tier": "silver",
+      "rationale": "A complete multi-size icon set is not a core journey.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-07",
+      "tier": "diamond",
+      "rationale": "Canonical HTTPS URLs prevent insecure and ambiguous destinations.",
+      "timing": "cutover",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-08",
+      "tier": "diamond",
+      "rationale": "Real internal links protect navigation and contact routes.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-09",
+      "tier": "silver",
+      "rationale": "A security contact file is useful when the client provides one.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-10",
+      "tier": "gold",
+      "rationale": "Accurate crawl directives and route maps support discoverability.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-11",
+      "tier": "diamond",
+      "rationale": "Structured data must not invent or misstate client facts.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-12",
+      "tier": "gold",
+      "rationale": "Image semantics and source fallbacks improve discovery and resilience.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-13",
+      "tier": "gold",
+      "rationale": "Indexing follow-up can only be measured after deployment.",
+      "timing": "postlaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-14",
+      "tier": "gold",
+      "rationale": "Working external destinations preserve visitor paths; link review recurs.",
+      "timing": "recurring",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-15",
+      "tier": "silver",
+      "rationale": "Buyer-intent research is commissioned search strategy, not launch safety.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-16",
+      "tier": "bronze",
+      "rationale": "Promotion planning is optional and must not trigger unapproved outreach.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "SEO-17",
+      "tier": "bronze",
+      "rationale": "Provider-specific AI crawler policy is niche and never a launch prerequisite.",
+      "timing": "prelaunch",
+      "group": "discoverability"
+    },
+    {
+      "id": "EDGE-01",
+      "tier": "bronze",
+      "rationale": "Capturing the reference error page is fidelity evidence, not release safety.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-02",
+      "tier": "diamond",
+      "rationale": "A real, understandable 404 gives visitors a safe recovery path.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-03",
+      "tier": "gold",
+      "rationale": "Clear error copy helps visitors recover without blame.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-04",
+      "tier": "diamond",
+      "rationale": "Missing assets and APIs must not masquerade as successful pages.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-05",
+      "tier": "diamond",
+      "rationale": "A failed visual asset must not blank essential content.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-06",
+      "tier": "diamond",
+      "rationale": "Navigation and copy must remain available without JavaScript.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-07",
+      "tier": "diamond",
+      "rationale": "A WebGL failure must preserve readable content and primary actions.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-08",
+      "tier": "gold",
+      "rationale": "Runtime errors and failed resources reveal reliability defects.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-09",
+      "tier": "diamond",
+      "rationale": "Forms must avoid leaking data or claiming false success.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-10",
+      "tier": "gold",
+      "rationale": "Browser history should restore a coherent page position.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-11",
+      "tier": "gold",
+      "rationale": "Long content must not break flexible page layouts.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-12",
+      "tier": "diamond",
+      "rationale": "Applicable consent must precede non-essential storage.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-13",
+      "tier": "silver",
+      "rationale": "Offline shell support is optional and brings service-worker complexity.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-14",
+      "tier": "diamond",
+      "rationale": "Visible states must retain contrast, overlay function, and dismissal.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-15",
+      "tier": "gold",
+      "rationale": "The 404 byte and LCP ceilings are house budgets.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-16",
+      "tier": "silver",
+      "rationale": "Path suggestions add convenience; safe text rendering is required if used.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-17",
+      "tier": "diamond",
+      "rationale": "URL migration must preserve relevant destinations and honest 404s.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "EDGE-18",
+      "tier": "diamond",
+      "rationale": "Server failures need truthful recovery without exposing internals.",
+      "timing": "prelaunch",
+      "group": "error-recovery"
+    },
+    {
+      "id": "UXF-01",
+      "tier": "diamond",
+      "rationale": "Every apparent control must complete an approved visitor action.",
+      "timing": "prelaunch",
+      "group": "conversion"
+    },
+    {
+      "id": "UXF-02",
+      "tier": "diamond",
+      "rationale": "Form status must be honest and recoverable; exact timings are house targets.",
+      "timing": "prelaunch",
+      "group": "conversion"
+    },
+    {
+      "id": "UXF-03",
+      "tier": "diamond",
+      "rationale": "Primary actions need real destinations and must not be placeholders.",
+      "timing": "prelaunch",
+      "group": "conversion"
+    },
+    {
+      "id": "UXF-04",
+      "tier": "diamond",
+      "rationale": "Displayed phone and email contact paths must actually work.",
+      "timing": "prelaunch",
+      "group": "conversion"
+    },
+    {
+      "id": "UXF-05",
+      "tier": "diamond",
+      "rationale": "Forms must preserve input, explain errors, and report delivery honestly.",
+      "timing": "prelaunch",
+      "group": "conversion"
+    },
+    {
+      "id": "UXF-06",
+      "tier": "gold",
+      "rationale": "The 44-pixel target is an AAA/policy enhancement over AA sizing.",
+      "timing": "prelaunch",
+      "group": "conversion"
+    },
+    {
+      "id": "UXF-07",
+      "tier": "diamond",
+      "rationale": "Consent and conversion patterns must not deceive or pressure visitors.",
+      "timing": "prelaunch",
+      "group": "conversion"
+    },
+    {
+      "id": "UXF-08",
+      "tier": "diamond",
+      "rationale": "Essential text must remain real, selectable, accessible content.",
+      "timing": "prelaunch",
+      "group": "conversion"
+    },
+    {
+      "id": "UXF-09",
+      "tier": "gold",
+      "rationale": "The five-second copy test is a useful clarity heuristic.",
+      "timing": "prelaunch",
+      "group": "conversion"
+    },
+    {
+      "id": "UXF-10",
+      "tier": "gold",
+      "rationale": "Declared color scheme should preserve the intended rendered design.",
+      "timing": "prelaunch",
+      "group": "conversion"
+    },
+    {
+      "id": "UXF-11",
+      "tier": "gold",
+      "rationale": "Comparing contact-path length with the design reference is conversion polish; real working CTAs remain Diamond under UXF-01 and UXF-03.",
+      "timing": "prelaunch",
+      "group": "conversion"
+    },
+    {
+      "id": "MOT-01",
+      "tier": "gold",
+      "rationale": "Frame-rate thresholds are agency smoothness budgets, not universal standards.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-02",
+      "tier": "gold",
+      "rationale": "Efficient animation properties reduce rendering cost.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-03",
+      "tier": "gold",
+      "rationale": "Framework cleanup prevents interaction leaks on route changes.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-04",
+      "tier": "bronze",
+      "rationale": "Lenis wiring is a reference-specific implementation experiment.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-05",
+      "tier": "diamond",
+      "rationale": "GPU failure must not remove content or primary actions.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-06",
+      "tier": "diamond",
+      "rationale": "Resizing must not leave stale or broken layouts.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-07",
+      "tier": "bronze",
+      "rationale": "Transition focus checks duplicate A11Y-12 and EDGE-10.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-08",
+      "tier": "silver",
+      "rationale": "Cursor effects are optional polish with device and motion limits.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-09",
+      "tier": "bronze",
+      "rationale": "Scrubbed-video encoding is a niche reference effect.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-10",
+      "tier": "bronze",
+      "rationale": "A ready flag is test-harness convenience, not visitor safety.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-11",
+      "tier": "bronze",
+      "rationale": "Matching frame dependence is a reference-motion experiment.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-12",
+      "tier": "gold",
+      "rationale": "Rejected autoplay must leave a usable poster and stable layout.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-13",
+      "tier": "gold",
+      "rationale": "GPU context and memory limits prevent resource degradation.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-14",
+      "tier": "gold",
+      "rationale": "Appropriate passive listeners improve touch-scroll responsiveness.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "MOT-15",
+      "tier": "gold",
+      "rationale": "Long-frame limits are internal smoothness targets.",
+      "timing": "prelaunch",
+      "group": "motion"
+    },
+    {
+      "id": "SEC-01",
+      "tier": "diamond",
+      "rationale": "The audited production build must serve the real security and error configuration.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-02",
+      "tier": "diamond",
+      "rationale": "Response handling must prevent sniffing, leakage, and unsafe embedding.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-03",
+      "tier": "diamond",
+      "rationale": "Live HSTS protects transport; subdomain and preload choices need owner review.",
+      "timing": "cutover",
+      "group": "security"
+    },
+    {
+      "id": "SEC-04",
+      "tier": "diamond",
+      "rationale": "An enforced, integration-aware CSP reduces script injection risk.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-05",
+      "tier": "diamond",
+      "rationale": "Unreviewed third-party requests create privacy and supply-chain exposure.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-06",
+      "tier": "diamond",
+      "rationale": "Secrets in history or outputs require removal and rotation.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-07",
+      "tier": "diamond",
+      "rationale": "Dependency provenance and exploitable vulnerabilities affect release safety.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-08",
+      "tier": "gold",
+      "rationale": "Public source maps and debug logging are avoidable exposure and quality issues.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-09",
+      "tier": "diamond",
+      "rationale": "Storage and authentication cookies must protect user data.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-10",
+      "tier": "diamond",
+      "rationale": "Private inputs and third-party rights must be protected in the handover.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-11",
+      "tier": "gold",
+      "rationale": "A repeatable verification command improves delivery quality.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-12",
+      "tier": "diamond",
+      "rationale": "External scripts need integrity checks when included.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-13",
+      "tier": "gold",
+      "rationale": "Trusted Types adds defense-in-depth for supported DOM sinks.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-14",
+      "tier": "silver",
+      "rationale": "Cross-origin isolation is an optional capability with compatibility costs.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "SEC-15",
+      "tier": "diamond",
+      "rationale": "CI and deployment credentials must not permit unsafe unreviewed releases.",
+      "timing": "prelaunch",
+      "group": "security"
+    },
+    {
+      "id": "BACK-00",
+      "tier": "diamond",
+      "rationale": "An accurate endpoint inventory defines the real security boundary.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-01",
+      "tier": "diamond",
+      "rationale": "A contact submission must reach its configured recipient before launch.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-02",
+      "tier": "diamond",
+      "rationale": "Request method, media type, and size limits constrain abuse.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-03",
+      "tier": "diamond",
+      "rationale": "Server-side validation and generic failures prevent injection and leakage.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-04",
+      "tier": "diamond",
+      "rationale": "Abuse controls must match topology and metered-service exposure.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-05",
+      "tier": "diamond",
+      "rationale": "Cookie-authenticated mutations need CSRF protection.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-06",
+      "tier": "diamond",
+      "rationale": "Cross-origin access must be explicitly limited where needed.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-07",
+      "tier": "diamond",
+      "rationale": "Private and error responses must not be cached or mis-typed.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-08",
+      "tier": "diamond",
+      "rationale": "Secrets belong in environment configuration and must fail safely.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-09",
+      "tier": "diamond",
+      "rationale": "Logs must support response while excluding credentials and personal data.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-10",
+      "tier": "diamond",
+      "rationale": "Bounded idempotent delivery avoids duplicate or ambiguous side effects.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-11",
+      "tier": "gold",
+      "rationale": "Health probes support hosting operations but are not a visitor journey.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-12",
+      "tier": "diamond",
+      "rationale": "Spam controls must deter abuse without blocking accessible form use.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-13",
+      "tier": "diamond",
+      "rationale": "Email header injection could expose data or redirect delivery.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-14",
+      "tier": "diamond",
+      "rationale": "Data minimization and deletion prevent unnecessary personal-data retention.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-15",
+      "tier": "diamond",
+      "rationale": "Side-effect retries must not create duplicate submissions or payments.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-16",
+      "tier": "bronze",
+      "rationale": "This install and signature check repeats the broader SEC-07 supply-chain gate.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-17",
+      "tier": "diamond",
+      "rationale": "Untrusted request bodies must be bounded, encoded, and safely logged.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-18",
+      "tier": "diamond",
+      "rationale": "Authorization must be enforced for every private data operation.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-19",
+      "tier": "gold",
+      "rationale": "Database workload budgets and pagination protect query quality at scale.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-20",
+      "tier": "diamond",
+      "rationale": "Caches must never cross user or tenant privacy boundaries.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-21",
+      "tier": "gold",
+      "rationale": "Connection-pool limits and recovery are provider-specific performance controls.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-22",
+      "tier": "diamond",
+      "rationale": "Trusted webhooks require signature, replay, and atomic state protection.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "BACK-23",
+      "tier": "diamond",
+      "rationale": "Live payment verification protects real checkout and entitlement journeys.",
+      "timing": "prelaunch",
+      "group": "backend"
+    },
+    {
+      "id": "MAIL-01",
+      "tier": "diamond",
+      "rationale": "Authenticated domain mail protects delivery and sender integrity where used.",
+      "timing": "cutover",
+      "group": "email"
+    },
+    {
+      "id": "MAIL-02",
+      "tier": "diamond",
+      "rationale": "Marketing messages must meet applicable law and provider opt-out rules.",
+      "timing": "prelaunch",
+      "group": "email"
+    },
+    {
+      "id": "MAIL-03",
+      "tier": "silver",
+      "rationale": "Separate marketing identities can help reputation but are not universal.",
+      "timing": "prelaunch",
+      "group": "email"
+    },
+    {
+      "id": "MAIL-04",
+      "tier": "silver",
+      "rationale": "MTA-STS is a scoped mail-security enhancement requiring administrator coordination.",
+      "timing": "cutover",
+      "group": "email"
+    },
+    {
+      "id": "MAIL-05",
+      "tier": "diamond",
+      "rationale": "Contact notifications need a safe authenticated sender and usable reply path.",
+      "timing": "prelaunch",
+      "group": "email"
+    },
+    {
+      "id": "MAIL-06",
+      "tier": "diamond",
+      "rationale": "Actual recipient receipt proves the enquiry journey works in production.",
+      "timing": "cutover",
+      "group": "email"
+    },
+    {
+      "id": "MAIL-07",
+      "tier": "diamond",
+      "rationale": "Promised transactional flows need verified mail and safe links.",
+      "timing": "cutover",
+      "group": "email"
+    },
+    {
+      "id": "HOST-01",
+      "tier": "diamond",
+      "rationale": "Every live hostname needs valid TLS and a clear HTTPS destination.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-02",
+      "tier": "diamond",
+      "rationale": "Modern supported TLS protects every deployed connection.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-03",
+      "tier": "diamond",
+      "rationale": "Automated renewal prevents certificate expiry and outages.",
+      "timing": "prelaunch",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-04",
+      "tier": "diamond",
+      "rationale": "Correct DNS and no dangling records protect reachability and takeover safety.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-05",
+      "tier": "silver",
+      "rationale": "HTTP/2 and HTTP/3 availability is host-dependent performance polish.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-06",
+      "tier": "silver",
+      "rationale": "A CDN cache hit is a performance enhancement, not a safety gate.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-07",
+      "tier": "diamond",
+      "rationale": "Unknown deployed routes must return a real 404.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-08",
+      "tier": "diamond",
+      "rationale": "Host-specific security headers must reach deployed and function responses.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-09",
+      "tier": "diamond",
+      "rationale": "Preview builds need access protection; noindex alone is not security.",
+      "timing": "prelaunch",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-10",
+      "tier": "diamond",
+      "rationale": "The reviewed deployable artifact and rollback identity must be reproducible.",
+      "timing": "prelaunch",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-11",
+      "tier": "gold",
+      "rationale": "Monitoring intervals are agency operations policy after setup.",
+      "timing": "recurring",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-12",
+      "tier": "diamond",
+      "rationale": "Account security and registrar controls reduce takeover risk.",
+      "timing": "prelaunch",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-13",
+      "tier": "silver",
+      "rationale": "Cost alerts and edge delivery limit avoidable operating expense.",
+      "timing": "prelaunch",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-14",
+      "tier": "diamond",
+      "rationale": "Recoverable source, content, configuration, and data protect continuity.",
+      "timing": "prelaunch",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-15",
+      "tier": "bronze",
+      "rationale": "A green-host score is an optional sustainability signal.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-16",
+      "tier": "diamond",
+      "rationale": "Live confirmation proves required headers are actually enforced.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-17",
+      "tier": "gold",
+      "rationale": "The five-minute rollback cap is a house target, not the rollback requirement.",
+      "timing": "prelaunch",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-18",
+      "tier": "gold",
+      "rationale": "Early Hints and HTTP/3 improve edge delivery when supported.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-19",
+      "tier": "diamond",
+      "rationale": "Safe cutover preserves service and a tested rollback path.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-20",
+      "tier": "silver",
+      "rationale": "An A+ scanner score is one limited optional signal.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-21",
+      "tier": "silver",
+      "rationale": "A 100-percent Internet.nl score is broader than launch safety.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-22",
+      "tier": "diamond",
+      "rationale": "DNS changes must preserve real business email delivery.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "HOST-23",
+      "tier": "diamond",
+      "rationale": "Historic routes must map to relevant pages or honest removals.",
+      "timing": "cutover",
+      "group": "hosting"
+    },
+    {
+      "id": "OPS-01",
+      "tier": "gold",
+      "rationale": "CI quality gates reduce accidental broken releases.",
+      "timing": "recurring",
+      "group": "operations"
+    },
+    {
+      "id": "OPS-02",
+      "tier": "gold",
+      "rationale": "Strict Lighthouse and byte thresholds are agency budgets.",
+      "timing": "recurring",
+      "group": "operations"
+    },
+    {
+      "id": "OPS-03",
+      "tier": "gold",
+      "rationale": "A complete operations runbook improves recovery quality.",
+      "timing": "prelaunch",
+      "group": "operations"
+    },
+    {
+      "id": "OPS-04",
+      "tier": "diamond",
+      "rationale": "Optional real-user telemetry still needs privacy-safe collection. Verify the initial safety controls before enabling; repeat during operation.",
+      "timing": "prelaunch",
+      "group": "operations"
+    },
+    {
+      "id": "OPS-05",
+      "tier": "diamond",
+      "rationale": "Error telemetry must scrub personal data before transmission. Verify the initial safety controls before enabling; repeat during operation.",
+      "timing": "prelaunch",
+      "group": "operations"
+    },
+    {
+      "id": "OPS-06",
+      "tier": "diamond",
+      "rationale": "Exploited vulnerabilities need prompt recurring remediation. Verify the initial safety controls before enabling; repeat during operation.",
+      "timing": "prelaunch",
+      "group": "operations"
+    },
+    {
+      "id": "OPS-07",
+      "tier": "gold",
+      "rationale": "A supported-browser policy makes compatibility expectations explicit.",
+      "timing": "recurring",
+      "group": "operations"
+    },
+    {
+      "id": "OPS-08",
+      "tier": "gold",
+      "rationale": "Seven- and thirty-day reviews are post-launch checks, never prelaunch evidence.",
+      "timing": "postlaunch",
+      "group": "operations"
+    },
+    {
+      "id": "OPS-09",
+      "tier": "silver",
+      "rationale": "Markup and stylesheet validation is useful quality assurance.",
+      "timing": "prelaunch",
+      "group": "operations"
+    },
+    {
+      "id": "OPS-10",
+      "tier": "diamond",
+      "rationale": "Approved analytics must respect privacy choices and avoid sensitive payloads. Verify the initial safety controls before enabling; repeat during operation.",
+      "timing": "prelaunch",
+      "group": "operations"
+    },
+    {
+      "id": "LEG-01",
+      "tier": "gold",
+      "rationale": "Self-hosted fonts reduce dependencies; privacy and origin approval remain mandatory under LEG-08 and SEC-05.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-02",
+      "tier": "diamond",
+      "rationale": "Trackers must not collect data before valid review and consent.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-03",
+      "tier": "diamond",
+      "rationale": "Reference assets and unlicensed material create rights and identity risk.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-04",
+      "tier": "diamond",
+      "rationale": "Child-directed or known child data requires applicable safeguards.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-05",
+      "tier": "diamond",
+      "rationale": "Marketing messages must include legally required opt-out and sender details.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-06",
+      "tier": "diamond",
+      "rationale": "Paid checkout terms must be visible before a financial commitment.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-07",
+      "tier": "bronze",
+      "rationale": "This retired ID is retained as stable legacy bookkeeping.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-08",
+      "tier": "diamond",
+      "rationale": "Privacy decisions require the complete actual data flow and jurisdiction.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-09",
+      "tier": "diamond",
+      "rationale": "Applicable consent must reflect current law and actual storage use.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-10",
+      "tier": "diamond",
+      "rationale": "Applicable privacy opt-outs must reach downstream processors.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-11",
+      "tier": "diamond",
+      "rationale": "Privacy notices must describe the real collection and user choices.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-12",
+      "tier": "diamond",
+      "rationale": "Applicable accessibility disclosures must match the deployed build and evidence.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-13",
+      "tier": "diamond",
+      "rationale": "Required entity and commerce disclosures protect informed transactions.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-14",
+      "tier": "diamond",
+      "rationale": "Third-party licences and attribution determine lawful use.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-15",
+      "tier": "diamond",
+      "rationale": "Safe-harbor measures matter when user content and reliance make them applicable.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-16",
+      "tier": "diamond",
+      "rationale": "Content rights and approvals must be established before public use.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-17",
+      "tier": "diamond",
+      "rationale": "Qualified review resolves material legal and rights uncertainty.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "LEG-18",
+      "tier": "bronze",
+      "rationale": "Detailed DMCA response planning is niche unless hosting user content or relying on safe harbor.",
+      "timing": "prelaunch",
+      "group": "privacy-legal"
+    },
+    {
+      "id": "SUS-01",
+      "tier": "silver",
+      "rationale": "Page-weight comparisons are an optional efficiency benchmark.",
+      "timing": "prelaunch",
+      "group": "sustainability"
+    },
+    {
+      "id": "SUS-02",
+      "tier": "silver",
+      "rationale": "Reduced-data media behavior benefits users but is an enhancement.",
+      "timing": "prelaunch",
+      "group": "sustainability"
+    },
+    {
+      "id": "SUS-03",
+      "tier": "bronze",
+      "rationale": "A modelled carbon estimate is informational, not a launch control.",
+      "timing": "prelaunch",
+      "group": "sustainability"
+    },
+    {
+      "id": "I18N-01",
+      "tier": "diamond",
+      "rationale": "Language routing and locale metadata preserve access to translated journeys.",
+      "timing": "prelaunch",
+      "group": "internationalization"
+    },
+    {
+      "id": "I18N-02",
+      "tier": "gold",
+      "rationale": "Expansion tests help prevent clipping in supported translations.",
+      "timing": "prelaunch",
+      "group": "internationalization"
+    },
+    {
+      "id": "I18N-03",
+      "tier": "diamond",
+      "rationale": "Missing glyphs or RTL layout can make language content unusable.",
+      "timing": "prelaunch",
+      "group": "internationalization"
+    },
+    {
+      "id": "I18N-04",
+      "tier": "diamond",
+      "rationale": "Locale-aware dates and currencies prevent misleading displayed information.",
+      "timing": "prelaunch",
+      "group": "internationalization"
+    },
+    {
+      "id": "CNT-01",
+      "tier": "gold",
+      "rationale": "Input reporting keeps preparation resilient without blocking useful work.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-02",
+      "tier": "diamond",
+      "rationale": "Reference text and assets must not enter the client release.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-03",
+      "tier": "diamond",
+      "rationale": "Media provenance and alternative text protect rights and access.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-04",
+      "tier": "diamond",
+      "rationale": "Only complete approved content may be indexed as client-ready.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-05",
+      "tier": "diamond",
+      "rationale": "Invented facts and unsupported claims create deception and legal risk.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-06",
+      "tier": "gold",
+      "rationale": "Copy-fit parity protects readable content across real viewports.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-07",
+      "tier": "diamond",
+      "rationale": "Text contrast over client images must meet WCAG AA.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-08",
+      "tier": "diamond",
+      "rationale": "Font licensing determines whether the shipped files may be used.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-09",
+      "tier": "diamond",
+      "rationale": "Removing location metadata protects privacy; format/crop targets are quality.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-10",
+      "tier": "diamond",
+      "rationale": "Missing translations must not silently fabricate content.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-11",
+      "tier": "diamond",
+      "rationale": "Live content status and canonical URLs must match release state.",
+      "timing": "cutover",
+      "group": "content"
+    },
+    {
+      "id": "CNT-12",
+      "tier": "silver",
+      "rationale": "A live clock or ticker is a feature-specific enhancement.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-13",
+      "tier": "gold",
+      "rationale": "Slot markers must survive motion so supplied content stays intact.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-14",
+      "tier": "diamond",
+      "rationale": "Private reference material must never ship or be publicly served.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-15",
+      "tier": "diamond",
+      "rationale": "Stock rights and client approval must be traceable before publication.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-16",
+      "tier": "gold",
+      "rationale": "The default brand shift is a fidelity and approval quality gate.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "CNT-17",
+      "tier": "diamond",
+      "rationale": "Descriptive link names are part of accessible navigation.",
+      "timing": "prelaunch",
+      "group": "content"
+    },
+    {
+      "id": "DEL-01",
+      "tier": "diamond",
+      "rationale": "Environment and DNS records must be complete without exposing secrets.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-02",
+      "tier": "diamond",
+      "rationale": "Live probes must distinguish deployment facts from unverified status.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-03",
+      "tier": "diamond",
+      "rationale": "Legal drafts must match real data and avoid unsupported claims.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-04",
+      "tier": "diamond",
+      "rationale": "Accessibility deviations must be disclosed and fixed in the shipped build.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-05",
+      "tier": "diamond",
+      "rationale": "Provenance and reference rights determine whether reproduction can be released.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-06",
+      "tier": "gold",
+      "rationale": "A clean offline rebuild adds reproducibility evidence.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-07",
+      "tier": "gold",
+      "rationale": "Transactional sync prevents bad content from replacing a good build.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-08",
+      "tier": "diamond",
+      "rationale": "Only the separately identified accessible artifact may be deployed.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-09",
+      "tier": "diamond",
+      "rationale": "Release documentation must state the actual scope and unresolved defects.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-10",
+      "tier": "diamond",
+      "rationale": "Exact cutover and rollback steps protect service continuity.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-11",
+      "tier": "gold",
+      "rationale": "Complete account, provider, and support handover improves ownership.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-12",
+      "tier": "silver",
+      "rationale": "A concise editing guide makes later content changes easier.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-13",
+      "tier": "gold",
+      "rationale": "Maintenance tasks need named owners and recurring dates.",
+      "timing": "recurring",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-14",
+      "tier": "diamond",
+      "rationale": "Acceptance must be tied to the actual deployed release and pending checks.",
+      "timing": "cutover",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-15",
+      "tier": "diamond",
+      "rationale": "Evidence identity and unresolved launch defects must block false readiness.",
+      "timing": "prelaunch",
+      "group": "handover"
+    },
+    {
+      "id": "DEL-16",
+      "tier": "gold",
+      "rationale": "A scoped brief and flow matrix reduce avoidable delivery defects.",
+      "timing": "prelaunch",
+      "group": "handover"
+    }
+  ]
+}

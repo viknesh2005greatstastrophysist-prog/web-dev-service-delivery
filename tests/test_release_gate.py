@@ -108,8 +108,73 @@ class ReleaseGateTests(unittest.TestCase):
 
     def test_required_failure_exception_and_unrun_block(self):
         for status in ('FAIL', 'FIDELITY-EXCEPTION', 'NOT_RUN'):
-            self.pending(self.row('SPD-01'), status)
+            self.pending(self.row('SEC-01'), status)
             self.assertBlocked(f'{status} blocks')
+
+    def test_each_priority_scope_includes_diamond(self):
+        self.pending(self.row('SEC-01'), 'FAIL')
+        for phase in gate.PHASES:
+            with self.subTest(phase=phase):
+                self.assertBlocked('FAIL blocks', phase)
+
+    def test_optional_priority_misses_do_not_block_diamond(self):
+        for tier, phase in [('Gold', 'gold'), ('Silver', 'silver'), ('Bronze', 'bronze')]:
+            key = next(k for k, (_, t) in gate.specifications(CHECKLIST).items()
+                       if t == tier and k != 'LEG-07')
+            self.pending(self.row(key), 'NOT_RUN')
+            self.assertEqual([], self.result('launch')['errors'])
+            self.assertBlocked('NOT_RUN blocks', phase)
+            self.row(key)['status'] = 'PASS'
+
+    def test_missing_tier_does_not_silently_fall_back(self):
+        path = self.root / 'mixed.md'
+        text = CHECKLIST.read_text()
+        import re
+        path.write_text(re.sub(r' (Diamond|Gold|Silver|Bronze) \|', '', text, count=1))
+        with self.assertRaisesRegex(ValueError, 'mixed legacy'):
+            gate.specifications(path)
+
+    def test_legacy_snapshot_preserves_required_gate(self):
+        path = self.root / 'legacy.md'
+        import re
+        path.write_text(re.sub(r' (Diamond|Gold|Silver|Bronze) \|', '', CHECKLIST.read_text()))
+        self.record['checklist_sha256'] = gate.sha256(path)
+        self.pending(self.row('SPD-01'), 'NOT_RUN')
+        result = gate.validate(self.record, path, self.root, now=NOW, resolver=lambda host: ['8.8.8.8'])
+        self.assertEqual('legacy', result['policy'])
+        self.assertIn('SPD-01: NOT_RUN blocks launch', result['errors'])
+        self.assertEqual('BLOCKED', gate.validate(self.record, path, self.root, phase='diamond')['decision'])
+
+    def test_invalid_phase_rejected_by_api(self):
+        self.assertEqual('BLOCKED', gate.validate(self.record, CHECKLIST, self.root, phase='optional')['decision'])
+
+    def test_contracted_optional_work_blocks_launch(self):
+        key = next(k for k, (_, tier) in gate.specifications(CHECKLIST).items()
+                   if tier == 'Bronze' and k != 'LEG-07')
+        self.pending(self.row(key), 'NOT_RUN')
+        self.assertEqual([], self.result()['errors'])
+        self.record['release']['required_rows'] = [key]
+        self.assertBlocked('NOT_RUN blocks launch')
+
+    def test_unknown_or_missing_contract_scope_rejected(self):
+        self.record['release'].pop('required_rows')
+        self.assertBlocked('required_rows')
+
+    def test_absent_feature_cannot_waive_contracted_work(self):
+        self.record['release']['required_rows'] = ['BACK-01']
+        self.row('BACK-01').update(status='N/A', applicable=False,
+                                  reason='Feature not built', predicate='No form found')
+        self.assertBlocked('contracted requirement cannot be N/A')
+        self.record['release']['required_rows'] = ['BOGUS-01']
+        self.assertBlocked('required_rows')
+
+    def test_coordinated_diamond_demotion_rejected(self):
+        path = self.root / 'demoted.md'
+        lines = CHECKLIST.read_text().splitlines()
+        path.write_text('\n'.join(line.replace('| Diamond |', '| Bronze |')
+                                 if line.startswith('| SEC-01 |') else line for line in lines))
+        with self.assertRaisesRegex(ValueError, 'Diamond safety floor'):
+            gate.specifications(path)
 
     def test_unknown_and_inherited_are_not_passes(self):
         for status in ('INHERITED', 'pass', None, {'PASS': True}):

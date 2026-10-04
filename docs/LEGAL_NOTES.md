@@ -6,7 +6,7 @@ Anyone can file a suit; the question is exposure. Use this to prepare questions 
 
 ## Scope of these notes
 
-Replacing content does not establish permission to reproduce a reference design. This historical research identifies issues for project-specific counsel review; it does not quantify claim strength, litigation likelihood or takedown probability. Active checklist rules and its 2026-10-02 audit supersede conflicting delivery instructions below.
+Replacing content does not establish permission to reproduce a reference design. This historical research identifies issues for project-specific counsel review; it does not quantify claim strength, litigation likelihood or takedown probability. Active checklist rules, the 2026-10-05 tier policy and reviewed LEG-17 wording supersede conflicting delivery instructions below. A named qualified review is mandatory; counsel is required for unresolved applicability, disputed rights or regulated services. This historical document does not prove present-day legal compliance.
 
 ## What the swap removes
 
