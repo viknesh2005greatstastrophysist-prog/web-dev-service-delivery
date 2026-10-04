@@ -2,8 +2,8 @@
 
 - Source base: origin/main `56d620ae89a1bcf06db349e8d1881e860954ad1e`.
 - Catalogue: 275 original unique IDs, 18 sections; 150 Diamond, 79 Gold, 31 Silver, 15 Bronze. No row removed.
-- `python3 scripts/check-kit.py`: all 60 checks passed; [full log](check-kit.log).
-- `python3 -m unittest discover -s tests -v`: all 50 tests passed; [full log](tests.log).
+- `python3 scripts/check-kit.py`: all 60 checks passed; [full log](check-kit.txt).
+- `python3 -m unittest discover -s tests -v`: all 50 tests passed; [full log](tests.txt).
 - Tier renderer: second run preserved both output hashes.
 - `git diff --check`: passed.
 - Methodology submodule initialized at reviewed pin `2c03e02d7e1849374739b576b9a0734e6d7e94ab`.
