@@ -108,11 +108,11 @@ class ReleaseGateTests(unittest.TestCase):
 
     def test_required_failure_exception_and_unrun_block(self):
         for status in ('FAIL', 'FIDELITY-EXCEPTION', 'NOT_RUN'):
-            self.pending(self.row('SEC-01'), status)
+            self.pending(self.row('SEC-06'), status)
             self.assertBlocked(f'{status} blocks')
 
     def test_each_priority_scope_includes_diamond(self):
-        self.pending(self.row('SEC-01'), 'FAIL')
+        self.pending(self.row('SEC-06'), 'FAIL')
         for phase in gate.PHASES:
             with self.subTest(phase=phase):
                 self.assertBlocked('FAIL blocks', phase)
@@ -172,7 +172,48 @@ class ReleaseGateTests(unittest.TestCase):
         path = self.root / 'demoted.md'
         lines = CHECKLIST.read_text().splitlines()
         path.write_text('\n'.join(line.replace('| Diamond |', '| Bronze |')
-                                 if line.startswith('| SEC-01 |') else line for line in lines))
+                                 if line.startswith('| SEC-06 |') else line for line in lines))
+        with self.assertRaisesRegex(ValueError, 'Diamond safety floor'):
+            gate.specifications(path)
+
+    def test_every_diamond_failure_blocks_launch(self):
+        for key, (_, tier) in gate.specifications(CHECKLIST).items():
+            if tier != 'Diamond':
+                continue
+            with self.subTest(row=key):
+                original = copy.deepcopy(self.row(key))
+                self.pending(self.row(key), 'FAIL')
+                self.assertBlocked(f'{key}: FAIL blocks launch')
+                entry = self.row(key)
+                entry.clear()
+                entry.update(original)
+
+    def test_old_tiered_snapshot_keeps_original_safety_floor(self):
+        path = self.root / 'v1.md'
+        path.write_text('\n'.join(
+            f'| {key} | Historical criterion | Historical method | {cls} | '
+            f'{"Diamond" if key in gate.DIAMOND_FLOOR_V1 else "Gold"} |'
+            for key, (cls, _) in gate.specifications(CHECKLIST).items()))
+        self.assertEqual('tiered-v1', gate.priority_policy(path.read_text()))
+        self.assertTrue(all(gate.specifications(path)[key][1] == 'Diamond'
+                            for key in gate.DIAMOND_FLOOR_V1))
+        path.write_text('\n'.join(line.replace('| Diamond |', '| Gold |')
+                                  if line.startswith('| SEC-01 |') else line
+                                  for line in path.read_text().splitlines()))
+        with self.assertRaisesRegex(ValueError, 'Diamond safety floor'):
+            gate.specifications(path)
+
+    def test_unknown_or_duplicate_priority_policy_rejected(self):
+        path = self.root / 'policy.md'
+        for marker in ('<!-- priority-policy: waived -->',
+                       '<!-- priority-policy: risk-v2 -->\n<!-- priority-policy: risk-v2 -->'):
+            path.write_text(CHECKLIST.read_text().replace('<!-- priority-policy: risk-v2 -->', marker))
+            with self.assertRaisesRegex(ValueError, 'priority policy'):
+                gate.specifications(path)
+
+    def test_removing_current_policy_marker_does_not_accept_demotions(self):
+        path = self.root / 'missing-policy.md'
+        path.write_text(CHECKLIST.read_text().replace('<!-- priority-policy: risk-v2 -->', ''))
         with self.assertRaisesRegex(ValueError, 'Diamond safety floor'):
             gate.specifications(path)
 
@@ -236,11 +277,12 @@ class ReleaseGateTests(unittest.TestCase):
         row.update(status='N/A', applicable=False, predicate='No desire to test', reason='Skipped')
         self.assertBlocked('unconditional required')
 
-    def test_recommended_miss_and_field_unavailable_prevent_gold_only(self):
+    def test_insufficient_field_samples_do_not_fail_lab_quality(self):
         for key, status in [('SPD-21', 'UNAVAILABLE'), ('SUS-01', 'FAIL')]:
             self.pending(self.row(key), status)
         self.assertEqual([], self.result('launch')['errors'])
-        self.assertBlocked('blocks gold', 'gold')
+        self.assertEqual([], self.result('gold')['errors'])
+        self.assertBlocked('blocks silver', 'silver')
         self.pending(self.row('SPD-01'), 'UNAVAILABLE')
         self.assertBlocked('only applies to field-data')
 

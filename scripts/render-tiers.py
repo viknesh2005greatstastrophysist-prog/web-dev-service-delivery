@@ -45,15 +45,17 @@ These are agency priorities, not third-party certifications. Use this view to de
 
 ## How to use it
 
+Start with [the operating standard](RELEASE_STANDARD.md) for the decision in plain English. This catalogue is the traceability view, not 275 independent test sessions.
+
 1. Inventory routes, data flows, providers, jurisdictions and contracted features. Unknown applicability is unresolved, not N/A. Privacy review includes hosting logs and processors even on a cookieless site.
 2. Clear Diamond before claiming launch completeness. Review core navigation, readable mobile content, keyboard/assistive access, real form delivery, secrets, access controls, TLS, truthful claims, privacy and rights, recovery and exact deployment identity.
 3. Prepare final-domain probes and rollback before controlled cutover; final-domain Diamond checks run immediately afterwards. Until then the cutover is provisional. Handover readiness is not launch approval.
 4. Work through Gold next. Record optional misses with an owner, reason, next action and date. Contracted features remain delivery obligations even if their generic priority is Silver or Bronze.
 5. Keep future field metrics, 7/30-day reviews and recurring checks pending until actually observed. Timing is scheduling metadata, never an exemption from Diamond.
 
-Tier is separate from applicability and evidence status. `G` is always applicable, `C` conditional, `R` an enhancement whose absence needs evidence for N/A. `-L` requires production-domain evidence; `-O` needs named human evidence. No fake PASS, fabricated approval or downgrade to get a green dashboard. An uncovered critical defect or applicable legal duty is Diamond regardless of its row label. Split mixed requirements before any later demotion; their highest-risk clause controls today.
+Tier is separate from applicability and evidence status. `G` is always applicable, `C` conditional, `R` an enhancement whose absence needs evidence for N/A. `-L` requires production-domain evidence; `-O` needs named human evidence. No fake PASS, fabricated approval or downgrade to get a green dashboard. An uncovered critical defect or applicable legal duty is Diamond regardless of its row label. A lower-tier implementation preference never weakens the linked Diamond outcome. Reuse one evidence bundle across overlapping rows, but list exactly which controls and states it proves. Do not run duplicate tests merely to populate two rows.
 
-The [release contract](../docs/RELEASE_EVIDENCE.md) explains phases and compatibility. The [row review](../docs/reviews/checklist-tiers-2026-10-05/ROW_REVIEW.md) records mixed requirements and review limits; [sources](../docs/reviews/checklist-tiers-2026-10-05/SOURCES.md) distinguish standards from house choices. Existing website evidence is not retroactively passed by this revision.
+The [release contract](../docs/RELEASE_EVIDENCE.md) explains phases and compatibility. The [current challenge audit](../docs/reviews/checklist-challenge-2026-10-05/REVIEW.md) records all decisions and their limits; [sources](../docs/reviews/checklist-tiers-2026-10-05/SOURCES.md) distinguish standards from house choices. Existing website evidence is not retroactively passed by this revision.
 '''
 out = [intro, '\n## Inventory\n', '| Tier | Rows |', '|---|---:|']
 for tier in ('diamond', 'gold', 'silver', 'bronze'):

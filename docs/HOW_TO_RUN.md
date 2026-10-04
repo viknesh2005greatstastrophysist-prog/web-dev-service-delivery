@@ -1,5 +1,8 @@
 # How to run the kit
 
+Start with [the short production standard](../checklist/RELEASE_STANDARD.md). The current risk-v2 policy separates Diamond release outcomes from Gold quality and optional implementation/reference work. Reuse evidence across overlapping rows; preserve the exact policy snapshot for historical records.
+
+
 ## 1. What you need
 
 On the machine where the agent works:

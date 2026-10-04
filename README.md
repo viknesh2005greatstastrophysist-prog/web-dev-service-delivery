@@ -5,7 +5,7 @@ winner that suits the client, rebuilds its design system, layout, structure and 
 it can measure, swaps in the client's own content, audits the result against a production-grade
 checklist, and hands over a package that a human deploys.
 
-Status (2026-10-05): all 275 requirements are prioritized as Diamond, Gold, Silver or Bronze; release validation enforces the tier policy. A complete client delivery is still not verified end to end. See "Status and honest limits" below.
+Status (2026-10-05): the risk-v2 audit challenges all 275 requirements, separates essential outcomes from implementation preferences, and updates Diamond/Gold enforcement. A complete client delivery is still not verified end to end. See "Status and honest limits" below.
 
 ## What is in this repository
 
@@ -21,7 +21,7 @@ docs/         How to run it, decisions, legal notes, history, and every review a
 archive/      Earlier editions of the prompt and checklist (superseded, kept for reference)
 ```
 
-Start with the [tiered checklist](checklist/TIERS.md), then [HOW_TO_RUN](docs/HOW_TO_RUN.md). Read the [release evidence contract](docs/RELEASE_EVIDENCE.md) and [2026-10-02 audit](docs/reviews/production-audit-2026-10-02/AUDIT.md) before making a readiness claim.
+Start with the [short production standard](checklist/RELEASE_STANDARD.md), then the [tiered catalogue](checklist/TIERS.md) and [HOW_TO_RUN](docs/HOW_TO_RUN.md). Read the [release evidence contract](docs/RELEASE_EVIDENCE.md) and [2026-10-02 audit](docs/reviews/production-audit-2026-10-02/AUDIT.md) before making a readiness claim.
 
 ## What a run does, end to end
 

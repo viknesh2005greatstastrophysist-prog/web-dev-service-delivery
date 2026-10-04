@@ -1,5 +1,10 @@
 # Decisions
 
+## 2026-10-05: challenge the production tier assumptions
+
+The second audit replaces implementation mandates and reference comparisons with scoped outcome criteria. It preserves all 275 IDs, records each decision, and versions the Diamond floor so historical snapshots retain their original meaning. See [review](reviews/checklist-challenge-2026-10-05/REVIEW.md) and [operating standard](../checklist/RELEASE_STANDARD.md). No website is recertified by this policy change.
+
+
 Decisions the operator made while the kit was built, and the ones still open. Each settled decision is
 reflected in the prompt and the checklist; change them together if you reverse one.
 

@@ -20,7 +20,8 @@ STATUSES = {'PASS', 'FAIL', 'N/A', 'FIDELITY-EXCEPTION', 'AWAITING-DEPLOY',
 PHASES = ('handover', 'launch', 'diamond', 'gold', 'silver', 'bronze')
 TIERS = ('Diamond', 'Gold', 'Silver', 'Bronze')
 # A policy change must explicitly review this safety floor as well as the catalogue.
-DIAMOND_FLOOR = frozenset('SPD-06 TYP-05 TYP-06 TYP-11 TYP-18 RSP-01 RSP-03 RSP-04 RSP-05 RSP-07 RSP-09 A11Y-01 A11Y-03 A11Y-04 A11Y-05 A11Y-06 A11Y-07 A11Y-08 A11Y-09 A11Y-10 A11Y-11 A11Y-12 A11Y-13 A11Y-14 A11Y-15 A11Y-16 A11Y-17 A11Y-18 A11Y-19 A11Y-20 A11Y-22 SEO-02 SEO-03 SEO-04 SEO-07 SEO-08 SEO-11 EDGE-02 EDGE-04 EDGE-05 EDGE-06 EDGE-07 EDGE-09 EDGE-12 EDGE-14 EDGE-17 EDGE-18 UXF-01 UXF-02 UXF-03 UXF-04 UXF-05 UXF-07 UXF-08 MOT-05 MOT-06 SEC-01 SEC-02 SEC-03 SEC-04 SEC-05 SEC-06 SEC-07 SEC-09 SEC-10 SEC-12 SEC-15 BACK-00 BACK-01 BACK-02 BACK-03 BACK-04 BACK-05 BACK-06 BACK-07 BACK-08 BACK-09 BACK-10 BACK-12 BACK-13 BACK-14 BACK-15 BACK-17 BACK-18 BACK-20 BACK-22 BACK-23 MAIL-01 MAIL-02 MAIL-05 MAIL-06 MAIL-07 HOST-01 HOST-02 HOST-03 HOST-04 HOST-07 HOST-08 HOST-09 HOST-10 HOST-12 HOST-14 HOST-16 HOST-19 HOST-22 HOST-23 OPS-04 OPS-05 OPS-06 OPS-10 LEG-02 LEG-03 LEG-04 LEG-05 LEG-06 LEG-08 LEG-09 LEG-10 LEG-11 LEG-12 LEG-13 LEG-14 LEG-15 LEG-16 LEG-17 I18N-01 I18N-03 I18N-04 CNT-02 CNT-03 CNT-04 CNT-05 CNT-07 CNT-08 CNT-09 CNT-10 CNT-11 CNT-14 CNT-15 CNT-17 DEL-01 DEL-02 DEL-03 DEL-04 DEL-05 DEL-08 DEL-09 DEL-10 DEL-14 DEL-15'.split())
+DIAMOND_FLOOR = frozenset('SPD-06 SPD-09 TYP-05 TYP-06 TYP-11 TYP-18 TYP-21 TYP-22 RSP-01 RSP-03 RSP-04 RSP-05 RSP-07 RSP-09 A11Y-01 A11Y-03 A11Y-04 A11Y-05 A11Y-06 A11Y-07 A11Y-08 A11Y-09 A11Y-10 A11Y-11 A11Y-12 A11Y-13 A11Y-14 A11Y-15 A11Y-16 A11Y-17 A11Y-19 A11Y-20 A11Y-22 SEO-02 SEO-08 SEO-11 EDGE-05 EDGE-09 EDGE-18 UXF-01 UXF-02 UXF-05 UXF-07 UXF-08 MOT-05 SEC-03 SEC-05 SEC-06 SEC-07 SEC-08 SEC-09 SEC-12 SEC-13 SEC-15 BACK-00 BACK-01 BACK-03 BACK-04 BACK-05 BACK-06 BACK-07 BACK-08 BACK-10 BACK-12 BACK-13 BACK-14 BACK-17 BACK-18 BACK-20 BACK-22 BACK-23 MAIL-01 MAIL-02 MAIL-06 MAIL-07 HOST-01 HOST-02 HOST-03 HOST-04 HOST-08 HOST-09 HOST-10 HOST-12 HOST-14 HOST-16 HOST-19 HOST-22 OPS-10 LEG-02 LEG-04 LEG-05 LEG-06 LEG-08 LEG-09 LEG-10 LEG-11 LEG-12 LEG-13 LEG-14 LEG-15 LEG-16 LEG-17 I18N-03 I18N-04 CNT-02 CNT-04 CNT-05 CNT-08 CNT-09 CNT-11 CNT-14 CNT-15 CNT-17 DEL-08 DEL-10 DEL-14 DEL-15'.split())
+DIAMOND_FLOOR_V1 = frozenset('SPD-06 TYP-05 TYP-06 TYP-11 TYP-18 RSP-01 RSP-03 RSP-04 RSP-05 RSP-07 RSP-09 A11Y-01 A11Y-03 A11Y-04 A11Y-05 A11Y-06 A11Y-07 A11Y-08 A11Y-09 A11Y-10 A11Y-11 A11Y-12 A11Y-13 A11Y-14 A11Y-15 A11Y-16 A11Y-17 A11Y-18 A11Y-19 A11Y-20 A11Y-22 SEO-02 SEO-03 SEO-04 SEO-07 SEO-08 SEO-11 EDGE-02 EDGE-04 EDGE-05 EDGE-06 EDGE-07 EDGE-09 EDGE-12 EDGE-14 EDGE-17 EDGE-18 UXF-01 UXF-02 UXF-03 UXF-04 UXF-05 UXF-07 UXF-08 MOT-05 MOT-06 SEC-01 SEC-02 SEC-03 SEC-04 SEC-05 SEC-06 SEC-07 SEC-09 SEC-10 SEC-12 SEC-15 BACK-00 BACK-01 BACK-02 BACK-03 BACK-04 BACK-05 BACK-06 BACK-07 BACK-08 BACK-09 BACK-10 BACK-12 BACK-13 BACK-14 BACK-15 BACK-17 BACK-18 BACK-20 BACK-22 BACK-23 MAIL-01 MAIL-02 MAIL-05 MAIL-06 MAIL-07 HOST-01 HOST-02 HOST-03 HOST-04 HOST-07 HOST-08 HOST-09 HOST-10 HOST-12 HOST-14 HOST-16 HOST-19 HOST-22 HOST-23 OPS-04 OPS-05 OPS-06 OPS-10 LEG-02 LEG-03 LEG-04 LEG-05 LEG-06 LEG-08 LEG-09 LEG-10 LEG-11 LEG-12 LEG-13 LEG-14 LEG-15 LEG-16 LEG-17 I18N-01 I18N-03 I18N-04 CNT-02 CNT-03 CNT-04 CNT-05 CNT-07 CNT-08 CNT-09 CNT-10 CNT-11 CNT-14 CNT-15 CNT-17 DEL-01 DEL-02 DEL-03 DEL-04 DEL-05 DEL-08 DEL-09 DEL-10 DEL-14 DEL-15'.split())
 HEX64 = re.compile(r'[a-f0-9]{64}')
 REVISION = re.compile(r'(?:[a-f0-9]{40}|[a-f0-9]{64})')
 ROW = re.compile(r'^\| ([A-Z][A-Z0-9]*-\d{2}) \| .+ \| .+ \| ([GRC](?:-[LO])?) \|(?: (Diamond|Gold|Silver|Bronze) \|)?$')
@@ -32,7 +33,8 @@ def sha256(path):
 
 def specifications(path):
     rows = {}
-    for number, line in enumerate(path.read_text(encoding='utf-8').splitlines(), 1):
+    document = path.read_text(encoding='utf-8')
+    for number, line in enumerate(document.splitlines(), 1):
         if not re.match(r'^\| [A-Z][A-Z0-9]*-\d', line):
             continue
         match = ROW.fullmatch(line)
@@ -47,10 +49,21 @@ def specifications(path):
     if any(tier for _, tier in rows.values()) and not all(tier for _, tier in rows.values()):
         raise ValueError('mixed legacy and tiered rows are forbidden')
     if any(tier for _, tier in rows.values()):
-        violations = sorted(key for key in DIAMOND_FLOOR if key not in rows or rows[key][1] != 'Diamond')
+        policy = priority_policy(document)
+        floor = DIAMOND_FLOOR_V1 if policy == 'tiered-v1' else DIAMOND_FLOOR
+        violations = sorted(key for key in floor if key not in rows or rows[key][1] != 'Diamond')
         if violations:
             raise ValueError('Diamond safety floor missing or demoted: ' + ', '.join(violations))
     return rows
+
+
+def priority_policy(document):
+    markers = re.findall(r'<!--\s*priority-policy:\s*(.*?)\s*-->', document)
+    if not markers:
+        return 'tiered-v1'
+    if len(markers) != 1 or markers[0] != 'risk-v2':
+        raise ValueError('unknown or duplicate priority policy')
+    return markers[0]
 
 
 def catalogue(path):
@@ -306,7 +319,7 @@ def validate(record, checklist, evidence_root, phase='launch', now=None, resolve
         'diamond': 'DIAMOND-EVIDENCE-COMPLETE', 'gold': 'GOLD-EVIDENCE-COMPLETE',
         'silver': 'SILVER-SCOPE-EVIDENCE-COMPLETE', 'bronze': 'FULL-CATALOGUE-EVIDENCE-COMPLETE'}[phase]
     return {'decision': decision, 'phase': phase, 'counts': dict(sorted(counts.items())),
-            'policy': 'tiered-v1' if tiered else 'legacy',
+            'policy': priority_policy(checklist.read_text()) if tiered else 'legacy',
             'tier_counts': {tier: dict(sorted(values.items())) for tier, values in tier_counts.items()},
             'errors': errors, 'warnings': warnings,
             'limitation': 'Validates evidence records and file integrity only. Human review must verify test truth, applicability, coverage and actual deployed artifact identity.'}

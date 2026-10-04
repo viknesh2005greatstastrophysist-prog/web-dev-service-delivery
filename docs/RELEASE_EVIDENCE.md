@@ -10,7 +10,7 @@ Use the corrected checklist as the requirement source. All 275 row IDs remain pr
 |---|---|---|
 | handover | HANDOVER-READY | Diamond local records pass; live/owner rows may remain explicitly pending with an owner, action and review date. CONTENT-PENDING is allowed. This does not authorize deployment. |
 | launch | LAUNCH-EVIDENCE-COMPLETE | Every applicable Diamond row has passing records for the production release, approved content and accessibility fixes enabled. Other tier misses have assigned follow-up. Actual test truth still requires review. |
-| gold | GOLD-EVIDENCE-COMPLETE | Launch requirements plus every applicable Gold row pass. No Gold claim with unresolved Diamond/Gold or contracted rows, or unavailable Gold field data. |
+| gold | GOLD-EVIDENCE-COMPLETE | Launch requirements plus every applicable Gold row pass. No Gold claim with unresolved Diamond/Gold or contracted rows, or missing required quality evidence. Longitudinal field sampling is Silver under risk-v2. |
 | diamond | DIAMOND-EVIDENCE-COMPLETE | Alias of launch checks; Diamond is the mandatory safety floor. |
 | silver | SILVER-SCOPE-EVIDENCE-COMPLETE | Diamond, Gold and Silver records complete; this is additional scope, not a lower safety level. |
 | bronze | FULL-CATALOGUE-EVIDENCE-COMPLETE | All four tiers complete; Bronze never permits skipping Diamond. |
@@ -49,7 +49,7 @@ The `release` object contains:
 - `built_at`: UTC or offset-aware ISO timestamp, taken after the build completes.
 - `url` and `environment`: the audited base URL and `local`, `staging` or `production`. Launch requires production HTTPS; the current DNS answer must contain only global addresses. This does not prove ownership, HTTP reachability, deployment identity or future DNS state; the live audit supplies that evidence.
 - `a11y`: `on` for the deployed artifact; `content_status`: `CLIENT-COMPLETE` or `CONTENT-PENDING`.
-- `required_rows`: an explicit list of additional contracted row IDs, or `[]`. These rows block readiness like required work even when their generic tier is Silver or Bronze. Contracted rows cannot use N/A; resolve an actual scope change before changing this inventory. Review the list against the signed scope; the validator cannot discover omitted promises.
+- `required_rows`: an explicit list of additional contracted row IDs due by release, or `[]`. Future support/measurement duties stay in the full ledger with their actual due dates and owners; do not put a post-launch observation in a prelaunch completion list. Compare the timing with the actual contract and disclose outstanding obligations. These listed rows block readiness like required work even when their generic tier is Silver or Bronze. Contracted rows cannot use N/A; resolve an actual scope change before changing this inventory. Review the list against the signed scope; the validator cannot discover omitted promises.
 - `routes`, `states`, `viewports`: nonempty unique string inventories. Derive routes from the built router, crawl, sitemap and approved scope; compare them independently. Derive states from the interaction inventory, including errors and reduced motion. The validator cannot infer omitted routes from these lists.
 
 Each entry in `rows` has a stable `id`, boolean `applicable`, status, verification method (`automated` or `manual`) and coverage. For every observed result, also provide:
@@ -90,3 +90,9 @@ G/C/R remains only for applicability: unconditional G cannot use N/A; conditiona
 Before controlled cutover, all Diamond prelaunch obligations must be verified, the exact candidate approved, rollback rehearsed, and final-domain Diamond probes prepared. Execute those immediately after cutover; on failure roll back or disable the affected optional feature without breaking the agreed core journey. Until they pass, describe the cutover as provisional, never Diamond complete. Newly discovered safety or legal failures block release even if absent from the catalogue.
 
 Legacy four-column snapshots retain their historical G/C launch and all-row Gold semantics. Mixed formats are rejected; new tier phases are rejected for legacy snapshots. Existing records are not rewritten, retagged as passed, or used with the new checklist hash. Create a new record and revalidate relevant evidence against the reviewed release. This policy revision cannot retroactively certify RIOA.
+
+## Priority policy revisions
+
+The current checklist declares `<!-- priority-policy: risk-v2 -->`. Its reviewed Diamond floor is pinned in the validator independently of the row register. Unknown or duplicate policy markers fail. Earlier tiered snapshots without a marker retain the original 150-row Diamond floor (`tiered-v1`); original four-column snapshots retain legacy behavior. Validate historical evidence against its actual approved snapshot, never a freshly substituted policy. A revision does not turn an old failure into a pass or authorize a live release. Reviewers must approve the actual policy version as well as the artifact.
+
+The [challenge review](reviews/checklist-challenge-2026-10-05/REVIEW.md) records the causal reasons for reclassifying requirements and the controls retained after compound rows were narrowed. A shared evidence file may support multiple rows if its coverage is explicit; there is no requirement to run one separate test per ID.

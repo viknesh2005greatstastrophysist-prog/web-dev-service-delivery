@@ -1,5 +1,10 @@
 # History
 
+## 2026-10-05: challenge the production tier assumptions
+
+The second audit replaces implementation mandates and reference comparisons with scoped outcome criteria. It preserves all 275 IDs, records each decision, and versions the Diamond floor so historical snapshots retain their original meaning. See [review](reviews/checklist-challenge-2026-10-05/REVIEW.md) and [operating standard](../checklist/RELEASE_STANDARD.md). No website is recertified by this policy change.
+
+
 How the prompt and checklist got to their current form. Append a line here for every change that matters.
 
 ## Lineage

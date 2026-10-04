@@ -1,0 +1,18 @@
+# Experience tier challenge notes
+
+Reviewed the full 77-row SPD/TYP/RSP/A11Y assignment against the stated harm-based tiers. This is a proposal only; it does not edit canonical checklist rows or claim implementation evidence.
+
+Strongest counterexamples and corrections:
+
+- **A11Y-06:** The row said focus must never be hidden. WCAG 2.2 SC 2.4.11 AA requires the focused component not be entirely hidden; full non-obscuration is SC 2.4.12 AAA. A blanket `scroll-padding-top` rule was an implementation prescription, not the criterion. [W3C 2.4.11](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum) · [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+- **TYP-18:** Visible focus is required at AA, and applicable non-text contrast applies; focus-indicator area and focused/unfocused contrast geometry are SC 2.4.13 AAA. The original blended those levels. [W3C 2.4.13](https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance) · [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+- **A11Y-04:** WCAG does not require exactly one H1 or prohibit every skipped heading level. The actual barrier is failing to programmatically mark meaningful structure; the proposal retains that Diamond requirement and drops false conformance shortcuts. [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+- **A11Y-10 / A11Y-14:** Pause/stop/hide for qualifying visual motion is SC 2.2.2; flash safety is a separate SC 2.3.1. WCAG 1.4.2 concerns qualifying automatic audio, not an absolute ban before activation. The stricter no-unmuted-autoplay-sound rule is labeled house policy. [W3C 2.2.2](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide) · [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+- **SPD-09:** A four-second timeout has no stated user or standard basis. The failure that matters is an authored intro trapping the core task when assets stall; the proposal requires an immediate bypass and a working core task, conditional on that feature existing.
+- **SPD-21:** Field CWV data can stay unavailable for low-traffic sites. The proposal makes this longitudinal measurement Silver, preserves the exact field thresholds and forbids a field-pass claim without eligible data. It does not block release solely because a sample cannot be collected.
+- **TYP-22:** Copying viewport units and safe-area behavior from a reference can hide a fixed action behind device UI. The proposal promotes this conditional risk to Diamond and requires physical-device evidence via RSP-10.
+- **A11Y-18:** A fixed desktop/mobile assistive-technology pairing is assurance sampling, not proof of WCAG conformance. It moves to Gold; A11Y-22 remains the Diamond manual A/AA gate and retains the block on confirmed essential barriers.
+
+Other edits remove repeated viewport/transfer checks, population statistics used as thresholds, arbitrary global font/byte/time caps, reference-dependent accessibility waivers, and implementation-only requirements. Optional typography and compression optimizations remain available without becoming safety gates.
+
+Sources used for changed normative claims: [WCAG 2.2 Recommendation](https://www.w3.org/TR/WCAG22/), especially SC 1.2.1–1.2.5, 1.3.4, 1.4.2, 1.4.10–1.4.13, 2.2.2, 2.3.1, 2.4.7, 2.4.11–2.4.13, 2.5.7–2.5.8, 3.2.6 and 3.3.7; [W3C Understanding 2.5.7](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements); [W3C Understanding 2.5.8](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum); and [web.dev motion guidance](https://web.dev/learn/accessibility/motion). Web.dev guidance supports honoring reduced-motion preferences; it is not represented as a blanket WCAG 2.2 AA requirement.

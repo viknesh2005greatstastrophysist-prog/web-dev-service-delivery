@@ -15,7 +15,7 @@ import argparse
 import itertools
 import json
 import subprocess
-from release_gate import catalogue, specifications, TIERS
+from release_gate import catalogue, specifications, priority_policy, TIERS
 import pathlib
 import re
 import sys
@@ -65,9 +65,11 @@ check("checklist: every row has 5 cells", not bad_cells, str(bad_cells[:5]))
 bad_class = [l[:16] for l in rows if not re.search(r"\| (G|R|C)(-L|-O)? \| (Diamond|Gold|Silver|Bronze) \|$", l)]
 check("checklist: every row ends in a valid class (G, R or C, optional -L or -O)", not bad_class, str(bad_class[:5]))
 try:
-    tier_rows = json.loads((ROOT / 'checklist/tiers.json').read_text())['rows']
+    tier_register = json.loads((ROOT / 'checklist/tiers.json').read_text())
+    tier_rows = tier_register['rows']
     specs = specifications(CHECKLIST)
     check('tiers: complete ordered inventory, valid metadata and matching priorities',
+          tier_register.get('policy_version') == priority_policy(ck) == 'risk-v2' and
           [r['id'] for r in tier_rows] == ids and
           all(r['tier'] in {tier.lower() for tier in TIERS} and specs[r['id']][1] == r['tier'].title()
               and r['rationale'].strip() and r['group'].strip()
@@ -200,10 +202,14 @@ check("prompt uses executable release record", "scripts/release_gate.py" in pr a
 # This guards accidental stale policy phrases, not arbitrary semantic contradictions.
 for forbidden in ("LCP minus TTFB", "else `build`", "For any other client the fidelity build ships", "ready for a human to deploy"):
     check(f"prompt omits superseded policy: {forbidden}", forbidden not in pr)
-check("deploy build is always accessible", "build:deploy always enables A11Y_FIXES=on" in ck)
+check("deploy build is always accessible", "The deployed artifact must pass applicable accessibility checks in every geography." in ck)
 
 # Validate actual Markdown file links in the active entry points, not example code paths.
-for rel in ("checklist/TIERS.md", "docs/reviews/checklist-tiers-2026-10-05/REVIEW.md",
+for rel in ("checklist/RELEASE_STANDARD.md", "checklist/TIERS.md",
+            "docs/reviews/checklist-challenge-2026-10-05/REVIEW.md",
+            "docs/reviews/checklist-challenge-2026-10-05/SOURCES.md",
+            "docs/reviews/checklist-challenge-2026-10-05/VERIFICATION.md",
+            "docs/reviews/checklist-tiers-2026-10-05/REVIEW.md",
             "docs/reviews/checklist-tiers-2026-10-05/INDEPENDENT_REVIEW.md",
             "README.md", "docs/HOW_TO_RUN.md", "docs/RELEASE_EVIDENCE.md", "checklist/PRODUCTION_CHECKLIST_clone_swap.md", "checklist/VIDEO_LESSONS_ADDON.md",
             "docs/reviews/instagram-addon-2026-10-03/REVIEW.md", "checklist/VIDEO_LESSONS_BATCH2.md",
