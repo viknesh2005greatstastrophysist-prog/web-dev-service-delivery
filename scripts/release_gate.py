@@ -17,31 +17,57 @@ import ipaddress
 
 STATUSES = {'PASS', 'FAIL', 'N/A', 'FIDELITY-EXCEPTION', 'AWAITING-DEPLOY',
             'OWNER-CONFIRM', 'NOT_RUN', 'UNAVAILABLE'}
-PHASES = ('handover', 'launch', 'gold')
+PHASES = ('handover', 'launch', 'diamond', 'gold', 'silver', 'bronze')
+TIERS = ('Diamond', 'Gold', 'Silver', 'Bronze')
+# A policy change must explicitly review this safety floor as well as the catalogue.
+DIAMOND_FLOOR = frozenset('SPD-06 SPD-09 TYP-05 TYP-06 TYP-11 TYP-18 TYP-21 TYP-22 RSP-01 RSP-03 RSP-04 RSP-05 RSP-07 RSP-09 A11Y-01 A11Y-03 A11Y-04 A11Y-05 A11Y-06 A11Y-07 A11Y-08 A11Y-09 A11Y-10 A11Y-11 A11Y-12 A11Y-13 A11Y-14 A11Y-15 A11Y-16 A11Y-17 A11Y-19 A11Y-20 A11Y-22 SEO-02 SEO-08 SEO-11 EDGE-05 EDGE-09 EDGE-18 UXF-01 UXF-02 UXF-05 UXF-07 UXF-08 MOT-05 SEC-03 SEC-05 SEC-06 SEC-07 SEC-08 SEC-09 SEC-12 SEC-13 SEC-15 BACK-00 BACK-01 BACK-03 BACK-04 BACK-05 BACK-06 BACK-07 BACK-08 BACK-10 BACK-12 BACK-13 BACK-14 BACK-17 BACK-18 BACK-20 BACK-22 BACK-23 MAIL-01 MAIL-02 MAIL-06 MAIL-07 HOST-01 HOST-02 HOST-03 HOST-04 HOST-08 HOST-09 HOST-10 HOST-12 HOST-14 HOST-16 HOST-19 HOST-22 OPS-10 LEG-02 LEG-04 LEG-05 LEG-06 LEG-08 LEG-09 LEG-10 LEG-11 LEG-12 LEG-13 LEG-14 LEG-15 LEG-16 LEG-17 I18N-03 I18N-04 CNT-02 CNT-04 CNT-05 CNT-08 CNT-09 CNT-11 CNT-14 CNT-15 CNT-17 DEL-08 DEL-10 DEL-14 DEL-15'.split())
+DIAMOND_FLOOR_V1 = frozenset('SPD-06 TYP-05 TYP-06 TYP-11 TYP-18 RSP-01 RSP-03 RSP-04 RSP-05 RSP-07 RSP-09 A11Y-01 A11Y-03 A11Y-04 A11Y-05 A11Y-06 A11Y-07 A11Y-08 A11Y-09 A11Y-10 A11Y-11 A11Y-12 A11Y-13 A11Y-14 A11Y-15 A11Y-16 A11Y-17 A11Y-18 A11Y-19 A11Y-20 A11Y-22 SEO-02 SEO-03 SEO-04 SEO-07 SEO-08 SEO-11 EDGE-02 EDGE-04 EDGE-05 EDGE-06 EDGE-07 EDGE-09 EDGE-12 EDGE-14 EDGE-17 EDGE-18 UXF-01 UXF-02 UXF-03 UXF-04 UXF-05 UXF-07 UXF-08 MOT-05 MOT-06 SEC-01 SEC-02 SEC-03 SEC-04 SEC-05 SEC-06 SEC-07 SEC-09 SEC-10 SEC-12 SEC-15 BACK-00 BACK-01 BACK-02 BACK-03 BACK-04 BACK-05 BACK-06 BACK-07 BACK-08 BACK-09 BACK-10 BACK-12 BACK-13 BACK-14 BACK-15 BACK-17 BACK-18 BACK-20 BACK-22 BACK-23 MAIL-01 MAIL-02 MAIL-05 MAIL-06 MAIL-07 HOST-01 HOST-02 HOST-03 HOST-04 HOST-07 HOST-08 HOST-09 HOST-10 HOST-12 HOST-14 HOST-16 HOST-19 HOST-22 HOST-23 OPS-04 OPS-05 OPS-06 OPS-10 LEG-02 LEG-03 LEG-04 LEG-05 LEG-06 LEG-08 LEG-09 LEG-10 LEG-11 LEG-12 LEG-13 LEG-14 LEG-15 LEG-16 LEG-17 I18N-01 I18N-03 I18N-04 CNT-02 CNT-03 CNT-04 CNT-05 CNT-07 CNT-08 CNT-09 CNT-10 CNT-11 CNT-14 CNT-15 CNT-17 DEL-01 DEL-02 DEL-03 DEL-04 DEL-05 DEL-08 DEL-09 DEL-10 DEL-14 DEL-15'.split())
 HEX64 = re.compile(r'[a-f0-9]{64}')
 REVISION = re.compile(r'(?:[a-f0-9]{40}|[a-f0-9]{64})')
-ROW = re.compile(r'^\| ([A-Z][A-Z0-9]*-\d{2}) \| .+ \| .+ \| ([GRC](?:-[LO])?) \|$')
+ROW = re.compile(r'^\| ([A-Z][A-Z0-9]*-\d{2}) \| .+ \| .+ \| ([GRC](?:-[LO])?) \|(?: (Diamond|Gold|Silver|Bronze) \|)?$')
 
 
 def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def catalogue(path):
+def specifications(path):
     rows = {}
-    for number, line in enumerate(path.read_text(encoding='utf-8').splitlines(), 1):
+    document = path.read_text(encoding='utf-8')
+    for number, line in enumerate(document.splitlines(), 1):
         if not re.match(r'^\| [A-Z][A-Z0-9]*-\d', line):
             continue
         match = ROW.fullmatch(line)
         if not match:
             raise ValueError(f'malformed checklist row at line {number}')
-        row_id, classification = match.groups()
+        row_id, classification, tier = match.groups()
         if row_id in rows:
             raise ValueError(f'duplicate checklist ID: {row_id}')
-        rows[row_id] = classification
+        rows[row_id] = (classification, tier)
     if not rows:
         raise ValueError('checklist contains no rows')
+    if any(tier for _, tier in rows.values()) and not all(tier for _, tier in rows.values()):
+        raise ValueError('mixed legacy and tiered rows are forbidden')
+    if any(tier for _, tier in rows.values()):
+        policy = priority_policy(document)
+        floor = DIAMOND_FLOOR_V1 if policy == 'tiered-v1' else DIAMOND_FLOOR
+        violations = sorted(key for key in floor if key not in rows or rows[key][1] != 'Diamond')
+        if violations:
+            raise ValueError('Diamond safety floor missing or demoted: ' + ', '.join(violations))
     return rows
+
+
+def priority_policy(document):
+    markers = re.findall(r'<!--\s*priority-policy:\s*(.*?)\s*-->', document)
+    if not markers:
+        return 'tiered-v1'
+    if len(markers) != 1 or markers[0] != 'risk-v2':
+        raise ValueError('unknown or duplicate priority policy')
+    return markers[0]
+
+
+def catalogue(path):
+    return {key: cls for key, (cls, _) in specifications(path).items()}
 
 
 def unique_object(pairs):
@@ -110,7 +136,7 @@ def template(checklist):
         'release': {'revision': '', 'artifact_sha256': '', 'build_id': '',
                     'built_at': '', 'url': '', 'environment': 'local',
                     'a11y': 'on', 'content_status': 'CONTENT-PENDING',
-                    'routes': [], 'states': [], 'viewports': []},
+                    'routes': [], 'states': [], 'viewports': [], 'required_rows': []},
         'rows': [dict(id=key, applicable=True,
                       status='AWAITING-DEPLOY' if cls.endswith('-L') else
                       'OWNER-CONFIRM' if cls.endswith('-O') else 'NOT_RUN',
@@ -125,7 +151,13 @@ def template(checklist):
 def validate(record, checklist, evidence_root, phase='launch', now=None, resolver=resolve_addresses):
     errors, warnings = [], []
     now = now or datetime.now(timezone.utc)
-    rowspec = catalogue(checklist)
+    specs = specifications(checklist)
+    rowspec = {key: cls for key, (cls, _) in specs.items()}
+    tiered = all(tier for _, tier in specs.values())
+    if phase not in PHASES or (not tiered and phase not in ('handover', 'launch', 'gold')):
+        return {'decision': 'BLOCKED', 'errors': ['unsupported phase for checklist policy'], 'warnings': []}
+    required_tiers = set(TIERS[:{'handover': 1, 'launch': 1, 'diamond': 1,
+                               'gold': 2, 'silver': 3, 'bronze': 4}[phase]])
     if not isinstance(record, dict):
         return {'decision': 'BLOCKED', 'errors': ['record must be an object'], 'warnings': []}
     if type(record.get('schema_version')) is not int or record.get('schema_version') != 1:
@@ -136,6 +168,11 @@ def validate(record, checklist, evidence_root, phase='launch', now=None, resolve
     if not isinstance(release, dict):
         release = {}
         errors.append('release must be an object')
+    scope_rows = release.get('required_rows', [] if not tiered else None)
+    if (not isinstance(scope_rows, list) or not all(isinstance(key, str) and key in rowspec for key in scope_rows)
+            or len(scope_rows) != len(set(scope_rows))):
+        errors.append('release.required_rows must explicitly list unique contracted row IDs (or [])')
+        scope_rows = []
     for key, pattern in [('revision', REVISION), ('artifact_sha256', HEX64)]:
         if not isinstance(release.get(key), str) or not pattern.fullmatch(release[key]):
             errors.append(f'release.{key} must be a full lowercase hash')
@@ -182,6 +219,7 @@ def validate(record, checklist, evidence_root, phase='launch', now=None, resolve
         errors.append('unknown row IDs: ' + ', '.join(unknown))
     evidence_root = evidence_root.resolve()
     counts = Counter()
+    tier_counts = {tier: Counter() for tier in TIERS} if tiered else {}
     for entry in entries:
         if not isinstance(entry, dict) or not isinstance(entry.get('id'), str):
             errors.append('each row must be an object with a string ID')
@@ -195,10 +233,15 @@ def validate(record, checklist, evidence_root, phase='launch', now=None, resolve
             errors.append(f'{key}: unknown status')
             continue
         counts[status] += 1
+        tier = specs[key][1]
+        if tiered:
+            tier_counts[tier][status] += 1
         applicable = entry.get('applicable')
         if type(applicable) is not bool:
             errors.append(f'{key}: applicable must be boolean')
         if status == 'N/A':
+            if key in scope_rows:
+                errors.append(f'{key}: contracted requirement cannot be N/A; resolve the agreed scope first')
             if applicable is not False or (cls.startswith('G') and key != 'LEG-07'):
                 errors.append(f'{key}: N/A cannot waive an unconditional required row')
             if not meaningful(entry.get('reason')) or not meaningful(entry.get('predicate')):
@@ -225,7 +268,8 @@ def validate(record, checklist, evidence_root, phase='launch', now=None, resolve
                     errors.append(f'{key}: follow-up date is overdue')
             except ValueError:
                 errors.append(f'{key}: unresolved result needs a review_by timestamp')
-            if not pending_allowed and (phase == 'gold' or not cls.startswith('R')):
+            required = (tier in required_tiers or key in scope_rows) if tiered else (phase == 'gold' or not cls.startswith('R'))
+            if not pending_allowed and required:
                 errors.append(f'{key}: {status} blocks {phase}')
             else:
                 warnings.append(f'{key}: {status}, follow-up required')
@@ -271,8 +315,12 @@ def validate(record, checklist, evidence_root, phase='launch', now=None, resolve
                     errors.append(f'{key}: evidence file missing or empty: {relative}')
                 elif not isinstance(item.get('sha256'), str) or item['sha256'] != sha256(target):
                     errors.append(f'{key}: evidence hash mismatch: {relative}')
-    decision = 'BLOCKED' if errors else {'handover': 'HANDOVER-READY', 'launch': 'LAUNCH-EVIDENCE-COMPLETE', 'gold': 'GOLD-EVIDENCE-COMPLETE'}[phase]
+    decision = 'BLOCKED' if errors else {'handover': 'HANDOVER-READY', 'launch': 'LAUNCH-EVIDENCE-COMPLETE',
+        'diamond': 'DIAMOND-EVIDENCE-COMPLETE', 'gold': 'GOLD-EVIDENCE-COMPLETE',
+        'silver': 'SILVER-SCOPE-EVIDENCE-COMPLETE', 'bronze': 'FULL-CATALOGUE-EVIDENCE-COMPLETE'}[phase]
     return {'decision': decision, 'phase': phase, 'counts': dict(sorted(counts.items())),
+            'policy': priority_policy(checklist.read_text()) if tiered else 'legacy',
+            'tier_counts': {tier: dict(sorted(values.items())) for tier, values in tier_counts.items()},
             'errors': errors, 'warnings': warnings,
             'limitation': 'Validates evidence records and file integrity only. Human review must verify test truth, applicability, coverage and actual deployed artifact identity.'}
 

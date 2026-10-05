@@ -1,5 +1,8 @@
 # How to run the kit
 
+Start with [the short production standard](../checklist/RELEASE_STANDARD.md). The current risk-v2 policy separates Diamond release outcomes from Gold quality and optional implementation/reference work. Reuse evidence across overlapping rows; preserve the exact policy snapshot for historical records.
+
+
 ## 1. What you need
 
 On the machine where the agent works:
@@ -140,3 +143,8 @@ copy or fetches stock; it only applies what the client supplied and re-runs the 
 ## Validate the release evidence
 
 Use [RELEASE_EVIDENCE.md](RELEASE_EVIDENCE.md) to create the per-release record from actual tests. Run handover validation before delivery, then launch validation after approved deployment and final-domain checks. All host builds use `build:deploy` with accessibility fixes enabled. Preserve the same tested artifact throughout. A machine-valid record still needs human inspection.
+
+
+## Prioritize the work
+
+Use [TIERS](../checklist/TIERS.md) to work through Diamond first, then Gold, Silver and Bronze. Every row still gets a disposition; optional work is tracked, not deleted. The full catalogue supplies exact criteria. A conditional feature absent from the actual system can be N/A with evidence. No lower tier target waives Diamond. Keep prelaunch, controlled-cutover and future checks separate. Old release records remain tied to their old checklist hash; a new policy is not retroactive evidence of a pass.

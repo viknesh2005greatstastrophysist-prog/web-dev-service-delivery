@@ -5,7 +5,7 @@ winner that suits the client, rebuilds its design system, layout, structure and 
 it can measure, swaps in the client's own content, audits the result against a production-grade
 checklist, and hands over a package that a human deploys.
 
-Status (2026-10-02): production requirements audited, release-evidence validation and adversarial tests added; a complete client delivery is still not verified end to end. See "Status and honest limits" below.
+Status (2026-10-05): the risk-v2 audit challenges all 275 requirements, separates essential outcomes from implementation preferences, and updates Diamond/Gold enforcement. A complete client delivery is still not verified end to end. See "Status and honest limits" below.
 
 ## What is in this repository
 
@@ -21,7 +21,7 @@ docs/         How to run it, decisions, legal notes, history, and every review a
 archive/      Earlier editions of the prompt and checklist (superseded, kept for reference)
 ```
 
-Start with [HOW_TO_RUN](docs/HOW_TO_RUN.md). Read the [release evidence contract](docs/RELEASE_EVIDENCE.md) and [2026-10-02 audit](docs/reviews/production-audit-2026-10-02/AUDIT.md) before making a readiness claim.
+Start with the [short production standard](checklist/RELEASE_STANDARD.md), then the [tiered catalogue](checklist/TIERS.md) and [HOW_TO_RUN](docs/HOW_TO_RUN.md). Read the [release evidence contract](docs/RELEASE_EVIDENCE.md) and [2026-10-02 audit](docs/reviews/production-audit-2026-10-02/AUDIT.md) before making a readiness claim.
 
 ## What a run does, end to end
 
@@ -80,7 +80,7 @@ recommended answer is written permission from its creators or advice from a US I
   into a rule or a gate, but only a real run will show what else is missing.
 - The job is large (a 16,000-word prompt, a 21,000-word checklist). If a model runs out of context or hits usage
   limits, use `RUN_PART=1` then `RUN_PART=2` (see `docs/HOW_TO_RUN.md`).
-- Strict speed budgets can be unreachable for a motion-heavy reference. Required misses block readiness;
+- Strict speed budgets can be unreachable for a motion-heavy reference. Gold budget misses block Gold completion; Diamond failures block launch;
   a fidelity exception records the shortfall and does not waive the production requirement.
 - Things only a person can do remain: deploying, DNS and accounts, legal review, a screen-reader pass, and the
   permission question on the reference design.
@@ -92,10 +92,11 @@ The [video lessons add-on](checklist/VIDEO_LESSONS_ADDON.md) maps the first nine
 1. Change the prompt and the checklist together; they cite each other by row ID and section number.
 2. Keep existing row IDs stable. New rows take the next free number in their section; update `checklist/row-ids.txt`, the documented count and tests together. Never remove a row to hide a failure.
 3. Run `python3 scripts/check-kit.py` and `python3 -m unittest discover -s tests -v`. Both must pass. The [CI template](docs/ci/README.md) runs these on pushes and pull requests once activated; activation currently needs GitHub workflow permission. Neither proves a client site is ready.
-4. No em dashes or en dashes in the prompt or the checklist (the check enforces it).
-5. Get an independent review for any change to a gate, a build rule or the legal wording. Earlier reviews caught
+4. Update `checklist/tiers.json` and the Tier column together. Run `python3 scripts/render-tiers.py` to rebuild the tier view.
+5. No em dashes or en dashes in the prompt or the checklist (the check enforces it).
+6. Get an independent review for any change to a gate, a build rule or the legal wording. Earlier reviews caught
    real blockers that the author missed every time. `docs/reviews/` shows how they were run.
-6. Record the change and the reason in `docs/HISTORY.md`.
+7. Record the change and the reason in `docs/HISTORY.md`.
 
 ## Third-party material and licences
 

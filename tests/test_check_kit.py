@@ -54,6 +54,27 @@ class KitConsistencyTests(unittest.TestCase):
         path.write_text(path.read_text().replace('(275 rows, 18 sections)', '(254 rows, 18 sections)'))
         self.assertRejected('README row count matches catalogue')
 
+    def test_tier_register_cannot_silently_demote_requirement(self):
+        path = self.root/'checklist/tiers.json'
+        data = json.loads(path.read_text())
+        next(row for row in data['rows'] if row['id'] == 'SEC-01')['tier'] = 'bronze'
+        path.write_text(json.dumps(data))
+        self.assertRejected('tiers: complete ordered inventory')
+
+    def test_missing_tier_assignment_rejected(self):
+        path = self.root/'checklist/tiers.json'
+        data = json.loads(path.read_text())
+        data['rows'].pop()
+        path.write_text(json.dumps(data))
+        self.assertRejected('tiers: complete ordered inventory')
+
+    def test_title_case_register_cannot_empty_rendered_view(self):
+        path = self.root/'checklist/tiers.json'
+        data = json.loads(path.read_text())
+        data['rows'][0]['tier'] = data['rows'][0]['tier'].title()
+        path.write_text(json.dumps(data))
+        self.assertRejected('tiers: complete ordered inventory')
+
     def test_broken_entry_point_link_fails(self):
         path = self.root/'README.md'
         path.write_text(path.read_text()+'\n[Missing](docs/does-not-exist.md)\n')

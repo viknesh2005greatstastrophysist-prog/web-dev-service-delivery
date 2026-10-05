@@ -1,5 +1,10 @@
 # Decisions
 
+## 2026-10-05: challenge the production tier assumptions
+
+The second audit replaces implementation mandates and reference comparisons with scoped outcome criteria. It preserves all 275 IDs, records each decision, and versions the Diamond floor so historical snapshots retain their original meaning. See [review](reviews/checklist-challenge-2026-10-05/REVIEW.md) and [operating standard](../checklist/RELEASE_STANDARD.md). No website is recertified by this policy change.
+
+
 Decisions the operator made while the kit was built, and the ones still open. Each settled decision is
 reflected in the prompt and the checklist; change them together if you reverse one.
 
@@ -15,13 +20,13 @@ reflected in the prompt and the checklist; change them together if you reverse o
 | The agent never deploys | A human deploys and runs `npm run audit:live`; owner-only rows are confirmed in the launch checklist |
 | Brand shift on by default | `design_shift` defaults to `palette+type`; a palette is derived if `brand.md` has none, holding WCAG relative luminance |
 | Customers are in the United States | All deployed builds use `npm run build:deploy` and accessibility fixes on; `npm run build` remains a private fidelity comparison |
-| Gold standard across the whole checklist | Gold targets are the pass criteria for speed, interaction and experience rows; a required miss blocks readiness; fidelity exceptions disclose differences without waiving required checks |
+| Four priority tiers | Diamond is mandatory for launch; Gold adds experience quality; Silver/Bronze retain optional and specialist work. All 275 IDs remain; exceptions do not waive Diamond. |
 | A reference that misses a published floor is a FAIL | Not an exception, even if the reference misses it too |
 | CPU throttling is calibrated | Effective versioned profiles and any supported calibration are recorded; simulated and applied throttling are not stacked (checklist rule 3) |
 | A11Y-21 and the touch-only hit areas stay | They change what some visitors see or feel; accepted |
-| Observatory A+ is a must-pass live row | HOST-20; each scan is published |
-| JAWS is required when the audience is North American | A11Y-18 house test matrix; required unavailable combinations remain unverified, and tool coverage is not a conformance guarantee |
-| Lighthouse CI blocks deploys at the gold targets | OPS-02, median of 3 runs |
+| Observatory is a diagnostic quality gate | HOST-20 follows its assigned tier; a scanner grade is not proof of security. Actual security controls remain Diamond. |
+| Real assistive-technology testing is mandatory | A11Y-18 requires an audience-based desktop/mobile matrix. Geography alone does not force a commercial tool; real required pairings stay unresolved until tested. |
+| Lighthouse house targets control Gold completion | OPS-02, median of 3 runs; Diamond release safety is separate. |
 | Two-part run is available | `RUN_PART=1` then `RUN_PART=2`; the default is one run |
 | Derived type may keep a commercial original's open substitute | Least fidelity cost |
 | A shift that changes little on a monochrome reference is accepted | Stated in the README (CNT-16) |
@@ -36,11 +41,15 @@ reflected in the prompt and the checklist; change them together if you reverse o
 | A licence for this kit | Operator | None chosen; internal use until then |
 | Where the repository is hosted and who can see it | Operator | It contains analysis of third-party sites; prefer private |
 | LICENSE grantor placeholder in each delivered project | Operator, per client | Completed before handover (SEC-10) |
-| Counsel review of the draft legal pages and the takedown plan | Operator, per client | LEG-17, LEG-18 |
+| Qualified legal/rights review and takedown plan | Operator, per client | LEG-17, LEG-18; counsel for unclear applicability, disputed rights and regulated activity |
 | Splitting the run if a model times out | Operator | Use the two-part run |
-| Whether to buy a JAWS licence | Operator | Needed for North American audiences (A11Y-18) |
+| Additional assistive-technology coverage | Operator | Add the tools required by the actual audience and support policy (A11Y-18) |
 | Whether to delete the original's captured text and images from `WS` after client acceptance | Operator | Lowers exposure; keep hashes and measurements |
 
 ## Production audit decisions, 2026-10-02
 
 Required production checks take precedence over fidelity in the deployed build. An incomplete handover may finish, but cannot pass launch. Owner-confirmation status can become PASS only from dated human evidence. Missing inputs do not prove a feature or duty absent. Field performance is separate from lab performance. The evidence validator checks records, not whether a claimed test is truthful.
+
+## Priority revision, 2026-10-05
+
+The tier policy supersedes historical references to all-row Gold gates. Required means Diamond for launch and Diamond plus Gold for Gold completion. Contractual scope is still enforceable regardless of generic tier.
