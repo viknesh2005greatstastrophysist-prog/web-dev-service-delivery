@@ -5,7 +5,7 @@ winner that suits the client, rebuilds its design system, layout, structure and 
 it can measure, swaps in the client's own content, audits the result against a production-grade
 checklist, and hands over a package that a human deploys.
 
-Status (2026-10-08): risk-v2 preserves all 275 requirements and the Diamond floor. The operating workflow now adds a private project profile, six overlapping work bundles and a generated advisory daily queue. A complete client delivery is still not verified end to end. See "Status and honest limits" below.
+Status (2026-10-08): risk-v2 preserves all 275 requirements and the Diamond floor. The operating workflow adds a private project profile, work bundles, an advisory queue, pinned clone-sample gates and original generated-media validation/sync preparation. A complete client delivery is still not verified end to end. See "Status and honest limits" below.
 
 ## What is in this repository
 
@@ -30,6 +30,10 @@ it never grants release approval or converts future Gold work into PASS.
 See the [implementation verification](docs/reviews/checklist-workflow-2026-10-08/VERIFICATION.md)
 for local checks, independent review and remaining rehearsal limits.
 
+Use the [clone proof and generated-media workflow](docs/CLONE_WORKFLOW.md) before scaling a clone.
+`clone_gate.py` rejects incomplete or stale sample records; `generated_media.py` validates original
+media and prepares content-sync proposals without app writes. Neither generates images or clears launch. See [three implementation loops and verification](docs/reviews/clone-workflow-2026-10-08/VERIFICATION.md).
+
 ## What a run does, end to end
 
 1. **Choose a target.** An Awwwards Site of the Day, Site of the Month or Developer Award winner that fits the
@@ -43,7 +47,7 @@ for local checks, independent review and remaining rehearsal limits.
    difference is a defect and not a content difference. A strict comparator, a per-frame motion gate, and a state
    walk of every menu and overlay run until they pass or the 10-cycle loop ends.
 6. **Swap the content in.** The client's copy, photos and video where supplied; otherwise copy drafted from the
-   brief, CC0 stock media, or marked placeholders. Testimonials, client names, statistics and awards are never
+   brief, original generated imagery with recorded model evidence where required, explicitly chosen stock media, or marked placeholders. Testimonials, client names, statistics and awards are never
    drafted or stocked. A brand shift (derived or the client's palette and typefaces) is on by default.
 7. **Production loop.** The agent audits against the checklist and fixes failures without breaking the match.
 8. **Polish** the scroll feel with the scroll-craft skill, additively.

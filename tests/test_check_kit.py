@@ -54,6 +54,12 @@ class KitConsistencyTests(unittest.TestCase):
         path.write_text(path.read_text().replace('(275 rows, 18 sections)', '(254 rows, 18 sections)'))
         self.assertRejected('README row count matches catalogue')
 
+    def test_generated_source_cannot_be_removed_from_content_enum(self):
+        path = self.root/'prompt/PROMPT_awwwards_clone_swap_v6.md'
+        path.write_text(path.read_text().replace('`source` is `client`, `drafted`, `generated`, `stock`,',
+                                                 '`source` is `client`, `drafted`, `stock`,', 1))
+        self.assertRejected('prompt declares typed generated media')
+
     def test_tier_register_cannot_silently_demote_requirement(self):
         path = self.root/'checklist/tiers.json'
         data = json.loads(path.read_text())
