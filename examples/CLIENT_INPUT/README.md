@@ -17,7 +17,13 @@ client fills, the less placeholder content ships and the sooner the site can be 
 | `brand.md` | Brand colours, typefaces, and `design_shift` | A palette and typefaces are derived (the default) |
 | `fonts/` | Licensed font files, if the client owns any | Open-licensed fonts are used |
 | `rights.md` | The client's statement that they own or license everything supplied | Content status stays `CONTENT-PENDING` |
-| `legal.md` | Jurisdiction, legal entity, forms, email provider, analytics, retention | The minimum is assumed (no accounts, payments, analytics or cookies) |
+| `legal.md` | Jurisdiction, legal entity, forms, email provider, analytics, retention | Processing and applicable duties remain unknown until the actual source, runtime settings and providers are reviewed |
+| `release-profile.md` | Operator records scope, inventories, procedure coverage, separate approvals and accepted later owners using existing inputs | Unknown scope and ownership remain unresolved; missing worksheets never establish absence or approval |
+
+The release profile is an operator worksheet, not another client questionnaire or status ledger.
+Missing `legal.md` does not establish absence of processing: inventory source, runtime settings,
+host logs and providers before making privacy or N/A decisions. Missing inputs can permit private
+building with gaps, but never an unsupported CLIENT-COMPLETE or release claim.
 
 Rules the prompt enforces, so tell the client up front:
 - Testimonials, client names, statistics and awards are only ever the client's own. They are never drafted or stocked.

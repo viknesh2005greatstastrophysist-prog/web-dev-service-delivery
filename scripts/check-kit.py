@@ -16,6 +16,7 @@ import itertools
 import json
 import subprocess
 from release_gate import catalogue, specifications, priority_policy, TIERS
+from release_queue import work_metadata
 import pathlib
 import re
 import sys
@@ -76,6 +77,12 @@ try:
               and r['timing'] in {'prelaunch', 'cutover', 'postlaunch', 'recurring'} for r in tier_rows))
 except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
     check('tiers: complete ordered inventory, valid metadata and matching priorities', False, str(error))
+
+try:
+    _, work_rows = work_metadata(CHECKLIST, ROOT/'checklist/tiers.json', ROOT/'checklist/bundles.json')
+    check('work bundles: every stable ID mapped without changing priorities', list(work_rows) == ids)
+except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
+    check('work bundles: every stable ID mapped without changing priorities', False, str(error))
 
 unsorted = []
 for sec, grp in itertools.groupby(ids, key=lambda i: i.split("-")[0]):
@@ -187,6 +194,8 @@ check("no machine-specific absolute paths", "/Users/" not in pr + ck and "C:\\" 
 for rel in ("skills/scroll-craft/SKILL.md", "skills/scroll-craft/scripts/shoot.mjs", "skills/scroll-craft/references/verify.md",
             "skills/scroll-craft/LICENSE", "checklist/PRODUCTION_CHECKLIST_clone_swap.md", "examples/CLIENT_INPUT/brief.md",
             "scripts/release_gate.py", "tests/test_release_gate.py", "docs/RELEASE_EVIDENCE.md",
+            "scripts/release_queue.py", "tests/test_release_queue.py", "docs/CHECKLIST_WORKFLOW.md",
+            "examples/CLIENT_INPUT/release-profile.md", "checklist/bundles.json",
             "docs/ci/verify-kit.yml", "checklist/VIDEO_LESSONS_ADDON.md", "checklist/VIDEO_LESSONS_BATCH2.md"):
     check(f"kit file exists: {rel}", (ROOT / rel).exists())
 sub = ROOT / "vendor" / "clone-app-pat-pro-public"
@@ -199,13 +208,15 @@ head = subprocess.run(["git", "-C", str(sub), "rev-parse", "HEAD"], capture_outp
 check("methodology checkout matches reviewed pin", head.returncode == 0 and head.stdout.strip() == pin)
 check("prompt names the reviewed methodology pin", pin in pr)
 check("prompt uses executable release record", "scripts/release_gate.py" in pr and "--phase launch" in pr and "--phase handover" in pr)
+check("prompt uses advisory operating workflow", "docs/CHECKLIST_WORKFLOW.md" in pr and "scripts/release_queue.py" in pr)
 # This guards accidental stale policy phrases, not arbitrary semantic contradictions.
 for forbidden in ("LCP minus TTFB", "else `build`", "For any other client the fidelity build ships", "ready for a human to deploy"):
     check(f"prompt omits superseded policy: {forbidden}", forbidden not in pr)
 check("deploy build is always accessible", "The deployed artifact must pass applicable accessibility checks in every geography." in ck)
 
 # Validate actual Markdown file links in the active entry points, not example code paths.
-for rel in ("checklist/RELEASE_STANDARD.md", "checklist/TIERS.md",
+for rel in ("checklist/RELEASE_STANDARD.md", "checklist/TIERS.md", "docs/CHECKLIST_WORKFLOW.md",
+            "examples/CLIENT_INPUT/README.md",
             "docs/reviews/checklist-challenge-2026-10-05/REVIEW.md",
             "docs/reviews/checklist-challenge-2026-10-05/SOURCES.md",
             "docs/reviews/checklist-challenge-2026-10-05/VERIFICATION.md",

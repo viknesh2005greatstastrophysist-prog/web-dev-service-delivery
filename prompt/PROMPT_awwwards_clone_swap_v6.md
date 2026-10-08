@@ -32,6 +32,12 @@ The run message may set `RUN_PART=1` or `RUN_PART=2`. With neither, one run does
 
 ## Inputs
 
+Use `<KIT_DIR>/docs/CHECKLIST_WORKFLOW.md` to organize production work. The operator fills
+`CLIENT_INPUT/release-profile.md` from the actual brief, scope, data/provider inventory and rights
+records, using `<KIT_DIR>/examples/CLIENT_INPUT/release-profile.md` when absent. Unknown fields
+remain unresolved, never invented approval or absence. Keep the full release record authoritative;
+the worksheet maps procedures and accepted responsibilities, not a second set of PASS statuses.
+
 Client materials are optional at run time, and the client is never asked to go and find anything: what they have is used, and the content ladder below fills every gap. Never stop because materials are missing. Look for `CLIENT_INPUT` (default `./CLIENT_INPUT`; the run message may give another path). A file that is missing, empty, unreadable, corrupt or in an unsupported format counts as not supplied. Expected files, all optional:
 - `brief.md`: what the business does and how it does it (services, process, differentiators), the audience, tone, niche, languages, the client's domain (`SITE_URL`), competitors to avoid as design targets, and optionally a target the client likes (`TARGET_URL`).
 - `copy.md` or `copy.json`: any text the client has already written, keyed by section: navigation labels, headings, about-us, service descriptions, calls to action, footer, testimonials (with the name and role the client wants shown), contact details, social links, form labels and success and error messages, and the legal entity name.
@@ -249,6 +255,8 @@ Write both human-facing scripts in the app's `scripts/` folder and expose them i
 **Additional scoped launch flows.** Test provider webhook signatures/replay/state transitions locally (BACK-22); retain pending owner-confirmed production payment and transactional-email evidence (BACK-23, MAIL-07). URL migrations require HOST-23. Optional crawler policy requires SEO-17 owner review; do not unblock training crawlers or add llms.txt automatically. These requirements do not authorize financial actions, messages or account changes.
 
 **Release record (DEL-15).** Copy `<KIT_DIR>/scripts/release_gate.py` into the app's scripts and the reviewed checklist into `docs/PRODUCTION_CHECKLIST.md`. Follow `<KIT_DIR>/docs/RELEASE_EVIDENCE.md` and keep the redacted release record/evidence outside the deployed artifact. Record every row, pending owner/live action, tested route/state/viewport and the exact artifact identity. The DEL-15 evidence is the validator's fixture-test log and integration check, not a recursive hash of its own final output. Save handover, launch and gold decisions separately. Read checklist/TIERS.md in the kit; Tier controls priority, Class controls applicability and evidence source. Diamond is mandatory for every launch; Gold is additional quality, Silver and Bronze are optional scope. Future checks stay pending. Copy the full five-column checklist without stripping Tier. Never downgrade a critical risk to meet a selected target. Never fabricate evidence or bulk-mark rows PASS.
+
+**Daily work view.** Copy `<KIT_DIR>/scripts/release_queue.py`, `checklist/tiers.json` and `checklist/bundles.json` with the release validator and exact checklist snapshot. Use explicit `--checklist`, `--tiers` and `--bundles` paths for the copied files. Generate the advisory queue from the complete private release record, keeping the profile, queue and evidence outside the deployed artifact. Bundle membership is not proof; record each row's expected and observed outcome in the evidence. A generated queue never grants deployment approval. Actual final-domain receipt, recovery proof and separate QA, client approval and cutover decisions remain required. Full Gold waits for all applicable Gold observations, including later SEO-13; accepted future duties need dates, actions and escalation. Reuse test procedures, never transfer template verdicts or re-stamp historical evidence.
 
 ## Finish
 

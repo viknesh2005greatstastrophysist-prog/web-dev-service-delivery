@@ -1,5 +1,13 @@
 # History
 
+## 2026-10-08: implement the reviewed checklist operating workflow
+
+Added the private release profile, six overlapping work bundles and a dependency-free advisory
+queue generated from the complete release record. Documented grouped evidence, separate release
+decisions, accepted future owners, recovery proof and later Gold observations. Corrected the
+stale SPD-21 sentence: unavailable Silver field data does not alone block Gold under risk-v2.
+All row IDs, tiers and release-gate semantics are retained. No client website is recertified.
+
 ## 2026-10-05: challenge the production tier assumptions
 
 The second audit replaces implementation mandates and reference comparisons with scoped outcome criteria. It preserves all 275 IDs, records each decision, and versions the Diamond floor so historical snapshots retain their original meaning. See [review](reviews/checklist-challenge-2026-10-05/REVIEW.md) and [operating standard](../checklist/RELEASE_STANDARD.md). No website is recertified by this policy change.

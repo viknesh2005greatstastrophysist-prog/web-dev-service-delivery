@@ -61,11 +61,16 @@ Each entry in `rows` has a stable `id`, boolean `applicable`, status, verificati
 
 An N/A row needs `applicable: false`, `reason`, an observed `predicate`, and evidence. Every other row has `applicable: true`. Unconditional G rows cannot be excluded. Conditional C rows are required whenever applicable. `LEG-07` is retired and records N/A with its supersession reason.
 
-Every unresolved result needs `reason`, `owner`, `next_action` and a future `review_by` ISO timestamp. `AWAITING-DEPLOY` is only for -L rows; `OWNER-CONFIRM` only for -O rows. Pending results need no fabricated capture. `UNAVAILABLE` is allowed only for SPD-21 with inadequate field data; it prevents Gold completion but not Diamond launch. `INHERITED` is never a production status. A Diamond FIDELITY-EXCEPTION blocks launch; a Gold exception also blocks Gold completion.
+Every unresolved result needs `reason`, `owner`, `next_action` and a future `review_by` ISO timestamp. `AWAITING-DEPLOY` is only for -L rows; `OWNER-CONFIRM` only for -O rows. Pending results need no fabricated capture. `UNAVAILABLE` is allowed only for SPD-21 with inadequate field data; under risk-v2 it prevents Silver completion, not Diamond or Gold completion. `INHERITED` is never a production status. A Diamond FIDELITY-EXCEPTION blocks launch; a Gold exception also blocks Gold completion.
 
 Owner PASS/N/A observations require `verification: manual` and a named human's evidence. A script cannot confirm mailbox receipt, legal rights, real devices or client approval on their behalf. The validator checks the record, not the person's identity.
 
 ## Freshness and review
+
+Use the [daily checklist workflow](CHECKLIST_WORKFLOW.md) and private project profile to organize
+work. `scripts/release_queue.py` reads the complete record and matching tier/bundle metadata to
+produce an advisory queue. It does not validate evidence or approve deployment. Full Gold still
+requires applicable later Gold observations, including SEO-13; scheduled work is never PASS.
 
 Preserve one record per release and environment. Do not mix a localhost report with live confirmations in one launch record. Re-run applicable checks on the final artifact; if a prior isolated test remains relevant, the reviewer explicitly revalidates it against the final revision and records that later review with the original report attached. Changes to content, build output, dependencies, host settings, DNS or provider configuration invalidate affected results. Time ordering alone cannot prove freshness.
 

@@ -5,7 +5,7 @@ winner that suits the client, rebuilds its design system, layout, structure and 
 it can measure, swaps in the client's own content, audits the result against a production-grade
 checklist, and hands over a package that a human deploys.
 
-Status (2026-10-05): the risk-v2 audit challenges all 275 requirements, separates essential outcomes from implementation preferences, and updates Diamond/Gold enforcement. A complete client delivery is still not verified end to end. See "Status and honest limits" below.
+Status (2026-10-08): risk-v2 preserves all 275 requirements and the Diamond floor. The operating workflow now adds a private project profile, six overlapping work bundles and a generated advisory daily queue. A complete client delivery is still not verified end to end. See "Status and honest limits" below.
 
 ## What is in this repository
 
@@ -22,6 +22,13 @@ archive/      Earlier editions of the prompt and checklist (superseded, kept for
 ```
 
 Start with the [short production standard](checklist/RELEASE_STANDARD.md), then the [tiered catalogue](checklist/TIERS.md) and [HOW_TO_RUN](docs/HOW_TO_RUN.md). Read the [release evidence contract](docs/RELEASE_EVIDENCE.md) and [2026-10-02 audit](docs/reviews/production-audit-2026-10-02/AUDIT.md) before making a readiness claim.
+
+Use the [daily checklist workflow](docs/CHECKLIST_WORKFLOW.md) to turn the full record into grouped
+work. Copy the [private release profile](examples/CLIENT_INPUT/release-profile.md) for each project.
+`python3 scripts/release_queue.py /path/to/private-evidence/release.json` prints the daily queue;
+it never grants release approval or converts future Gold work into PASS.
+See the [implementation verification](docs/reviews/checklist-workflow-2026-10-08/VERIFICATION.md)
+for local checks, independent review and remaining rehearsal limits.
 
 ## What a run does, end to end
 
