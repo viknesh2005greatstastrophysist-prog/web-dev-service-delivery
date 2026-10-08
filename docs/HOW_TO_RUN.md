@@ -49,6 +49,11 @@ cp -R ../web-dev-service-delivery/examples/CLIENT_INPUT ./CLIENT_INPUT
 Fill in `CLIENT_INPUT` with what the client has (every file is optional; see `CLIENT_INPUT/README.md`).
 Do not commit the real `CLIENT_INPUT` anywhere public: photos can carry location data.
 
+The operator fills `CLIENT_INPUT/release-profile.md` from the actual scope and existing inputs.
+Use the [daily checklist workflow](CHECKLIST_WORKFLOW.md): review applicability, prepare grouped
+procedures, capture exact-release evidence and generate the queue from the full release record.
+Missing fields stay unknown; they cannot justify N/A, approval or a release claim.
+
 ## 4. Start the agent
 
 Open your agent in the `acme-site` folder and give it a run message like this one (single run):

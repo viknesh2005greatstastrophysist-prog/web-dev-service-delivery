@@ -38,3 +38,7 @@ Silver contains useful optimizations, diagnostics and optional operations. Bronz
 4. Report Diamond, Gold and contracted scope separately. Record optional work with a reason and next action. Never call a historical failure a PASS because a later policy changed.
 
 Reference imitation is its own commissioned deliverable. The cloning prompt's fidelity measurements remain relevant when that work is requested; they are not universal production safety rules.
+
+The [daily operating workflow](../docs/CHECKLIST_WORKFLOW.md) provides the project profile,
+six overlapping work bundles and advisory queue. All 275 IDs remain in the master record.
+Full Gold requires actual later Gold observations; a handover deadline does not pre-pass them.

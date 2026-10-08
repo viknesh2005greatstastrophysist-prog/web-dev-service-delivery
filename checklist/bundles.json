@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "purpose": "Work organization only. Bundle membership is not proof of row coverage or release readiness.",
+  "bundles": [
+    {"id": "navigation", "title": "Navigation and essential actions", "groups": ["discoverability", "error-recovery", "conversion"]},
+    {"id": "enquiries", "title": "Enquiries and integrations", "groups": ["backend", "email", "error-recovery", "conversion"]},
+    {"id": "usability", "title": "Accessibility, responsive use and performance", "groups": ["performance", "typography", "responsive", "accessibility", "motion", "internationalization", "sustainability"]},
+    {"id": "security-privacy", "title": "Security and privacy", "groups": ["security", "privacy-legal", "backend", "email", "hosting", "operations"]},
+    {"id": "content-rights", "title": "Content, claims and rights", "groups": ["content", "privacy-legal", "typography", "internationalization", "handover", "security"]},
+    {"id": "deployment", "title": "Deployment, ownership and recovery", "groups": ["hosting", "operations", "handover", "email"]}
+  ]
+}
