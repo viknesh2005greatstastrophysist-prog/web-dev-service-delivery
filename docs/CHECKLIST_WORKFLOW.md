@@ -110,3 +110,10 @@ Zero false completion decisions and complete mandatory coverage are the acceptan
 Another reviewer must be able to recover the same decision. Net time savings and production
 capacity remain unproven until measured; one rehearsal cannot prove scale. Use existing files
 and scripts before considering dashboard infrastructure.
+
+## Clone and media work
+
+For commissioned clones, use [CLONE_WORKFLOW](CLONE_WORKFLOW.md) before expanding the build.
+Close the pinned reference sample, validate original generated media and final crops, then close
+the adapted sample. Full fidelity and production decisions remain separate. A finished private
+handover can preserve blockers, but cannot become an accepted-clone or launch claim.

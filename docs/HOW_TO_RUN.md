@@ -153,3 +153,9 @@ Use [RELEASE_EVIDENCE.md](RELEASE_EVIDENCE.md) to create the per-release record 
 ## Prioritize the work
 
 Use [TIERS](../checklist/TIERS.md) to work through Diamond first, then Gold, Silver and Bronze. Every row still gets a disposition; optional work is tracked, not deleted. The full catalogue supplies exact criteria. A conditional feature absent from the actual system can be N/A with evidence. No lower tier target waives Diamond. Keep prelaunch, controlled-cutover and future checks separate. Old release records remain tied to their old checklist hash; a new policy is not retroactive evidence of a pass.
+
+## Before scaling a clone
+
+Use [CLONE_WORKFLOW](CLONE_WORKFLOW.md) for pinned desktop/mobile/state contracts, actual
+model records, generated-media content sync and stale-evidence checks. These controls supplement
+the fifteen full fidelity gates and never replace the Diamond release floor.

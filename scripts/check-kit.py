@@ -196,6 +196,7 @@ for rel in ("skills/scroll-craft/SKILL.md", "skills/scroll-craft/scripts/shoot.m
             "scripts/release_gate.py", "tests/test_release_gate.py", "docs/RELEASE_EVIDENCE.md",
             "scripts/release_queue.py", "tests/test_release_queue.py", "docs/CHECKLIST_WORKFLOW.md",
             "examples/CLIENT_INPUT/release-profile.md", "checklist/bundles.json",
+            "scripts/clone_gate.py", "scripts/generated_media.py", "tests/test_clone_workflow.py", "docs/CLONE_WORKFLOW.md",
             "docs/ci/verify-kit.yml", "checklist/VIDEO_LESSONS_ADDON.md", "checklist/VIDEO_LESSONS_BATCH2.md"):
     check(f"kit file exists: {rel}", (ROOT / rel).exists())
 sub = ROOT / "vendor" / "clone-app-pat-pro-public"
@@ -208,6 +209,8 @@ head = subprocess.run(["git", "-C", str(sub), "rev-parse", "HEAD"], capture_outp
 check("methodology checkout matches reviewed pin", head.returncode == 0 and head.stdout.strip() == pin)
 check("prompt names the reviewed methodology pin", pin in pr)
 check("prompt uses executable release record", "scripts/release_gate.py" in pr and "--phase launch" in pr and "--phase handover" in pr)
+check("prompt uses clone sample and original media controls", "docs/CLONE_WORKFLOW.md" in pr and "scripts/clone_gate.py" in pr and "`generated`" in pr and "generated_media.py" in pr)
+check("prompt declares typed generated media", "`source` is `client`, `drafted`, `generated`, `stock`, `template` or `system`" in pr)
 check("prompt uses advisory operating workflow", "docs/CHECKLIST_WORKFLOW.md" in pr and "scripts/release_queue.py" in pr)
 # This guards accidental stale policy phrases, not arbitrary semantic contradictions.
 for forbidden in ("LCP minus TTFB", "else `build`", "For any other client the fidelity build ships", "ready for a human to deploy"):
@@ -216,7 +219,7 @@ check("deploy build is always accessible", "The deployed artifact must pass appl
 
 # Validate actual Markdown file links in the active entry points, not example code paths.
 for rel in ("checklist/RELEASE_STANDARD.md", "checklist/TIERS.md", "docs/CHECKLIST_WORKFLOW.md",
-            "examples/CLIENT_INPUT/README.md",
+            "examples/CLIENT_INPUT/README.md", "docs/CLONE_WORKFLOW.md",
             "docs/reviews/checklist-challenge-2026-10-05/REVIEW.md",
             "docs/reviews/checklist-challenge-2026-10-05/SOURCES.md",
             "docs/reviews/checklist-challenge-2026-10-05/VERIFICATION.md",

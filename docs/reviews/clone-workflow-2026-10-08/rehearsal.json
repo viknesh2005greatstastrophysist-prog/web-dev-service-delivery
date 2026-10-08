@@ -1,0 +1,50 @@
+{
+  "scope": "Synthetic record/CLI rehearsal, not an image generation or website test",
+  "prepare_sync_exit": 0,
+  "complete_sample": {
+    "phase": "adapted",
+    "stage_complete": true,
+    "blockers": [],
+    "record_complete_for_samples": [
+      "home"
+    ],
+    "production_clearance": false,
+    "notice": "Validates declared coverage and hashed records, not the truth of measurements. No whole-site, model-authenticity or launch certification."
+  },
+  "regression_probes": {
+    "RIOA": {
+      "reference_px": "48px",
+      "artifact_px": "37.44px",
+      "exit_code": 1,
+      "result": {
+        "phase": "adapted",
+        "stage_complete": false,
+        "blockers": [
+          "adapted:390:FAIL"
+        ],
+        "record_complete_for_samples": [],
+        "production_clearance": false,
+        "notice": "Validates declared coverage and hashed records, not the truth of measurements. No whole-site, model-authenticity or launch certification."
+      }
+    },
+    "Landscaping": {
+      "reference_px": "56px",
+      "artifact_px": "92.3201px",
+      "exit_code": 1,
+      "result": {
+        "phase": "adapted",
+        "stage_complete": false,
+        "blockers": [
+          "adapted:390:FAIL"
+        ],
+        "record_complete_for_samples": [],
+        "production_clearance": false,
+        "notice": "Validates declared coverage and hashed records, not the truth of measurements. No whole-site, model-authenticity or launch certification."
+      }
+    }
+  },
+  "missing_model_probe": {
+    "exit_code": 1,
+    "message": "Required model unverified; no unsafe/illegal finding"
+  }
+}
