@@ -10,6 +10,13 @@ businesses turn a recipe and a good idea into a name, a label and a website.
 - A one-page website with a simple way to order or enquire (one week).
 Our process: a half-day workshop, three rounds of drafts, then a handover pack with every file.
 
+## Local search (a local business only; see checklist/VIDEO_LESSONS_BATCH4.md)
+- Main service and place, in the words customers use: (for example "Junk removal in Evansville, WI")
+- Service area: the towns actually served.
+- Services sold, one per line (each gets its own page):
+- The questions customers ask most, per service (from calls, emails and reviews):
+- Google Business Profile: exists or not, who owns it, and who will publish the updates.
+
 ## Audience
 Founders of food and drink start-ups in the United States, usually pre-launch or in their first year.
 
